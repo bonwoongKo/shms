@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ManagerService {
-	public void registManager(Manager manager);
-	public List<Manager> managerList(Manager manager);
-	public Manager viewManager(Manager manager);
-	public void editManager(Manager manager);
-	public void deleteManager(Manager manager);
+	public void registManager(Manager manager) throws Exception;
+	public List<Manager> managerList(Manager manager) throws Exception;
+	public Manager viewManager(Manager manager) throws Exception;
+	public void editManager(Manager manager) throws Exception;
+	public void deleteManager(Manager manager) throws Exception;
 }

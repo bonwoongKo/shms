@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface WearLogService {
-	public void registWearLog(WearLog wearLog);
-	public List<WearLog> wearLogList(WearLog wearLog);
-	public WearLog viewWearLog(WearLog wearLog);
-	public void deleteWearLog(WearLog wearLog);
+	public void registWearLog(WearLog wearLog) throws Exception;
+	public List<WearLog> wearLogList(WearLog wearLog) throws Exception;
+	public WearLog viewWearLog(WearLog wearLog) throws Exception;
+	public void deleteWearLog(WearLog wearLog) throws Exception;
 }

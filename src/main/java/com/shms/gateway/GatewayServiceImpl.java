@@ -11,28 +11,28 @@ public class GatewayServiceImpl implements GatewayService {
 	private GatewayMapper gatewayMapper;
 	
 	@Override
-	public void registGateway(Gateway gateway) {
-		
+	public void registGateway(Gateway gateway) throws Exception {
+		gatewayMapper.insert(gateway);
 	}
 
 	@Override
-	public List<Gateway> gatewayList(Gateway gateway) {
-		return null;
+	public List<Gateway> gatewayList(Gateway gateway) throws Exception {
+		return gatewayMapper.list(gateway);
 	}
 
 	@Override
-	public Gateway viewGateway(Gateway gateway) {
-		return null;
+	public Gateway viewGateway(Gateway gateway) throws Exception {
+		return gatewayMapper.select(gateway);
 	}
 
 	@Override
-	public void editGateway(Gateway gateway) {
-		
+	public void editGateway(Gateway gateway) throws Exception {
+		gatewayMapper.update(gateway);
 	}
 
 	@Override
-	public void deleteGateway(Gateway gateway) {
-		
+	public void deleteGateway(Gateway gateway) throws Exception {
+		gatewayMapper.delete(gateway);
 	}
 
 }
