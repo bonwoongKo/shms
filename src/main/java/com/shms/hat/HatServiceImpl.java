@@ -16,8 +16,8 @@ public class HatServiceImpl implements HatService {
 	}
 
 	@Override
-	public List<Hat> hatList(Hat hat) throws Exception {
-		return hatMapper.list(hat);
+	public List<Hat> hatList() throws Exception {
+		return hatMapper.list();
 	}
 
 	@Override

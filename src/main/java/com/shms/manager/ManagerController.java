@@ -1,5 +1,6 @@
 package com.shms.manager;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.view.RedirectView;
 @RestController
 @RequestMapping("/manager")
 public class ManagerController {
+	@Autowired
+	private ManagerServiceImpl managerServiceImpl;
 	
 	@GetMapping("/main")
 	public ModelAndView managerMain() {
@@ -31,8 +34,11 @@ public class ManagerController {
 	}
 	
 	@GetMapping
-	public ModelAndView managerList() {
-		return new ModelAndView("manager/list");
+	public ModelAndView managerList() throws Exception {
+		ModelAndView mav = new ModelAndView("manager/list");
+		mav.addObject("managerList", managerServiceImpl.managerList());
+		
+		return mav;
 	}
 	
 	@GetMapping("/search/{name}")
@@ -40,9 +46,12 @@ public class ManagerController {
 		return null;
 	}
 	
-	@GetMapping("/{number}")
-	public ModelAndView viewManager(@ModelAttribute Manager manager) {
-		return new ModelAndView("manager/view");
+	@GetMapping("/{empNumber}")
+	public ModelAndView viewManager(@ModelAttribute Manager manager) throws Exception {
+		ModelAndView mav = new ModelAndView("manager/view");
+		mav.addObject("manager", managerServiceImpl.viewManager(manager));
+		
+		return mav;
 	}
 	
 	@GetMapping("/{number}/form")

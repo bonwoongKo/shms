@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface WorkerService {
-	public void registManager(Worker worker) throws Exception;
-	public List<Worker> managerList(Worker worker) throws Exception;
-	public Worker viewManager(Worker worker) throws Exception;
-	public void editManager(Worker worker) throws Exception;
-	public void deleteManager(Worker worker) throws Exception;
+	public void registWorker(Worker worker) throws Exception;
+	public List<Worker> workerList() throws Exception;
+	public Worker viewWorker(Worker worker) throws Exception;
+	public void editWorker(Worker worker) throws Exception;
+	public void deleteWorker(Worker worker) throws Exception;
 }

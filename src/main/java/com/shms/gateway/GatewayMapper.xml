@@ -30,7 +30,7 @@
         <include refid="whereSql" />
     </select>
 
-	<select id="list" parameterType="com.shms.gateway.Gateway" resultMap="gatewayResultMap">
+	<select id="list" resultMap="gatewayResultMap">
         SELECT
             CODE
             , REGIST_DATE

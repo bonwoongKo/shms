@@ -16,8 +16,8 @@ public class WearLogServiceImpl implements WearLogService {
 	}
 
 	@Override
-	public List<WearLog> wearLogList(WearLog wearLog) throws Exception {
-		return wearLogMapper.list(wearLog);
+	public List<WearLog> wearLogList() throws Exception {
+		return wearLogMapper.list();
 	}
 
 	@Override

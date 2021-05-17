@@ -1,5 +1,6 @@
 package com.shms.wearlog;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,15 @@ import org.springframework.web.servlet.view.RedirectView;
 @RestController
 @RequestMapping("/wearlog")
 public class WearLogController {
+	@Autowired
+	private WearLogServiceImpl wearLogServiceImpl;
 	
 	@GetMapping
-	public ModelAndView wearLogList() {
-		return new ModelAndView("wearlog/list");
+	public ModelAndView wearLogList() throws Exception {
+		ModelAndView mav = new ModelAndView("wearlog/list");
+		mav.addObject("wearLogList", wearLogServiceImpl.wearLogList());
+		
+		return mav;
 	}
 	
 	@GetMapping("/search/{name}/{time}")
@@ -24,8 +30,11 @@ public class WearLogController {
 	}
 	
 	@GetMapping("/{number}")
-	public ModelAndView viewWearLog(@ModelAttribute WearLog wearLog) {
-		return new ModelAndView("wearlog/view");
+	public ModelAndView viewWearLog(@ModelAttribute WearLog wearLog) throws Exception {
+		ModelAndView mav = new ModelAndView("wearLog/view");
+		mav.addObject("wearLog", wearLogServiceImpl.viewWearLog(wearLog));
+		
+		return mav;
 	}
 	
 	@DeleteMapping("/{number}")

@@ -1,5 +1,6 @@
 package com.shms.worker;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.view.RedirectView;
 @RestController
 @RequestMapping("/worker")
 public class WorkerController {
+	@Autowired
+	private WorkerServiceImpl WorkerServiceImpl;
 	
 	@GetMapping("/form")
 	public ModelAndView registWorkerForm() {
@@ -26,8 +29,11 @@ public class WorkerController {
 	}
 	
 	@GetMapping
-	public ModelAndView workerList() {
-		return new ModelAndView("worker/list");
+	public ModelAndView workerList() throws Exception {
+		ModelAndView mav = new ModelAndView("worker/list");
+		mav.addObject("workerList", WorkerServiceImpl.workerList());
+		
+		return mav;
 	}
 	
 	@GetMapping("/search/{name}")
@@ -35,9 +41,12 @@ public class WorkerController {
 		return null;
 	}
 	
-	@GetMapping("/{number}")
-	public ModelAndView viewWorker(@ModelAttribute Worker worker) {
-		return new ModelAndView("worker/view");
+	@GetMapping("/{empNumber}")
+	public ModelAndView viewWorker(@ModelAttribute Worker worker) throws Exception {
+		ModelAndView mav = new ModelAndView("worker/view");
+		mav.addObject("worker", WorkerServiceImpl.viewWorker(worker));
+		
+		return mav;
 	}
 	
 	@GetMapping("/{number}/form")

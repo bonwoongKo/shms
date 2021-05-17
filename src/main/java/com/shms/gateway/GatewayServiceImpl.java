@@ -16,8 +16,8 @@ public class GatewayServiceImpl implements GatewayService {
 	}
 
 	@Override
-	public List<Gateway> gatewayList(Gateway gateway) throws Exception {
-		return gatewayMapper.list(gateway);
+	public List<Gateway> gatewayList() throws Exception {
+		return gatewayMapper.list();
 	}
 
 	@Override

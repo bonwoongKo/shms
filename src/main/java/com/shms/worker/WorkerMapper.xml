@@ -38,7 +38,7 @@
         <include refid="whereSql" />
     </select>
 
-	<select id="list" parameterType="com.shms.worker.Worker" resultMap="workerResultMap">
+	<select id="list" resultMap="workerResultMap">
         SELECT
             EMP_NUMBER
             , NAME

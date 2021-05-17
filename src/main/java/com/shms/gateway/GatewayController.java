@@ -29,13 +29,19 @@ public class GatewayController {
 	}
 	
 	@GetMapping
-	public ModelAndView gatewayList() {
-		return new ModelAndView("gateway/list");
+	public ModelAndView gatewayList(@ModelAttribute Gateway gateway) throws Exception {
+		ModelAndView mav = new ModelAndView("gateway/list");
+		mav.addObject("gatewayList",gatewayServiceImpl.gatewayList());
+		
+		return mav;
 	}
 	
-	@GetMapping("/{number}")
-	public ModelAndView viewGateway(@ModelAttribute Gateway gateway, Errors errors) {
-		return new ModelAndView("gateway/view");
+	@GetMapping("/{code}")
+	public ModelAndView viewGateway(Gateway gateway, Errors errors) throws Exception {
+		ModelAndView mav = new ModelAndView("gateway/view");
+		mav.addObject("gateway", gatewayServiceImpl.viewGateway(gateway));
+		
+		return mav;
 	}
 	
 	@PutMapping

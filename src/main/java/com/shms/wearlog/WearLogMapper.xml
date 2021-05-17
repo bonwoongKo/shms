@@ -50,7 +50,7 @@
         <include refid="whereSql" />
     </select>
 
-	<select id="list" parameterType="com.shms.wearlog.WearLog" resultMap="wearLogResultMap">
+	<select id="list" resultMap="wearLogResultMap">
         SELECT
             CODE
             , HAT_CODE

@@ -12,20 +12,20 @@ public class WearLog implements Serializable{
 	private String hatCode;
 	private String gatewayCode;
 	private String empNumber;
-	private LocalDateTime dateTime;
+	private LocalDateTime time;
 	private char isWear;
 	private double latitude;
 	private double longitude;
 	
 	public WearLog() {	}
 
-	public WearLog(int code, String hatCode, String gatewayCode, String empNumber, LocalDateTime dateTime, char isWear,
+	public WearLog(int code, String hatCode, String gatewayCode, String empNumber, LocalDateTime time, char isWear,
 			double latitude, double longitude) {
 		this.code = code;
 		this.hatCode = hatCode;
 		this.gatewayCode = gatewayCode;
 		this.empNumber = empNumber;
-		this.dateTime = dateTime;
+		this.time = time;
 		this.isWear = isWear;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -63,12 +63,12 @@ public class WearLog implements Serializable{
 		this.empNumber = empNumber;
 	}
 
-	public LocalDateTime getDateTime() {
-		return dateTime;
+	public LocalDateTime getTime() {
+		return time;
 	}
 
-	public void setDateTime(LocalDateTime dateTime) {
-		this.dateTime = dateTime;
+	public void setTime(LocalDateTime time) {
+		this.time = time;
 	}
 
 	public char getIsWear() {

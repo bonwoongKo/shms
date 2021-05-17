@@ -9,16 +9,16 @@ import org.springframework.stereotype.Component;
 public class Worker implements Serializable{
 	private String empNumber;
 	private String name;
-	private String charNumber;
+	private String cardNumber;
 	private String phoneNumber;
 	private char isDelete;
 	
 	public Worker() {	}
 
-	public Worker(String empNumber, String name, String charNumber, String phoneNumber, char isDelete) {
+	public Worker(String empNumber, String name, String cardNumber, String phoneNumber, char isDelete) {
 		this.empNumber = empNumber;
 		this.name = name;
-		this.charNumber = charNumber;
+		this.cardNumber = cardNumber;
 		this.phoneNumber = phoneNumber;
 		this.isDelete = isDelete;
 	}
@@ -39,12 +39,12 @@ public class Worker implements Serializable{
 		this.name = name;
 	}
 
-	public String getCharNumber() {
-		return charNumber;
+	public String getcardNumber() {
+		return cardNumber;
 	}
 
-	public void setCharNumber(String charNumber) {
-		this.charNumber = charNumber;
+	public void setcardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
 	public String getPhoneNumber() {

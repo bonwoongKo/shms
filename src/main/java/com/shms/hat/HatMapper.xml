@@ -30,7 +30,7 @@
         <include refid="whereSql" />
     </select>
 
-	<select id="list" parameterType="com.shms.hat.Hat" resultMap="hatResultMap">
+	<select id="list" resultMap="hatResultMap">
         SELECT
             CODE
             , REGIST_DATE
