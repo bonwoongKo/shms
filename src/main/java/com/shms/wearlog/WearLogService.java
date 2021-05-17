@@ -2,9 +2,6 @@ package com.shms.wearlog;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public interface WearLogService {
 	public void registWearLog(WearLog wearLog) throws Exception;
 	public List<WearLog> wearLogList() throws Exception;
