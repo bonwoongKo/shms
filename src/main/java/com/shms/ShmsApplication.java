@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.shms"})
+@MapperScan(value = {"com.shms.*"})
 public class ShmsApplication {
 
 	public static void main(String[] args) {
