@@ -4,6 +4,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface WearInfoService {
-	public void receiveWearInfo(Message message);
-	public boolean vaildWearInfo(Message message);
+	public void receiveWearInfo(WearInfo message);
+	public boolean vaildWearInfo(WearInfo message);
 }

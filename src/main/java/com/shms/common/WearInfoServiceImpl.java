@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 public class WearInfoServiceImpl implements WearInfoService {
 
 	@Override
-	public void receiveWearInfo(Message message) {
+	public void receiveWearInfo(WearInfo message) {
 		
 	}
 
 	@Override
-	public boolean vaildWearInfo(Message message) {
+	public boolean vaildWearInfo(WearInfo message) {
 		return false;
 	}
 

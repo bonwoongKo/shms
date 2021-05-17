@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @SuppressWarnings("serial")
-public class Message implements Serializable {
+public class WearInfo implements Serializable {
 	private int code;
 	private String hatCode;
 	private String gatewayCode;
@@ -17,9 +17,9 @@ public class Message implements Serializable {
 	private double latitude;
 	private double longitude;
 	
-	public Message() {	}
+	public WearInfo() {	}
 
-	public Message(int code, String hatCode, String gatewayCode, String empNumber, LocalDateTime dateTime, char isWear,
+	public WearInfo(int code, String hatCode, String gatewayCode, String empNumber, LocalDateTime dateTime, char isWear,
 			double latitude, double longitude) {
 		this.code = code;
 		this.hatCode = hatCode;
