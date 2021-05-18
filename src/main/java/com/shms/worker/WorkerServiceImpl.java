@@ -27,6 +27,7 @@ public class WorkerServiceImpl implements WorkerService {
 
 	@Override
 	public void editWorker(Worker worker) throws Exception {
+		System.out.println(worker.getName());
 		workerMapper.update(worker);
 	}
 

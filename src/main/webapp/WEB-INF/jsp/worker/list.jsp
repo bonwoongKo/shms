@@ -8,7 +8,12 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		worker_list
-		<c:out value="${workerList}" />
+		worker_list <br>
+		<c:forEach items="${workerList}" var="worker">
+			<c:if test="${worker.isDelete eq 'N'}">
+				<a href = "/worker/${worker.empNumber}">${worker.empNumber}</a>
+				<a href = "/worker/${worker.empNumber}">${worker.name}</a> <br>
+			</c:if>
+		</c:forEach>
 	</body>
 </html>

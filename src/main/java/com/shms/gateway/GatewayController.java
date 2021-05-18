@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +23,9 @@ public class GatewayController {
 	}
 	
 	@PostMapping
-	public ModelAndView registGateway(@ModelAttribute Gateway gateway, Errors errors) {
+	public ModelAndView registGateway(@ModelAttribute Gateway gateway, Errors errors) throws Exception {
+		gatewayServiceImpl.registGateway(gateway);
+		
 		return new ModelAndView(new RedirectView("/gateway"));
 	}
 	
@@ -36,21 +37,10 @@ public class GatewayController {
 		return mav;
 	}
 	
-	@GetMapping("/{code}")
-	public ModelAndView viewGateway(Gateway gateway, Errors errors) throws Exception {
-		ModelAndView mav = new ModelAndView("gateway/view");
-		mav.addObject("gateway", gatewayServiceImpl.viewGateway(gateway));
-		
-		return mav;
-	}
-	
-	@PutMapping
-	public ModelAndView editGateway(@ModelAttribute Gateway gateway) {
-		return new ModelAndView(new RedirectView("/gateway"));
-	}
-	
 	@DeleteMapping
-	public ModelAndView deleteGateway(@ModelAttribute Gateway gateway, Errors errors) {
+	public ModelAndView deleteGateway(@ModelAttribute Gateway gateway, Errors errors) throws Exception {
+		gatewayServiceImpl.editGateway(gateway);
+		
 		return new ModelAndView(new RedirectView("gateway"));
 	}
 }

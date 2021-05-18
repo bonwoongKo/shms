@@ -8,7 +8,21 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		manager_list
-		<c:out value="${managerList}" />
+		manager_list <br>
+		<c:forEach items="${managerList}" var="manager">
+			<c:if test="${manager.job eq 'M'}">
+				<form action="/manager" method="post">
+					<input type="hidden" name="_method" value="delete" />
+					<input type="hidden" name="empNumber" value="${manager.empNumber}" />
+					<label>${manager.empNumber}</label>
+					<label>${manager.name}</label>
+					<label>${manager.phoneNumber}</label>
+					<input type="submit" value="삭제" /> <br>
+				</form>
+			</c:if>
+		</c:forEach>
+		<form action="/manager/form" method="get">
+			<input type="submit" value="등록" />
+		</form>
 	</body>
 </html>

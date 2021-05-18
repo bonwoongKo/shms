@@ -11,9 +11,10 @@
 		manager_view
 		<c:out value="${manager}" /> <br>
 		<c:out value="${manager.empNumber}" /> <br>
-		<c:out value="${manager.password}" /> <br>
 		<c:out value="${manager.name}" /> <br>
 		<c:out value="${manager.phoneNumber}" /> <br>
-		<c:out value="${manager.job}" />
+		<c:if test="${manager.job eq 'M'}">
+			<label>안전관리자</label>
+		</c:if>
 	</body>
 </html>

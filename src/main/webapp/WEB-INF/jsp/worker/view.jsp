@@ -15,5 +15,16 @@
 		<c:out value="${worker.cardNumber}" /> <br>
 		<c:out value="${worker.phoneNumber}" /> <br>
 		<c:out value="${worker.isDelete}" />
+		
+		<form action="/worker/${worker.empNumber}/form" method="get">
+			<input type="submit" value="수정" />
+		</form>
+		
+		<form action="/worker" method="post">
+			<input type="hidden" name="_method" value="delete" /> <br>
+			<input type="hidden" name="empNumber" value="${worker.empNumber}"/>
+			<input type="hidden" name="isDelete" value="Y"/>
+			<input type="submit" value="삭제" />
+		</form>
 	</body>
 </html>

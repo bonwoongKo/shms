@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +23,9 @@ public class HatController {
 	}
 	
 	@PostMapping
-	public ModelAndView registHat(@ModelAttribute Hat hat, Errors erros) {
+	public ModelAndView registHat(@ModelAttribute Hat hat, Errors erros) throws Exception {
+		hatServiceImpl.registHat(hat);
+		
 		return new ModelAndView(new RedirectView("/hat"));
 	}
 	
@@ -36,21 +37,10 @@ public class HatController {
 		return mav;
 	}
 	
-	@GetMapping("/{code}")
-	public ModelAndView viewHat(@ModelAttribute Hat hat) throws Exception {
-		ModelAndView mav = new ModelAndView("hat/view");
-		mav.addObject("hat", hatServiceImpl.viewHat(hat));
-		
-		return mav;
-	}
-	
-	@PutMapping
-	public ModelAndView editHat(@ModelAttribute Hat hat, Errors errors) {
-		return new ModelAndView(new RedirectView("/hat"));
-	}
-	
 	@DeleteMapping
-	public ModelAndView deleteHat(@ModelAttribute Hat hat) {
+	public ModelAndView deleteHat(@ModelAttribute Hat hat) throws Exception {
+		hatServiceImpl.editHat(hat);
+		
 		return new ModelAndView(new RedirectView("/hat"));
 	}
 }
