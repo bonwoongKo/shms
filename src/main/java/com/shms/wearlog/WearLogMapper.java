@@ -2,9 +2,9 @@ package com.shms.wearlog;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface WearLogMapper {
 	public int count(WearLog wearLog) throws Exception;
 	public List<WearLog> list() throws Exception;

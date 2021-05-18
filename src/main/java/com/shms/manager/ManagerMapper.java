@@ -2,9 +2,9 @@ package com.shms.manager;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface ManagerMapper {
 	public int count(Manager manager) throws Exception;
 	public List<Manager> list() throws Exception;

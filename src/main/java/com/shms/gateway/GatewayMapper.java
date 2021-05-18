@@ -2,9 +2,9 @@ package com.shms.gateway;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface GatewayMapper {
 	public int count(Gateway gateway) throws Exception;
 	public List<Gateway> list() throws Exception;

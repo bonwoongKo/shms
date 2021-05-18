@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-@Service
 public interface HatService {
 	public void registHat(Hat hat) throws Exception;
 	public List<Hat> hatList() throws Exception;

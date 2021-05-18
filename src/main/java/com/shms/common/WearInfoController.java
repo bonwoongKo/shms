@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WearInfoController {
 	
 	@PostMapping
-	public void receiveWearInfo(Message message, Errors errors) {
-
+	public void receiveWearInfo(WearInfo message, Errors errors) {
+		
 	}
 }

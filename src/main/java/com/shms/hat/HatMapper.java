@@ -2,9 +2,9 @@ package com.shms.hat;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface HatMapper {
 	public int count(Hat hat) throws Exception;
 	public List<Hat> list() throws Exception;

@@ -2,9 +2,9 @@ package com.shms.worker;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface WorkerMapper {
 	public int count(Worker worker) throws Exception;
 	public List<Worker> list() throws Exception;
