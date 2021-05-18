@@ -11,6 +11,6 @@ public class WearInfoController {
 	
 	@PostMapping
 	public void receiveWearInfo(Message message, Errors errors) {
-		
+
 	}
 }
