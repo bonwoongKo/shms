@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -101,4 +102,109 @@
         DELETE FROM MANAGER
         <include refid="whereSql" />
     </delete>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.manager.ManagerMapper">
+    <resultMap id="managerResultMap" type="com.shms.manager.Manager">
+        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="PASSWORD" property="password" />
+        <result column="NAME" property="name" />
+        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="JOB" property="job" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="empNumber != null and empNumber != ''">
+                AND EMP_NUMBER = #{empNumber}
+            </if>
+            <if test="password != null and password != ''">
+                AND PASSWORD = #{password}
+            </if>
+            <if test="name != null and name != ''">
+                AND NAME = #{name}
+            </if>
+            <if test="phoneNumber != null and phoneNumber != ''">
+                AND PHONE_NUMBER = #{phoneNumber}
+            </if>
+            <if test="job != null and job != ''">
+                AND JOB = #{job}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="count" parameterType="com.shms.manager.Manager" resultType="int">
+        SELECT COUNT(*)
+        FROM MANAGER
+        <include refid="whereSql" />
+    </select>
+
+	<select id="list" resultMap="managerResultMap">
+        SELECT
+            EMP_NUMBER
+            , PASSWORD
+            , NAME
+            , PHONE_NUMBER
+            , JOB
+        FROM MANAGER
+    </select>
+
+    <select id="select" parameterType="com.shms.manager.Manager" resultMap="managerResultMap">
+        SELECT
+            EMP_NUMBER
+            , PASSWORD
+            , NAME
+            , PHONE_NUMBER
+            , JOB
+        FROM MANAGER
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="com.shms.manager.Manager">
+        INSERT INTO MANAGER (
+            EMP_NUMBER
+            , PASSWORD
+            , NAME
+            , PHONE_NUMBER
+            , JOB
+        ) VALUES (
+            #{empNumber}
+            , #{password}
+            , #{name}
+            , #{phoneNumber}
+            , #{job}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.manager.Manager">
+        UPDATE MANAGER
+        <set>
+            <if test="code != null and code != ''">
+                EMP_NUMBER = #{empNumber},
+            </if>
+            <if test="registDate != null and registDate != ''">
+                PASSWORD = #{password},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                NAME = #{name},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                PHONE_NUMBER = #{phoneNumber},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                JOB = #{job},
+            </if>
+        </set>
+        WHERE EMP_NUMBER = #{empNumber}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.manager.Manager">
+        DELETE FROM MANAGER
+        <include refid="whereSql" />
+    </delete>
+>>>>>>> branch 'master' of https://github.com/2021-shms/system.git
 </mapper>
