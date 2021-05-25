@@ -50,12 +50,8 @@
     <insert id="insert" parameterType="com.shms.gateway.Gateway">
         INSERT INTO GATEWAY (
             CODE
-            , REGIST_DATE
-            , IS_DELETE
         ) VALUES (
             #{code}
-            , #{registDate}
-            , #{isDelete}
         )
     </insert>
 

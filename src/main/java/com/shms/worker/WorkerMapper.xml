@@ -65,29 +65,27 @@
             , NAME
             , CARD_NUMBER
             , PHONE_NUMBER
-            , IS_DELETE
         ) VALUES (
             #{empNumber}
             , #{name}
             , #{cardNumber}
             , #{phoneNumber}
-            , #{isDelete}
         )
     </insert>
 
     <update id="update" parameterType="com.shms.worker.Worker">
         UPDATE WORKER
         <set>
-            <if test="code != null and code != ''">
+            <if test="empNumber != null and empNumber != ''">
                 EMP_NUMBER = #{empNumber},
             </if>
-            <if test="registDate != null and registDate != ''">
+            <if test="name != null and name != ''">
                 NAME = #{name},
             </if>
-            <if test="isDelete != null and isDelete != ''">
+            <if test="cardNumber != null and cardNumber != ''">
                 CARD_NUMBER = #{cardNumber},
             </if>
-            <if test="isDelete != null and isDelete != ''">
+            <if test="phoneNumber != null and phoneNumber != ''">
                 PHONE_NUMBER = #{phoneNumber},
             </if>
             <if test="isDelete != null and isDelete != ''">

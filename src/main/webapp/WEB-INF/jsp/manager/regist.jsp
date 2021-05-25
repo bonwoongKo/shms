@@ -7,6 +7,14 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		manager_regist
+		manager_regist <br>
+		<form action="/manager" method="post">
+			사원번호 : <input type="text" name="empNumber" /> <br>
+			비밀번호 : <input type="text" name="password" /> <br>
+			비밀번호 확인 : <input type="text" /> <br>
+			이름 : <input type="text" name="name" /> <br>
+			연락처 : <input type="text" name="phoneNumber" /> <br>
+			<input type="submit" value="등록"	 />		
+		</form>
 	</body>
 </html>

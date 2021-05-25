@@ -65,32 +65,30 @@
             , PASSWORD
             , NAME
             , PHONE_NUMBER
-            , JOB
         ) VALUES (
             #{empNumber}
             , #{password}
             , #{name}
             , #{phoneNumber}
-            , #{job}
         )
     </insert>
 
     <update id="update" parameterType="com.shms.manager.Manager">
         UPDATE MANAGER
         <set>
-            <if test="code != null and code != ''">
+            <if test="empNumber != null and empNumber != ''">
                 EMP_NUMBER = #{empNumber},
             </if>
-            <if test="registDate != null and registDate != ''">
+            <if test="password != null and password != ''">
                 PASSWORD = #{password},
             </if>
-            <if test="isDelete != null and isDelete != ''">
+            <if test="name != null and name != ''">
                 NAME = #{name},
             </if>
-            <if test="isDelete != null and isDelete != ''">
+            <if test="phoneNumber != null and phoneNumber != ''">
                 PHONE_NUMBER = #{phoneNumber},
             </if>
-            <if test="isDelete != null and isDelete != ''">
+            <if test="job != null and job != ''">
                 JOB = #{job},
             </if>
         </set>

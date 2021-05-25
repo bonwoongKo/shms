@@ -5,6 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/worker")
 public class WorkerController {
 	@Autowired
-	private WorkerServiceImpl WorkerServiceImpl;
+	private WorkerServiceImpl workerServiceImpl;
 	
 	@GetMapping("/form")
 	public ModelAndView registWorkerForm() {
@@ -24,14 +25,16 @@ public class WorkerController {
 	}
 	
 	@PostMapping
-	public ModelAndView registWorker(@ModelAttribute Worker worker, Errors erros) {
+	public ModelAndView registWorker(@ModelAttribute Worker worker, Errors erros) throws Exception {
+		workerServiceImpl.registWorker(worker);
+		
 		return new ModelAndView(new RedirectView("/worker"));
 	}
 	
 	@GetMapping
 	public ModelAndView workerList() throws Exception {
 		ModelAndView mav = new ModelAndView("worker/list");
-		mav.addObject("workerList", WorkerServiceImpl.workerList());
+		mav.addObject("workerList", workerServiceImpl.workerList());
 		
 		return mav;
 	}
@@ -44,28 +47,35 @@ public class WorkerController {
 	@GetMapping("/{empNumber}")
 	public ModelAndView viewWorker(@ModelAttribute Worker worker) throws Exception {
 		ModelAndView mav = new ModelAndView("worker/view");
-		mav.addObject("worker", WorkerServiceImpl.viewWorker(worker));
+		mav.addObject("worker", workerServiceImpl.viewWorker(worker));
 		
 		return mav;
 	}
 	
-	@GetMapping("/{number}/form")
-	public ModelAndView editWorkerForm(@ModelAttribute Worker worker) {
-		return new ModelAndView("worker/edit");
+	@GetMapping("/{empNumber}/form")
+	public ModelAndView editWorkerForm(@ModelAttribute Worker worker) throws Exception {
+		ModelAndView mav = new ModelAndView("worker/edit");
+		mav.addObject("worker", workerServiceImpl.viewWorker(worker));
+		
+		return mav;
 	}
 	
 	@PutMapping
-	public ModelAndView editWorker(@ModelAttribute Worker worker, Errors errors) {
+	public ModelAndView editWorker(@ModelAttribute Worker worker, Errors errors) throws Exception {
+		workerServiceImpl.editWorker(worker);
+		
 		return new ModelAndView(new RedirectView("/worker"));
 	}
 	
 	@DeleteMapping
-	public ModelAndView deleteWorker(@ModelAttribute Worker worker) {
+	public ModelAndView deleteWorker(@ModelAttribute Worker worker) throws Exception {
+		workerServiceImpl.editWorker(worker);
+		
 		return new ModelAndView(new RedirectView("/worker"));
 	}
 	
-	@GetMapping("/{number}/{time}/map")
-	public ModelAndView mapWorker(@ModelAttribute Worker worker) {
+	@GetMapping("/{empNumber}/{time}/map")
+	public ModelAndView mapWorker(@ModelAttribute Worker worker, @PathVariable String time) {
 		return new ModelAndView("worker/map");
 	}
 }
