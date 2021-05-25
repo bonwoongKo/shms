@@ -17,11 +17,11 @@ public class WearInfoValidator implements Validator {
 			errors.rejectValue("cardNumber", "broken");
 		}
 		
-		if(WearInfo.getHatCode().length() != 5 || WearInfo.getHatCode() == null || WearInfo.getHatCode().isEmpty()) {
+		if(WearInfo.getSafeHatCode().length() != 5 || WearInfo.getSafeHatCode() == null || WearInfo.getSafeHatCode().isEmpty()) {
 			errors.rejectValue("safeHatCode", "broken");
 		}
 		
-		if(WearInfo.getGatewayCode().length() != 5 || WearInfo.getHatCode() == null || WearInfo.getHatCode().isEmpty()) {
+		if(WearInfo.getGatewayCode().length() != 5 || WearInfo.getSafeHatCode() == null || WearInfo.getSafeHatCode().isEmpty()) {
 			errors.rejectValue("gatewayCode", "broken");
 		}
 		

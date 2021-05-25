@@ -24,8 +24,6 @@ public class WearLogServiceImpl implements WearLogService {
 	
 	@Override
 	public void registWearLog(WearLog wearLog) throws Exception {
-		
-		
 		wearLogMapper.insert(wearLog);
 	}
 

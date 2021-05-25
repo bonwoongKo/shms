@@ -32,6 +32,8 @@ public class WearInfoServiceImpl implements WearInfoService {
 	public void receiveWearInfo(WearInfo message) {
 		WearLog wearLog = new WearLog();
 		
+		System.out.println("can't take my eye off you");
+		
 		try {
 			if (validWearInfo(message)) {
 				Worker worker = new Worker();
@@ -40,13 +42,13 @@ public class WearInfoServiceImpl implements WearInfoService {
 				
 				wearLog.setEmpNumber(worker.getEmpNumber());
 				wearLog.setGatewayCode(message.getGatewayCode());
-				wearLog.setHatCode(message.getHatCode());
+				wearLog.setHatCode(message.getSafeHatCode());
 				wearLog.setIsWear(message.getIsWear());
 				wearLog.setLatitude(message.getLatitude());
 				wearLog.setLongitude(message.getLongitude());
 				wearLog.setTime(message.getTime());
 				
-				System.out.println(wearLog.toString());
+				System.out.println("wear log toString() : " + wearLog.toString());
 				
 				wearLogService.registWearLog(wearLog);
 			}
@@ -63,7 +65,7 @@ public class WearInfoServiceImpl implements WearInfoService {
 		worker.setcardNumber(message.getCardNumber());
 		
 		Hat hat = new Hat();
-		hat.setCode(message.getHatCode());
+		hat.setCode(message.getSafeHatCode());
 		
 		Gateway gateway = new Gateway();
 		gateway.setCode(message.getGatewayCode());
@@ -87,7 +89,7 @@ public class WearInfoServiceImpl implements WearInfoService {
 			e.printStackTrace();
 		}
 		System.out.println("return true");
-		return false;
+		return true;
 	}
 
 }

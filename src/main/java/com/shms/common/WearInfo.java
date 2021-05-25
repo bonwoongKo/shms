@@ -14,7 +14,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 @SuppressWarnings("serial")
 public class WearInfo implements Serializable {
 	private int code;
-	private String hatCode;
+	private String safeHatCode;
 	private String gatewayCode;
 	private String cardNumber;
 	
@@ -30,7 +30,7 @@ public class WearInfo implements Serializable {
 	public WearInfo(int code, String hatCode, String gatewayCode, String empNumber, LocalDateTime dateTime, char isWear,
 			double latitude, double longitude) {
 		this.code = code;
-		this.hatCode = hatCode;
+		this.safeHatCode = hatCode;
 		this.gatewayCode = gatewayCode;
 		this.cardNumber = empNumber;
 		this.time = dateTime;
@@ -47,12 +47,12 @@ public class WearInfo implements Serializable {
 		this.code = code;
 	}
 
-	public String getHatCode() {
-		return hatCode;
+	public String getSafeHatCode() {
+		return safeHatCode;
 	}
 
-	public void setHatCode(String hatCode) {
-		this.hatCode = hatCode;
+	public void setSafeHatCode(String safeHatCode) {
+		this.safeHatCode = safeHatCode;
 	}
 
 	public String getGatewayCode() {
