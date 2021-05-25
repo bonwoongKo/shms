@@ -5,14 +5,22 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 @Component
 @SuppressWarnings("serial")
 public class WearInfo implements Serializable {
 	private int code;
 	private String hatCode;
 	private String gatewayCode;
-	private String empNumber;
-	private LocalDateTime dateTime;
+	private String cardNumber;
+	
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	private LocalDateTime time;
 	private char isWear;
 	private double latitude;
 	private double longitude;
@@ -24,8 +32,8 @@ public class WearInfo implements Serializable {
 		this.code = code;
 		this.hatCode = hatCode;
 		this.gatewayCode = gatewayCode;
-		this.empNumber = empNumber;
-		this.dateTime = dateTime;
+		this.cardNumber = empNumber;
+		this.time = dateTime;
 		this.isWear = isWear;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -55,20 +63,20 @@ public class WearInfo implements Serializable {
 		this.gatewayCode = gatewayCode;
 	}
 
-	public String getEmpNumber() {
-		return empNumber;
+	public String getCardNumber() {
+		return cardNumber;
 	}
 
-	public void setEmpNumber(String empNumber) {
-		this.empNumber = empNumber;
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
-	public LocalDateTime getDateTime() {
-		return dateTime;
+	public LocalDateTime getTime() {
+		return time;
 	}
 
-	public void setDateTime(LocalDateTime dateTime) {
-		this.dateTime = dateTime;
+	public void setTime(LocalDateTime time) {
+		this.time = time;
 	}
 
 	public char getIsWear() {
@@ -94,4 +102,5 @@ public class WearInfo implements Serializable {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+
 }
