@@ -50,7 +50,7 @@
 					password = "!";
 				}
 				
-				xhr.open("GET", "http://localhost:8080/common/check/" + empNumber + "/" + password, true);
+				xhr.open("GET", "${pageContext.request.contextPath}" + "/common/check/" + empNumber + "/" + password, true);
 				xhr.send();
 				
 				return false;
