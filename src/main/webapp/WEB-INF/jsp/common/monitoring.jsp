@@ -32,8 +32,8 @@
 			</div>
 		</div>
 	</div>
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98bbfb9a1199725564f1e511f426dd6d"></script>
+<!--localhost:8080용 appkey=98bbfb9a1199725564f1e511f426dd6d AWS용 appkey=84df5ba3fe6d380ae81cc0059ae8ae59 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=84df5ba3fe6d380ae81cc0059ae8ae59"></script> 
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
