@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -133,4 +134,279 @@
         DELETE FROM WEAR_LOG
         <include refid="whereSql" />
     </delete>
+=======
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.wearlog.WearLogMapper">
+    <resultMap id="wearLogResultMap" type="com.shms.wearlog.WearLog">
+        <result column="CODE" property="code" />
+        <result column="HAT_CODE" property="hatCode" />
+        <result column="GATEWAY_CODE" property="gatewayCode" />
+        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="TIME" property="time" />
+        <result column="IS_WEAR" property="isWear" />
+        <result column="LATITUDE" property="latitude" />
+        <result column="LONGITUDE" property="longitude" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="code != null and code != ''">
+                AND CODE = #{code}
+            </if>
+            <if test="hatCode != null and hatCode != ''">
+                AND HAT_CODE = #{hatCode}
+            </if>
+            <if test="gatewayCode != null and gatewayCode != ''">
+                AND GATEWAY_CODE = #{gatewayCode}
+            </if>
+            <if test="empNumber != null and empNumber != ''">
+                AND EMP_NUMBER = #{empNumber}
+            </if>
+            <if test="time != null and time != ''">
+                AND TIME = #{time}
+            </if>
+            <if test="isWear != null and isWear != ''">
+                AND IS_WEAR = #{isWear}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                AND LATITUDE = #{latitude}
+            </if>
+            <if test="longitude != null and longitude != ''">
+                AND LONGITUDE = #{longitude}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="count" parameterType="com.shms.wearlog.WearLog" resultType="int">
+        SELECT COUNT(*)
+        FROM WEAR_LOG
+        <include refid="whereSql" />
+    </select>
+
+	<select id="list" resultMap="wearLogResultMap">
+        SELECT
+            CODE
+            , HAT_CODE
+            , GATEWAY_CODE
+            , EMP_NUMBER
+            , TIME
+            , IS_WEAR
+            , LATITUDE
+            , LONGITUDE
+        FROM WEAR_LOG
+    </select>
+
+    <select id="select" parameterType="com.shms.wearlog.WearLog" resultMap="wearLogResultMap">
+        SELECT
+            CODE
+            , HAT_CODE
+            , GATEWAY_CODE
+            , EMP_NUMBER
+            , TIME
+            , IS_WEAR
+            , LATITUDE
+            , LONGITUDE
+        FROM WEAR_LOG
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="com.shms.wearlog.WearLog">
+        INSERT INTO WEAR_LOG (
+            CODE
+            , HAT_CODE
+            , GATEWAY_CODE
+            , EMP_NUMBER
+            , TIME
+            , IS_WEAR
+            , LATITUDE
+            , LONGITUDE
+        ) VALUES (
+            #{code}
+            , #{gatewayCode}
+            , #{empNumber}
+            , #{time}
+            , #{isWear}
+            , #{latitude}
+            , #{longitude}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.wearlog.WearLog">
+        UPDATE WEAR_LOG
+        <set>
+            <if test="code != null and code != ''">
+                CODE = #{code},
+            </if>
+            <if test="hatCode != null and hatCode != ''">
+                HAT_CODE = #{hatCode},
+            </if>
+            <if test="gatewayCode != null and gatewayCode != ''">
+                GATEWAY_CODE = #{gatewayCode},
+            </if>
+            <if test="empNumber != null and empNumber != ''">
+                EMP_NUMBER = #{empNumber},
+            </if>
+            <if test="time != null and time != ''">
+                TIME = #{time},
+            </if>
+            <if test="isWear != null and isWear != ''">
+                IS_WEAR = #{isWear},
+            </if>
+            <if test="latitude != null and latitude != ''">
+                LATITUDE = #{latitude},
+            </if>
+            <if test="longitude != null and longitude != ''">
+                LONGITUDE = #{longitude},
+            </if>
+        </set>
+        WHERE CODE = #{code}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.wearlog.WearLog">
+        DELETE FROM WEAR_LOG
+        <include refid="whereSql" />
+    </delete>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.wearlog.WearLogMapper">
+    <resultMap id="wearLogResultMap" type="com.shms.wearlog.WearLog">
+        <result column="CODE" property="code" />
+        <result column="HAT_CODE" property="hatCode" />
+        <result column="GATEWAY_CODE" property="gatewayCode" />
+        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="TIME" property="time" />
+        <result column="IS_WEAR" property="isWear" />
+        <result column="LATITUDE" property="latitude" />
+        <result column="LONGITUDE" property="longitude" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="code != null and code != ''">
+                AND CODE = #{code}
+            </if>
+            <if test="hatCode != null and hatCode != ''">
+                AND HAT_CODE = #{hatCode}
+            </if>
+            <if test="gatewayCode != null and gatewayCode != ''">
+                AND GATEWAY_CODE = #{gatewayCode}
+            </if>
+            <if test="empNumber != null and empNumber != ''">
+                AND EMP_NUMBER = #{empNumber}
+            </if>
+            <if test="time != null and time != ''">
+                AND TIME = #{time}
+            </if>
+            <if test="isWear != null and isWear != ''">
+                AND IS_WEAR = #{isWear}
+            </if>
+            <if test="latitude != null and latitude != ''">
+                AND LATITUDE = #{latitude}
+            </if>
+            <if test="longitude != null and longitude != ''">
+                AND LONGITUDE = #{longitude}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="count" parameterType="com.shms.wearlog.WearLog" resultType="int">
+        SELECT COUNT(*)
+        FROM WEAR_LOG
+        <include refid="whereSql" />
+    </select>
+
+	<select id="list" resultMap="wearLogResultMap">
+        SELECT
+            CODE
+            , HAT_CODE
+            , GATEWAY_CODE
+            , EMP_NUMBER
+            , TIME
+            , IS_WEAR
+            , LATITUDE
+            , LONGITUDE
+        FROM WEAR_LOG
+    </select>
+
+    <select id="select" parameterType="com.shms.wearlog.WearLog" resultMap="wearLogResultMap">
+        SELECT
+            CODE
+            , HAT_CODE
+            , GATEWAY_CODE
+            , EMP_NUMBER
+            , TIME
+            , IS_WEAR
+            , LATITUDE
+            , LONGITUDE
+        FROM WEAR_LOG
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="com.shms.wearlog.WearLog">
+        INSERT INTO WEAR_LOG (
+            CODE
+            , HAT_CODE
+            , GATEWAY_CODE
+            , EMP_NUMBER
+            , TIME
+            , IS_WEAR
+            , LATITUDE
+            , LONGITUDE
+        ) VALUES (
+            #{code}
+            , #{gatewayCode}
+            , #{empNumber}
+            , #{time}
+            , #{isWear}
+            , #{latitude}
+            , #{longitude}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.wearlog.WearLog">
+        UPDATE WEAR_LOG
+        <set>
+            <if test="code != null and code != ''">
+                CODE = #{code},
+            </if>
+            <if test="hatCode != null and hatCode != ''">
+                HAT_CODE = #{hatCode},
+            </if>
+            <if test="gatewayCode != null and gatewayCode != ''">
+                GATEWAY_CODE = #{gatewayCode},
+            </if>
+            <if test="empNumber != null and empNumber != ''">
+                EMP_NUMBER = #{empNumber},
+            </if>
+            <if test="time != null and time != ''">
+                TIME = #{time},
+            </if>
+            <if test="isWear != null and isWear != ''">
+                IS_WEAR = #{isWear},
+            </if>
+            <if test="latitude != null and latitude != ''">
+                LATITUDE = #{latitude},
+            </if>
+            <if test="longitude != null and longitude != ''">
+                LONGITUDE = #{longitude},
+            </if>
+        </set>
+        WHERE CODE = #{code}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.wearlog.WearLog">
+        DELETE FROM WEAR_LOG
+        <include refid="whereSql" />
+    </delete>
+>>>>>>> branch 'master' of https://github.com/2021-shms/system.git
+>>>>>>> branch 'master' of https://github.com/2021-shms/system.git
 </mapper>

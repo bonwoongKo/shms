@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -75,4 +76,171 @@
         DELETE FROM HAT
         <include refid="whereSql" />
     </delete>
+=======
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.hat.HatMapper">
+    <resultMap id="hatResultMap" type="com.shms.hat.Hat">
+        <result column="CODE" property="code" />
+        <result column="REGIST_DATE" property="registDate" />
+        <result column="IS_DELETE" property="isDelete" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="code != null and code != ''">
+                AND CODE = #{code}
+            </if>
+            <if test="registDate != null and registDate != ''">
+                AND REGIST_DATE = #{registDate}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                AND IS_DELETE = #{isDelete}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="count" parameterType="com.shms.hat.Hat" resultType="int">
+        SELECT COUNT(*)
+        FROM HAT
+        <include refid="whereSql" />
+    </select>
+
+	<select id="list" resultMap="hatResultMap">
+        SELECT
+            CODE
+            , REGIST_DATE
+            , IS_DELETE
+        FROM HAT
+    </select>
+
+    <select id="select" parameterType="com.shms.hat.Hat" resultMap="hatResultMap">
+        SELECT
+            CODE
+            , REGIST_DATE
+            , IS_DELETE
+        FROM HAT
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="com.shms.hat.Hat">
+        INSERT INTO HAT (
+            CODE
+            , REGIST_DATE
+            , IS_DELETE
+        ) VALUES (
+            #{code}
+            , #{registDate}
+            , #{isDelete}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.hat.Hat">
+        UPDATE HAT
+        <set>
+            <if test="code != null and code != ''">
+                CODE = #{code},
+            </if>
+            <if test="registDate != null and registDate != ''">
+                REGIST_DATE = #{registDate},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                IS_DELETE = #{isDelete},
+            </if>
+        </set>
+        WHERE CODE = #{code}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.hat.Hat">
+        DELETE FROM HAT
+        <include refid="whereSql" />
+    </delete>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.hat.HatMapper">
+    <resultMap id="hatResultMap" type="com.shms.hat.Hat">
+        <result column="CODE" property="code" />
+        <result column="REGIST_DATE" property="registDate" />
+        <result column="IS_DELETE" property="isDelete" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="code != null and code != ''">
+                AND CODE = #{code}
+            </if>
+            <if test="registDate != null and registDate != ''">
+                AND REGIST_DATE = #{registDate}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                AND IS_DELETE = #{isDelete}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="count" parameterType="com.shms.hat.Hat" resultType="int">
+        SELECT COUNT(*)
+        FROM HAT
+        <include refid="whereSql" />
+    </select>
+
+	<select id="list" resultMap="hatResultMap">
+        SELECT
+            CODE
+            , REGIST_DATE
+            , IS_DELETE
+        FROM HAT
+    </select>
+
+    <select id="select" parameterType="com.shms.hat.Hat" resultMap="hatResultMap">
+        SELECT
+            CODE
+            , REGIST_DATE
+            , IS_DELETE
+        FROM HAT
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="com.shms.hat.Hat">
+        INSERT INTO HAT (
+            CODE
+            , REGIST_DATE
+            , IS_DELETE
+        ) VALUES (
+            #{code}
+            , #{registDate}
+            , #{isDelete}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.hat.Hat">
+        UPDATE HAT
+        <set>
+            <if test="code != null and code != ''">
+                CODE = #{code},
+            </if>
+            <if test="registDate != null and registDate != ''">
+                REGIST_DATE = #{registDate},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                IS_DELETE = #{isDelete},
+            </if>
+        </set>
+        WHERE CODE = #{code}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.hat.Hat">
+        DELETE FROM HAT
+        <include refid="whereSql" />
+    </delete>
+>>>>>>> branch 'master' of https://github.com/2021-shms/system.git
+>>>>>>> branch 'master' of https://github.com/2021-shms/system.git
 </mapper>

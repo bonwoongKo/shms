@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -99,4 +100,215 @@
         DELETE FROM WORKER
         <include refid="whereSql" />
     </delete>
+=======
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.worker.WorkerMapper">
+    <resultMap id="workerResultMap" type="com.shms.worker.Worker">
+        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="NAME" property="name" />
+        <result column="CARD_NUMBER" property="cardNumber" />
+        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="IS_DELETE" property="isDelete" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="empNumber != null and empNumber != ''">
+                AND EMP_NUMBER = #{empNumber}
+            </if>
+            <if test="name != null and name != ''">
+                AND NAME = #{name}
+            </if>
+            <if test="cardNumber != null and cardNumber != ''">
+                AND CARD_NUMBER = #{cardNumber}
+            </if>
+            <if test="phoneNumber != null and phoneNumber != ''">
+                AND PHONE_NUMBER = #{phoneNumber}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                AND IS_DELETE = #{isDelete}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="count" parameterType="com.shms.worker.Worker" resultType="int">
+        SELECT COUNT(*)
+        FROM WORKER
+        <include refid="whereSql" />
+    </select>
+
+	<select id="list" resultMap="workerResultMap">
+        SELECT
+            EMP_NUMBER
+            , NAME
+            , CARD_NUMBER
+            , PHONE_NUMBER
+            , IS_DELETE
+        FROM WORKER
+    </select>
+
+    <select id="select" parameterType="com.shms.worker.Worker" resultMap="workerResultMap">
+        SELECT
+            EMP_NUMBER
+            , NAME
+            , CARD_NUMBER
+            , PHONE_NUMBER
+            , IS_DELETE
+        FROM WORKER
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="com.shms.worker.Worker">
+        INSERT INTO WORKER (
+            EMP_NUMBER
+            , NAME
+            , CARD_NUMBER
+            , PHONE_NUMBER
+            , IS_DELETE
+        ) VALUES (
+            #{empNumber}
+            , #{name}
+            , #{cardNumber}
+            , #{phoneNumber}
+            , #{isDelete}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.worker.Worker">
+        UPDATE WORKER
+        <set>
+            <if test="code != null and code != ''">
+                EMP_NUMBER = #{empNumber},
+            </if>
+            <if test="registDate != null and registDate != ''">
+                NAME = #{name},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                CARD_NUMBER = #{cardNumber},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                PHONE_NUMBER = #{phoneNumber},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                IS_DELETE = #{isDelete},
+            </if>
+        </set>
+        WHERE EMP_NUMBER = #{empNumber}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.worker.Worker">
+        DELETE FROM WORKER
+        <include refid="whereSql" />
+    </delete>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.worker.WorkerMapper">
+    <resultMap id="workerResultMap" type="com.shms.worker.Worker">
+        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="NAME" property="name" />
+        <result column="CARD_NUMBER" property="cardNumber" />
+        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="IS_DELETE" property="isDelete" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="empNumber != null and empNumber != ''">
+                AND EMP_NUMBER = #{empNumber}
+            </if>
+            <if test="name != null and name != ''">
+                AND NAME = #{name}
+            </if>
+            <if test="cardNumber != null and cardNumber != ''">
+                AND CARD_NUMBER = #{cardNumber}
+            </if>
+            <if test="phoneNumber != null and phoneNumber != ''">
+                AND PHONE_NUMBER = #{phoneNumber}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                AND IS_DELETE = #{isDelete}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="count" parameterType="com.shms.worker.Worker" resultType="int">
+        SELECT COUNT(*)
+        FROM WORKER
+        <include refid="whereSql" />
+    </select>
+
+	<select id="list" resultMap="workerResultMap">
+        SELECT
+            EMP_NUMBER
+            , NAME
+            , CARD_NUMBER
+            , PHONE_NUMBER
+            , IS_DELETE
+        FROM WORKER
+    </select>
+
+    <select id="select" parameterType="com.shms.worker.Worker" resultMap="workerResultMap">
+        SELECT
+            EMP_NUMBER
+            , NAME
+            , CARD_NUMBER
+            , PHONE_NUMBER
+            , IS_DELETE
+        FROM WORKER
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="com.shms.worker.Worker">
+        INSERT INTO WORKER (
+            EMP_NUMBER
+            , NAME
+            , CARD_NUMBER
+            , PHONE_NUMBER
+            , IS_DELETE
+        ) VALUES (
+            #{empNumber}
+            , #{name}
+            , #{cardNumber}
+            , #{phoneNumber}
+            , #{isDelete}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.worker.Worker">
+        UPDATE WORKER
+        <set>
+            <if test="code != null and code != ''">
+                EMP_NUMBER = #{empNumber},
+            </if>
+            <if test="registDate != null and registDate != ''">
+                NAME = #{name},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                CARD_NUMBER = #{cardNumber},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                PHONE_NUMBER = #{phoneNumber},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                IS_DELETE = #{isDelete},
+            </if>
+        </set>
+        WHERE EMP_NUMBER = #{empNumber}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.worker.Worker">
+        DELETE FROM WORKER
+        <include refid="whereSql" />
+    </delete>
+>>>>>>> branch 'master' of https://github.com/2021-shms/system.git
+>>>>>>> branch 'master' of https://github.com/2021-shms/system.git
 </mapper>
