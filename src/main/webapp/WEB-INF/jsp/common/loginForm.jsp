@@ -15,7 +15,7 @@
 			<input id="password" type="password" name="password" required>
 
 			<div id="error"></div>
-			<input type="submit" value="로그인" data-loading-text="Loading..." />
+			<input type="submit" value="로그인" />
 		</form>
 			<script>
 				function check(form) {
@@ -50,7 +50,7 @@
 					password = "!";
 				}
 				
-				xhr.open("GET", "http://localhost/common/check/" + empNumber + "/" + password, true);
+				xhr.open("GET", "http://localhost:8080/common/check/" + empNumber + "/" + password, true);
 				xhr.send();
 				
 				return false;

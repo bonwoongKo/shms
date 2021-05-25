@@ -30,6 +30,7 @@ public class LoginController {
 	public ModelAndView login(@ModelAttribute Manager manager, HttpSession httpSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		
+		System.out.println(manager.getEmpNumber());
 		modelAndView.setView(new RedirectView(loginService.login(manager, httpSession)));
 		
 		return modelAndView;
