@@ -89,6 +89,7 @@
             , LONGITUDE
         ) VALUES (
             #{code}
+            , #{hatCode}
             , #{gatewayCode}
             , #{empNumber}
             , #{time}
