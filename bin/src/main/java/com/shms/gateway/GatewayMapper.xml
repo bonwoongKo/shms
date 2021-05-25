@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -79,4 +80,87 @@
         DELETE FROM GATEWAY
         <include refid="whereSql" />
     </delete>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.gateway.GatewayMapper">
+    <resultMap id="gatewayResultMap" type="com.shms.gateway.Gateway">
+        <result column="CODE" property="code" />
+        <result column="REGIST_DATE" property="registDate" />
+        <result column="IS_DELETE" property="isDelete" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="code != null and code != ''">
+                AND CODE = #{code}
+            </if>
+            <if test="registDate != null and registDate != ''">
+                AND REGIST_DATE = #{registDate}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                AND IS_DELETE = #{isDelete}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="count" parameterType="com.shms.gateway.Gateway" resultType="int">
+        SELECT COUNT(*)
+        FROM GATEWAY
+        <include refid="whereSql" />
+    </select>
+
+	<select id="list" resultMap="gatewayResultMap">
+        SELECT
+            CODE
+            , REGIST_DATE
+            , IS_DELETE
+        FROM GATEWAY
+    </select>
+
+    <select id="select" parameterType="com.shms.gateway.Gateway" resultMap="gatewayResultMap">
+        SELECT
+            CODE
+            , REGIST_DATE
+            , IS_DELETE
+        FROM GATEWAY
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="com.shms.gateway.Gateway">
+        INSERT INTO GATEWAY (
+            CODE
+            , REGIST_DATE
+            , IS_DELETE
+        ) VALUES (
+            #{code}
+            , #{registDate}
+            , #{isDelete}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.gateway.Gateway">
+        UPDATE GATEWAY
+        <set>
+            <if test="code != null and code != ''">
+                CODE = #{code},
+            </if>
+            <if test="registDate != null and registDate != ''">
+                REGIST_DATE = #{registDate},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                IS_DELETE = #{isDelete},
+            </if>
+        </set>
+        WHERE CODE = #{code}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.gateway.Gateway">
+        DELETE FROM GATEWAY
+        <include refid="whereSql" />
+    </delete>
+>>>>>>> branch 'master' of https://github.com/2021-shms/system.git
 </mapper>

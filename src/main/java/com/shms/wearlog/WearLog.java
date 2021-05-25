@@ -17,6 +17,9 @@ public class WearLog implements Serializable{
 	private double latitude;
 	private double longitude;
 	
+	private String name;
+	private String phone;
+	
 	public WearLog() {	}
 
 	public WearLog(int code, String hatCode, String gatewayCode, String empNumber, LocalDateTime time, char isWear,
@@ -94,4 +97,21 @@ public class WearLog implements Serializable{
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+		
 }
