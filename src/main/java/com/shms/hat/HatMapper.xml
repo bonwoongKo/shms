@@ -50,12 +50,8 @@
     <insert id="insert" parameterType="com.shms.hat.Hat">
         INSERT INTO HAT (
             CODE
-            , REGIST_DATE
-            , IS_DELETE
         ) VALUES (
             #{code}
-            , #{registDate}
-            , #{isDelete}
         )
     </insert>
 

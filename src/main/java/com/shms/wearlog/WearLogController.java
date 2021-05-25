@@ -10,16 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.shms.worker.WorkerServiceImpl;
+
 @RestController
 @RequestMapping("/wearlog")
 public class WearLogController {
 	@Autowired
 	private WearLogServiceImpl wearLogServiceImpl;
+	@Autowired
+	private WorkerServiceImpl workerServiceImpl;
 	
 	@GetMapping
 	public ModelAndView wearLogList() throws Exception {
 		ModelAndView mav = new ModelAndView("wearlog/list");
 		mav.addObject("wearLogList", wearLogServiceImpl.wearLogList());
+		mav.addObject("workerList", workerServiceImpl.workerList());
 		
 		return mav;
 	}
@@ -29,16 +34,11 @@ public class WearLogController {
 		return null;
 	}
 	
-	@GetMapping("/{number}")
+	@GetMapping("/{code}")
 	public ModelAndView viewWearLog(@ModelAttribute WearLog wearLog) throws Exception {
-		ModelAndView mav = new ModelAndView("wearLog/view");
+		ModelAndView mav = new ModelAndView("wearlog/view");
 		mav.addObject("wearLog", wearLogServiceImpl.viewWearLog(wearLog));
 		
 		return mav;
-	}
-	
-	@DeleteMapping("/{number}")
-	public ModelAndView deleteWearLog(@ModelAttribute WearLog wearLog, Errors errors) {
-		return new ModelAndView(new RedirectView("/wearlog"));
 	}
 }

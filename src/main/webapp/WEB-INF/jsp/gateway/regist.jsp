@@ -7,6 +7,10 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		gateway_regits
+		gateway_regits <br>
+		<form action="/gateway" method="post">
+			일련번호 <input type="text" name="code" /> <br>
+			<input type="submit" value="완료" />
+		</form>
 	</body>
 </html>

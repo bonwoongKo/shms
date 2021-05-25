@@ -29,7 +29,9 @@ public class ManagerController {
 	}
 	
 	@PostMapping
-	public ModelAndView registManager(@ModelAttribute Manager manager, Errors errors) {
+	public ModelAndView registManager(@ModelAttribute Manager manager, Errors errors) throws Exception {
+		managerServiceImpl.registManager(manager);
+		
 		return new ModelAndView(new RedirectView("/manager"));
 	}
 	
@@ -54,9 +56,12 @@ public class ManagerController {
 		return mav;
 	}
 	
-	@GetMapping("/{number}/form")
-	public ModelAndView editManagerForm(@ModelAttribute Manager manager) {
-		return new ModelAndView("manager/edit");
+	@GetMapping("/{empNumber}/form")
+	public ModelAndView editManagerForm(@ModelAttribute Manager manager) throws Exception {
+		ModelAndView mav = new ModelAndView("manager/edit");
+		mav.addObject("manager", managerServiceImpl.viewManager(manager));
+		
+		return mav;
 	}
 	
 	@PutMapping
@@ -65,7 +70,9 @@ public class ManagerController {
 	}
 	
 	@DeleteMapping
-	public ModelAndView deleteManager(@ModelAttribute Manager manager) {
+	public ModelAndView deleteManager(@ModelAttribute Manager manager) throws Exception {
+		managerServiceImpl.deleteManager(manager);
+		
 		return new ModelAndView(new RedirectView("/manager"));
 	}
 }

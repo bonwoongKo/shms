@@ -9,6 +9,20 @@
 	</head>
 	<body>
 		hat_list
-		<c:out value="${hatList}" />
+		<c:forEach items="${hatList}" var="hat">
+			<c:if test="${hat.isDelete eq 'N'}">
+				<form action="/hat" method="post">
+					<input type="hidden" name="_method" value="delete" />
+					<input type="hidden" name="code" value="${hat.code}" />
+					<input type="hidden" name="isDelete" value="Y" />
+					<label>${hat.code}</label>
+					<label>${hat.registDate}</label>
+					<input type="submit" value="삭제" /> <br>
+				</form>
+			</c:if>
+		</c:forEach>
+		<form action="/hat/form" method="get">
+			<input type="submit" value="등록" />
+		</form>
 	</body>
 </html>
