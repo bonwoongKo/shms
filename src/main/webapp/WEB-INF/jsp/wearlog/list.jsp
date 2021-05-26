@@ -12,7 +12,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${wearLogList}" var="wearLog">
+				<c:forEach items="${rows}" var="wearLog">
 					<tr onclick="location.href='/wearlog/${wearLog.empNumber}/${wearLog.time}'">
 						<td>
 							<label>${wearLog.worker.name}</label>
