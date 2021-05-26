@@ -17,7 +17,7 @@ public class MapController {
 	@Autowired
 	private MapServiceImpl mapService;
 	
-	@GetMapping("/main") //http://localhost:8080/map/main
+	@GetMapping("/main") //http://localhost:8080/map/main  aws = http://15.164.67.165/
 	public ModelAndView Monitoring() {
 		ModelAndView mav = new ModelAndView("/common/monitoring");
 		List<WearLog> rows = null;
