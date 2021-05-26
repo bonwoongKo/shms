@@ -3,7 +3,10 @@ package com.shms.wearlog;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
+import com.shms.worker.Worker;
 
 @Component
 @SuppressWarnings("serial")
@@ -12,13 +15,13 @@ public class WearLog implements Serializable{
 	private String hatCode;
 	private String gatewayCode;
 	private String empNumber;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime time;
 	private char isWear;
 	private double latitude;
 	private double longitude;
-	
-	private String name;
-	private String phone;
+	private Worker worker;
 	
 	public WearLog() {	}
 
@@ -98,20 +101,11 @@ public class WearLog implements Serializable{
 		this.longitude = longitude;
 	}
 
-	public String getName() {
-		return name;
+	public Worker getWorker() {
+		return worker;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setWorker(Worker worker) {
+		this.worker = worker;
 	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-		
 }

@@ -4,6 +4,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shms.wearlog.WearLogMapper">
+	<resultMap id="workerResultMap" type="com.shms.worker.Worker">
+        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="NAME" property="name" />
+        <result column="CARD_NUMBER" property="cardNumber" />
+        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="IS_DELETE" property="isDelete" />
+    </resultMap>
+    
     <resultMap id="wearLogResultMap" type="com.shms.wearlog.WearLog">
         <result column="CODE" property="code" />
         <result column="HAT_CODE" property="hatCode" />
@@ -13,6 +21,7 @@
         <result column="IS_WEAR" property="isWear" />
         <result column="LATITUDE" property="latitude" />
         <result column="LONGITUDE" property="longitude" />
+        <collection property="worker" resultMap="workerResultMap"/>
     </resultMap>
 
     <sql id="whereSql">
@@ -51,16 +60,39 @@
     </select>
 
 	<select id="list" resultMap="wearLogResultMap">
-        SELECT
-            CODE
-            , HAT_CODE
-            , GATEWAY_CODE
-            , EMP_NUMBER
-            , TIME
-            , IS_WEAR
-            , LATITUDE
-            , LONGITUDE
-        FROM WEAR_LOG
+        SELECT 
+        	L.CODE
+            , L.HAT_CODE
+            , L.GATEWAY_CODE
+            , L.EMP_NUMBER
+            , MAX(L.TIME) AS TIME
+            , L.IS_WEAR
+            , L.LATITUDE
+            , L.LONGITUDE
+            , W.NAME
+            , W.PHONE_NUMBER
+        FROM WEAR_LOG L JOIN WORKER W
+        ON L.EMP_NUMBER = W.EMP_NUMBER
+        WHERE DATE_FORMAT(TIME, '%Y%m%d') = DATE_FORMAT(SYSDATE(), '%Y%m%d')
+        GROUP BY W.NAME;
+    </select>
+    
+    <select id="viewWearLog" parameterType="com.shms.wearlog.WearLog" resultMap="wearLogResultMap">
+        SELECT 
+        	L.CODE
+            , L.HAT_CODE
+            , L.GATEWAY_CODE
+            , L.EMP_NUMBER
+            , L.TIME
+            , L.IS_WEAR
+            , L.LATITUDE
+            , L.LONGITUDE
+            , W.NAME
+            , W.PHONE_NUMBER
+        FROM WEAR_LOG L JOIN WORKER W
+        ON L.EMP_NUMBER = W.EMP_NUMBER
+        WHERE L.EMP_NUMBER = #{empNumber}
+        AND DATE_FORMAT(L.TIME, '%Y%m%d') = DATE_FORMAT(#{time}, '%Y%m%d')
     </select>
 
     <select id="select" parameterType="com.shms.wearlog.WearLog" resultMap="wearLogResultMap">

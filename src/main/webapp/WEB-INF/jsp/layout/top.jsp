@@ -48,7 +48,7 @@
 						<div class="header-column">
 							<div class="header-row">
 								<div class="header-logo" style="width: 100px; height: 48px;">
-									<a href="index.html">
+									<a href="/map/main">
 										<img alt="shms" width="199" height="30" data-sticky-width="82" data-sticky-height="40" src="${pageContext.request.contextPath}/img/SHMS.png" style="top: 0px; width: 199px; height: 60px;">
 									</a>
 								</div>

@@ -33,8 +33,8 @@ public class WearLogServiceImpl implements WearLogService {
 	}
 
 	@Override
-	public WearLog viewWearLog(WearLog wearLog) throws Exception {
-		return wearLogMapper.select(wearLog);
+	public List<WearLog> viewWearLog(WearLog wearLog) throws Exception {
+		return wearLogMapper.viewWearLog(wearLog);
 	}
 
 	@Override
