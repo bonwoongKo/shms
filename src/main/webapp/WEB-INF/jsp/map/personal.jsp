@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%@ include file="/WEB-INF/jsp/top.jsp" %>
-<html>
-<body>
+<%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
 	<div role="main" class="main">
 		<div class="container">
 			<div class="row pb-5">
@@ -189,5 +187,3 @@ var count = 0;
 </c:forEach> 
 
 </script>
-</body>
-</html>

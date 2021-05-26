@@ -1,4 +1,4 @@
-package com.shms.common;
+package com.shms.map;
 
 import java.util.List;
 

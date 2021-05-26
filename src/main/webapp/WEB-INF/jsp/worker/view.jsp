@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-	</head>
-	<body>
-		worker_regist
+<%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
 		<c:out value="${worker}" /> <br>
 		<c:out value="${worker.empNumber}" /> <br>
 		<c:out value="${worker.name}" /> <br>
@@ -26,5 +19,4 @@
 			<input type="hidden" name="isDelete" value="Y"/>
 			<input type="submit" value="삭제" />
 		</form>
-	</body>
-</html>
+<%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>

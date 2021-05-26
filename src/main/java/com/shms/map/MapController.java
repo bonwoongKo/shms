@@ -1,4 +1,4 @@
-package com.shms.common;
+package com.shms.map;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class MapController {
 	
 	@GetMapping("/main") //http://localhost:8080/map/main  aws = http://15.164.67.165/
 	public ModelAndView Monitoring() {
-		ModelAndView mav = new ModelAndView("/common/monitoring");
+		ModelAndView mav = new ModelAndView("/map/monitoring");
 		List<WearLog> rows = null;
 		try {
 			rows = mapService.listWearLog();
@@ -34,7 +34,7 @@ public class MapController {
 	
 	@GetMapping("/personal") //http://localhost:8080/map/personal
 	public ModelAndView Personal() {
-		ModelAndView mav = new ModelAndView("/common/personal");
+		ModelAndView mav = new ModelAndView("/map/personal");
 		
 		List<WearLog> rows = null;
 		try {

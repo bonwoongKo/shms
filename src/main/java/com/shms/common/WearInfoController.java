@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
-@RequestMapping("/receive")
+@RequestMapping("/common")
 public class WearInfoController {
 	
 	@Autowired
 	WearInfoServiceImpl wearInfoService;
 	
-	@PostMapping
+	@PostMapping("/receive")
 	public void receiveWearInfo(@RequestBody StringBuilder json, Errors errors) {
 		WearInfo jsonMap = null;
 		
@@ -28,18 +28,12 @@ public class WearInfoController {
 			new WearInfoValidator().validate(jsonMap, errors);
 			
 			if (errors.hasErrors()) {
-				System.out.println("we got error");
 			
-//				return jsonMap;
 			}
-			System.out.println("wearInfoService start");
 			wearInfoService.receiveWearInfo(jsonMap);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-			
-//			return jsonMap;
 		}
-//		return jsonMap;
 	}
 }

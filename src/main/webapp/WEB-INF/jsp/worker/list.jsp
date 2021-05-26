@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<%@ include file="/WEB-INF/jsp/top.jsp" %>
-	<body>
+<%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -26,5 +24,4 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</body>
-</html>
+<%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
