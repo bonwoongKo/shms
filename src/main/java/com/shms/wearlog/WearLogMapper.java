@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface WearLogMapper {
 	public int count(WearLog wearLog) throws Exception;
 	public List<WearLog> list() throws Exception;
+	public List<WearLog> viewWearLog(WearLog wearLog) throws Exception;
 	public WearLog select(WearLog wearLog) throws Exception;
 	public void insert(WearLog wearLog) throws Exception;
 	public void update(WearLog wearLog) throws Exception;

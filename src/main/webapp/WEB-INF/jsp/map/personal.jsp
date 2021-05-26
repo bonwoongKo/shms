@@ -46,10 +46,9 @@
 <script>
 	var date = "${rows[0].time}";
 	var date2 = date.substring(0, 10);
-	document.getElementById("headLine").innerHTML = date2 + "${rows[0].name}님의 " + "착용기록입니다.";
+	document.getElementById("headLine").innerHTML = date2 + "  ${rows[0].worker.name}님의 " + "착용기록입니다.";
 	
 </script>
-<!--localhost:8080용 appkey=98bbfb9a1199725564f1e511f426dd6d AWS용 appkey=84df5ba3fe6d380ae81cc0059ae8ae59 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98bbfb9a1199725564f1e511f426dd6d"></script> 
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -90,7 +89,7 @@ var redMarkerImage = new kakao.maps.MarkerImage(redImageSrc, imageSize, imageOpt
 var positions = [
 	<c:forEach items="${rows}" var="row">
 	 {
-		 content: '<div>${row.name}</div>' + '<div>${row.phone}</div>', 
+		 content: '<div>${row.worker.name}</div>' + '<div>${row.worker.phoneNumber}</div>', 
 	     latlng: new kakao.maps.LatLng("${row.latitude}", "${row.longitude}")
 	 },
 	</c:forEach> 

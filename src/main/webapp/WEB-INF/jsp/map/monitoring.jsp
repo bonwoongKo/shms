@@ -24,7 +24,6 @@
 			</div>
 		</div>
 	</div>
-<!--localhost:8080용 appkey=98bbfb9a1199725564f1e511f426dd6d AWS용 appkey=84df5ba3fe6d380ae81cc0059ae8ae59 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=84df5ba3fe6d380ae81cc0059ae8ae59"></script> 
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -121,7 +120,7 @@ function reCall() {
 					for (var i = 0; i < rows.length; i++) {
 						html += "	<li class=nav-item>";
 						html += " 		<a class=nav-link onclick=panToMarker(" + i + ")>";
-						html += "		" + rows[i].name + " : ";
+						html += "		" + rows[i].worker.name + " : ";
 						if (rows[i].isWear == 'y') {
 							html += "착용";
 						} else {
@@ -143,7 +142,7 @@ function reCall() {
 					var positions = [];
 					for (var i = 0; i < rows.length; i++) {
 						positions.push({
-							content: '<div>' + rows[i].name + '</div>' + '<div>' + rows[i].phone + '</div>', 
+							content: '<div>' + rows[i].worker.name + '</div>' + '<div>' + rows[i].worker.phoneNumber + '</div>', 
 						    latlng: new kakao.maps.LatLng(rows[i].latitude, rows[i].longitude)
 						});
 					}
