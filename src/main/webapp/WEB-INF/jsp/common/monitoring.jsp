@@ -2,14 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="/WEB-INF/jsp/top.jsp" %>
-<html>
-<body>
-	<div role="main" class="main">
-		<div class="container">
-			<div class="row pb-5">
-				<div class="col">
-				</div>
-			</div>
+
+
+	
 			<h3>실시간 모니터링</h3>
 			<div class="row">
 				<div class="col-lg-9">
@@ -207,5 +202,4 @@ function reCall() {
 	xhr.send();
 };
 </script>
-</body>
-</html>
+<%@ include file="/WEB-INF/jsp/bottom.jsp" %>
