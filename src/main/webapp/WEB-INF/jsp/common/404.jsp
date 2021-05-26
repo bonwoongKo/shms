@@ -1,12 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
 <div role="main" class="main" style="min-height: calc(100vh - 393px);">
 			<div class="container">
 				<div class="row mt-5">
@@ -27,7 +19,7 @@
 					<div class="row justify-content-center py-3">
 						<div class="col-6 text-center">
 							<div class="http-error-main">
-								<h2 class="mb-0">500!</h2>
+								<h2 class="mb-0">404!</h2>
 								<span class="text-6 font-weight-bold text-color-dark">UNEXPECTED ERROR</span>
 								<p class="text-3 my-4">An unexpected error has occured. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim.</p>
 							</div>
@@ -37,5 +29,4 @@
 				</section>
 			</div>
 		</div>
-</body>
-</html>
+<%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>

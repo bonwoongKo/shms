@@ -1,12 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
 <div role="main" class="main" style="min-height: calc(100vh - 393px);">
 			<div class="container">
 				<div class="row mt-5">
@@ -37,5 +29,4 @@
 				</section>
 			</div>
 		</div>
-</body>
-</html>
+<%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>

@@ -28,7 +28,7 @@ public class WearInfoController {
 			new WearInfoValidator().validate(jsonMap, errors);
 			
 			if (errors.hasErrors()) {
-			
+				new Exception();
 			}
 			wearInfoService.receiveWearInfo(jsonMap);
 			

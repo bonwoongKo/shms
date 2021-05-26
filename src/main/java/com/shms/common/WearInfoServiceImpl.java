@@ -55,7 +55,6 @@ public class WearInfoServiceImpl implements WearInfoService {
 
 	@Override
 	public boolean validWearInfo(WearInfo message) {
-		System.out.println("valid wear info Start");
 		
 		Worker worker = new Worker();
 		worker.setcardNumber(message.getCardNumber());
@@ -84,7 +83,6 @@ public class WearInfoServiceImpl implements WearInfoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("return true");
 		return true;
 	}
 
