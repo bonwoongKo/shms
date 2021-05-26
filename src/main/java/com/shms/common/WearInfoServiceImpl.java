@@ -32,8 +32,6 @@ public class WearInfoServiceImpl implements WearInfoService {
 	public void receiveWearInfo(WearInfo message) {
 		WearLog wearLog = new WearLog();
 		
-		System.out.println("can't take my eye off you");
-		
 		try {
 			if (validWearInfo(message)) {
 				Worker worker = new Worker();
@@ -47,8 +45,6 @@ public class WearInfoServiceImpl implements WearInfoService {
 				wearLog.setLatitude(message.getLatitude());
 				wearLog.setLongitude(message.getLongitude());
 				wearLog.setTime(message.getTime());
-				
-				System.out.println("wear log toString() : " + wearLog.toString());
 				
 				wearLogService.registWearLog(wearLog);
 			}
