@@ -67,8 +67,8 @@ public class ManagerController {
 	
 	@PutMapping
 	public ModelAndView editManager(@ModelAttribute Manager manager, Errors erros) throws Exception {
-
 		managerServiceImpl.editManager(manager);
+		
 		return new ModelAndView(new RedirectView("/manager"));
 	}
 	
