@@ -2,16 +2,22 @@
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
 		
-		<div class="float-left col-lg-4" style="padding-left: 0px;">
-			<input id="name" type="text" name="name" placeholder="검색할 이름을 입력해주세요." class="form-control" onkeyup="enterkey();" />
+		<div style="clear:both">
+			<div style="float:left">
+				<h2 class="font-weight-extra-bold">착용기록</h2>
+			</div>
+			<div class="float-right">
+				<input id="search" type="submit" value="검색" class="btn btn-outline btn-primary btn-sm mb-2 form-control" />
+			</div>
+			<div class="float-right col-lg-4" style="padding-left: 0px;">
+				<input id="name" type="text" name="name" placeholder="검색할 이름을 입력해주세요." class="form-control" onkeyup="enterkey();" />
+			</div>
 		</div>
-		<div class="float-left">
-			<input id="search" type="submit" value="검색" class="btn btn-outline btn-primary btn-sm mb-2 form-control" />
-		</div>
+		
 		<div id="list">
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr align="center">
 						<th>근로자 이름</th>
 						<th>연락처</th>
 						<th>기록 시간</th>
@@ -21,11 +27,13 @@
 				<tbody>
 					<c:choose>
 						<c:when test="${rows eq null}">
-							<td colspan="4">금일 기록된 기록이 없습니다.</td>
+							<tr align="center">
+								<td colspan="4">금일 기록된 기록이 없습니다.</td>
+							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${rows}" var="wearLog">
-								<tr onclick="location.href='/wearlog/${wearLog.empNumber}/${wearLog.time}'">
+								<tr onclick="location.href='/wearlog/${wearLog.empNumber}/${wearLog.time}'" align="center">
 									<td>
 										<label>${wearLog.worker.name}</label>
 									</td>
@@ -64,17 +72,34 @@
 							var rows = JSON.parse(xhr.responseText);
 							
 							if (rows.length === 0) {
-								document.getElementById("list").innerHTML = "검색결과가 없습니다";
+								var html =
+									"<table class=\"table table-hover\">";
+								html += "<thead>";
+								html += "	<tr align=\"center\">";
+								html += "   	<th>근로자 이름</th>";
+								html += "		<th>연락처</th>";
+								html += "		<th>기록 시간</th>";
+								html += "		<th>착용 여부</th>";
+								html += "	<tr>";
+								html += "</thead>";
+								html += "<tr align=\"center\">";
+								html += "<td colspan=\"4\">검색된 기록이 없습니다.</td>";
+								html += "</tr>";
+								
+								document.getElementById("list").innerHTML = html;
 							} else {
 								var html =
-										"<table class=\"table table-hover\">";
-								html += "<tr>";
-								html += "   <th>근로자 이름</th>";
-								html += "	<th>연락처</th>";
-								html += "	<th>기록 시간</th>";
-								html += "	<th>착용 여부</th>";
-								html += "<tr>";
+										"<table class=\"table table-hover\" style=\"display:block; width:100%;\">";
+								html += "	<thead style=\"display:table; width: calc(100% - 1em); table-layout:fixed;\">";
+								html += "		<tr align=\"center\" style=\"width:100%;\">";
+								html += "   		<th>근로자 이름</th>";
+								html += "			<th>연락처</th>";
+								html += "			<th>기록 시간</th>";
+								html += "			<th>착용 여부</th>";
+								html += "		<tr>";
+								html += "	</thead>";
 								
+								html += "	<tbody style=\"display:block; overflow:auto; width:100%; height:500px;\">";
 								for (var i = 0; i < rows.length; i++) {
 									var month = (rows[i].time.monthValue / 10) > 1 ? rows[i].time.monthValue : "0" + rows[i].time.monthValue;
 									var day = (rows[i].time.dayOfMonth / 10) > 1 ? rows[i].time.dayOfMonth : "0" + rows[i].time.dayOfMonth;
@@ -96,7 +121,7 @@
 													  + minute
 													  + ":"
 													  + second
-													  + "\'\">";
+													  + "\'\" align=\"center\" style=\"display:table; width:100%; table-layout:fixed;\">";
 													  
 									html += "	<td>" + rows[i].worker.name + "</td>";
 									html += "	<td>" + rows[i].worker.phoneNumber + "</td>";
@@ -116,6 +141,7 @@
 									html += "</tr>";
 								}
 								
+								html += "</tbody>"
 								html += "</table>";
 								
 								document.getElementById("list").innerHTML = html;

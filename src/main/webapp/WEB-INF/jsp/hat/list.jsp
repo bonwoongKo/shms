@@ -14,7 +14,7 @@
 		
 		<table class="table table-hover">
 			<thead>
-				<tr>
+				<tr align="center">
 					<th>일련번호</th>
 					<th>등록일</th>
 					<th></th>
@@ -23,7 +23,7 @@
 			<tbody>
 				<c:forEach items="${hatList}" var="hat">
 					<c:if test="${hat.isDelete eq 'N'}">
-						<tr>
+						<tr align="center">
 							<form action="/hat" method="post">
 								<input type="hidden" name="_method" value="delete" />
 								<input type="hidden" name="code" value="${hat.code}" />

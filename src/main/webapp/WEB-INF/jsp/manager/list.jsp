@@ -5,7 +5,7 @@
 	
 		<table class="table table-hover">
 			<thead>
-				<tr>
+				<tr align="center">
 					<th>사원번호</th>
 					<th>이름</th>
 					<th>연락처</th>
@@ -14,7 +14,7 @@
 			<tbody>
 				<c:forEach items="${managerList}" var="manager">
 					<c:if test="${manager.job eq 'M'}">
-						<tr>
+						<tr align="center">
 							<form action="/manager" method="post">
 								<input type="hidden" name="_method" value="delete" />
 								<input type="hidden" name="code" value="${manager.empNumber}" />

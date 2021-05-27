@@ -6,7 +6,7 @@
 		
 		<table class="table table-hover">
 			<thead>
-				<tr>
+				<tr align="center">
 					<th>사원번호</th>
 					<th>근로자이름</th>
 				</tr>
@@ -14,7 +14,7 @@
 			<tbody>
 				<c:forEach items="${workerList}" var="worker">
 					<c:if test="${worker.isDelete eq 'N'}">
-						<tr onclick="location.href='/worker/${worker.empNumber}'">
+						<tr onclick="location.href='/worker/${worker.empNumber}'" align="center">
 							<td>
 								${worker.empNumber}
 							</td>
@@ -27,6 +27,6 @@
 			</tbody>
 		</table>
 		<form action="/worker/form" method="get">
-			<input type="submit" class="btn btn-primary mb-2" value="등록" />
+			<input type="submit" style="float:right" class="btn btn-primary mb-2" value="등록" />
 		</form>
 <%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
