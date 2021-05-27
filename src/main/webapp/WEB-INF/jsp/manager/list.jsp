@@ -6,7 +6,7 @@
 				<tr>
 					<th>code</th>
 					<th>등록일</th>
-					<th></th>
+					<th>연락처</th>
 				</tr>
 			</thead>
 			<tbody>
