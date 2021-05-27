@@ -1,6 +1,7 @@
 package com.shms.wearlog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ public class WearLogController {
 	}
 	
 	@GetMapping("/{empNumber}/{time}")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	public ModelAndView viewWearLog(@ModelAttribute WearLog wearLog) throws Exception {
 		ModelAndView mav = new ModelAndView("map/personal");
 		mav.addObject("rows", wearLogServiceImpl.viewWearLog(wearLog));
