@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
+		<h2 class="font-weight-extra-bold">안전관리자</h2>
+	
 		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>사원번호</th>
-					<th>관리자 이름</th>
+					<th>이름</th>
 					<th>연락처</th>
 				</tr>
 			</thead>
@@ -27,7 +29,7 @@
 									<label>${manager.phoneNumber}</label>
 								</td>
 								<td>
-									<input type="submit" value="삭제" /> <br>
+									<input type="submit" class="btn btn-secondary mb-2" value="삭제" />
 								</td>
 							</form>
 						</tr>
@@ -36,6 +38,6 @@
 			</tbody>
 		</table>
 		<form action="/manager/form" method="get">
-			<input type="submit" value="등록" />
+			<input type="submit" style="float:right" class="btn btn-primary mb-2" value="등록" />
 		</form>
 <%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>

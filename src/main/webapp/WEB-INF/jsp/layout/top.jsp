@@ -23,6 +23,7 @@
 		<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
 		<!-- Theme CSS -->
+
 		<link rel="stylesheet" href="/css/theme.css">
 		<link rel="stylesheet" href="/css/theme-elements.css">
 		<link rel="stylesheet" href="/css/theme-blog.css">

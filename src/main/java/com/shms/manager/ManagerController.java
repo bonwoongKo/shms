@@ -5,6 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,7 +66,9 @@ public class ManagerController {
 	}
 	
 	@PutMapping
-	public ModelAndView editManager(@ModelAttribute Manager manager, Errors erros) {
+	public ModelAndView editManager(@ModelAttribute Manager manager, Errors erros) throws Exception {
+		managerServiceImpl.editManager(manager);
+		
 		return new ModelAndView(new RedirectView("/manager"));
 	}
 	

@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
+		<h2 class="font-weight-extra-bold">근로자</h2>
+		
 		<table class="table table-hover">
 			<thead>
 				<tr>
