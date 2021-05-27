@@ -24,4 +24,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<form action="/worker/form" method="get">
+			<input type="submit" class="btn btn-primary mb-2" value="등록" />
+		</form>
 <%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>

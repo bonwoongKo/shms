@@ -24,6 +24,11 @@ public class WearLogServiceImpl implements WearLogService {
 	public List<WearLog> viewWearLog(WearLog wearLog) throws Exception {
 		return wearLogMapper.viewWearLog(wearLog);
 	}
+	
+	@Override
+	public List<WearLog> searchWearLog(String name) throws Exception {
+		return wearLogMapper.searchWearLog(name);
+	}
 
 	@Override
 	public void deleteWearLog(WearLog wearLog) throws Exception {
