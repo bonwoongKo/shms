@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
-		<button type="button" class="btn btn-primary mb-2" onclick="location.href='/gateway'">게이트웨이</button>
-		<button type="button" class="btn btn-primary mb-2" onclick="location.href='/hat'">안전모</button>
+
+		<div style="clear:both">
+			<div style="float:left">
+				<h2 class="font-weight-extra-bold">안전모</h2>
+			</div>
+			<div style="float:right">
+				<button type="button" class="btn btn-outline btn-primary mb-2" onclick="location.href='/gateway'">게이트웨이</button>
+				<button type="button" class="btn btn-primary mb-2" onclick="location.href='/hat'">안전모</button>
+			</div>
+		</div>
 		
 		<table class="table table-hover">
 			<thead>
@@ -37,6 +45,6 @@
 			</tbody>
 		</table>
 		<form action="/hat/form" method="get">
-			<input type="submit" class="btn btn-primary mb-2" value="등록" />
+			<input type="submit" style="float:right" class="btn btn-primary mb-2" value="등록" />
 		</form>
 <%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
