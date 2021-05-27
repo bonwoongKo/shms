@@ -4,9 +4,9 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>code</th>
-					<th>등록일</th>
-					<th></th>
+					<th>사원번호</th>
+					<th>관리자 이름</th>
+					<th>연락처</th>
 				</tr>
 			</thead>
 			<tbody>

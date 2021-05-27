@@ -120,7 +120,7 @@ function reCall() {
 						html += "	<li class=nav-item>";
 						html += " 		<a class=nav-link onclick=panToMarker(" + i + ")>";
 						html += "		" + rows[i].worker.name + " : ";
-						if (rows[i].isWear == 'y') {
+						if (rows[i].isWear == 'Y') {
 							html += "착용";
 						} else {
 							html += "미착용";
@@ -147,7 +147,7 @@ function reCall() {
 					}
 									
 					for (var i = 0; i < rows.length; i++) {
-						if ('y' == rows[i].isWear) {
+						if ('Y' == rows[i].isWear) {
 							// 마커를 생성합니다
 							var marker = new kakao.maps.Marker({
 								map: map, // 마커를 표시할 지도

@@ -27,6 +27,7 @@ public class LoginServiceImpl implements LoginService {
 			else if (manager.getJob() == 'M') { // 안전 관리자
 				httpSession.setAttribute("empNumber", manager.getEmpNumber());
 				httpSession.setAttribute("job", manager.getJob());
+				httpSession.setAttribute("name", manager.getName());
 				
 				return "/map";
 			}

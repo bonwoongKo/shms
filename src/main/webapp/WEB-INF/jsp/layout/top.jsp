@@ -32,7 +32,7 @@
 		
 		<style>
       		.header-container{
-        		background-color: #343a40;
+        		background-color: #3b3b3b;
       		}
     	</style>
 		
@@ -47,12 +47,12 @@
 							<c:choose>
 								<c:when test="${sessionScope.job eq 'A'}">
 									<a href="${request.getContextPath()}/manager/main">
-										<img src="${pageContext.request.contextPath}/img/SHMS.png" style="top: 0px; width: 199px; height: 60px;">
+										<img src="${pageContext.request.contextPath}/img/shms.png" style="top: 0px; width: 199px; height: 60px;">
 									</a>	
 								</c:when>
 								<c:when test="${sessionScope.job eq 'M'}">
 									<a href="${request.getContextPath()}/map">
-										<img src="${pageContext.request.contextPath}/img/SHMS.png" style="top: 0px; width: 199px; height: 60px;">
+										<img src="${pageContext.request.contextPath}/img/shms.png" style="top: 0px; width: 199px; height: 60px;">
 									</a>
 								</c:when>
 							</c:choose>
@@ -66,17 +66,19 @@
 									<ul class="nav nav-pills" id="mainNav">
 										<c:choose>
 											<c:when test="${sessionScope.job eq 'A'}">
-												<li><a href="${request.getContextPath()}/hat" class="nav-link">장비 관리</a></li>
-												<li><a href="${request.getContextPath()}/worker" class="nav-link">근로자 관리</a></li>
-												<li><a href="${request.getContextPath()}/manager" class="nav-link">안전관리자 관리</a></li>
-												<li><a href="${request.getContextPath()}/wearlog" class="nav-link">착용 기록</a></li>
-												<li><a href="${request.getContextPath()}/common/logout" class="nav-link">로그아웃</a></li>
+												<li><a href="${request.getContextPath()}/hat" class="nav-link" style="font-size:16px" style="font-size:18px">장비 관리</a></li>
+												<li><a href="${request.getContextPath()}/worker" class="nav-link" style="font-size:16px" style="font-size:18px">근로자 관리</a></li>
+												<li><a href="${request.getContextPath()}/manager" class="nav-link" style="font-size:16px" style="font-size:18px">안전관리자 관리</a></li>
+												<li><a href="${request.getContextPath()}/wearlog" class="nav-link" style="font-size:16px" style="font-size:18px">착용 기록</a></li>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<li><a href="${request.getContextPath()}/common/logout" class="nav-link" style="font-size:16px" style="font-size:18px">로그아웃</a></li>
 											</c:when>
 											<c:when test="${sessionScope.job eq 'M'}">
-												<li><a href="${request.getContextPath()}/map" class="nav-link">모니터링</a></li>
-												<li><a href="${request.getContextPath()}/wearlog" class="nav-link">착용 기록</a></li>
-												<li><a href="${request.getContextPath()}/manager/${sessionScope.empNumber}" class="nav-link">내 정보</a></li>
-												<li><a href="${request.getContextPath()}/common/logout" class="nav-link">로그아웃</a></li>
+												<li><a href="${request.getContextPath()}/map" class="nav-link" style="font-size:18px">모니터링</a></li>
+												<li><a href="${request.getContextPath()}/wearlog" class="nav-link" style="font-size:18px">착용 기록</a></li>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<li><a href="${request.getContextPath()}/manager/${sessionScope.empNumber}" class="nav-link" style="font-size:18px">${sessionScope.name}님</a></li>
+												<li><a href="${request.getContextPath()}/common/logout" class="nav-link" style="font-size:18px">로그아웃</a></li>
 											</c:when>  
 										</c:choose>
 									</ul>
@@ -84,7 +86,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="header-column align-items-end justify-content-center d-none d-lg-flex">
+					<div class="header-column flex-row justify-content-end justify-content-lg-center">
 					</div>
 				</div>
 			</div>
