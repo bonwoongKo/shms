@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -21,24 +22,15 @@
 		<!-- Vendor CSS -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/animate/animate.compat.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/simple-line-icons/css/simple-line-icons.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/owl.carousel/assets/owl.carousel.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/owl.carousel/assets/owl.theme.default.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/magnific-popup/magnific-popup.min.css">
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme-elements.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme-blog.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme-shop.css">
-		<!-- Current Page CSS -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/circle-flip-slideshow/css/component.css">
 		<!-- Skin CSS -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/skins/default.css">
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/custom.css">
-		<!-- Head Libs -->
-		<script src="${pageContext.request.contextPath}/vendor/modernizr/modernizr.min.js"></script>
 	</head>
 	<body>
 		<header id="header" class="header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyChangeLogo': true, 'stickyStartAt': 120, 'stickyHeaderContainerHeight': 70}" style="height: 104px;">
@@ -48,7 +40,7 @@
 						<div class="header-column">
 							<div class="header-row">
 								<div class="header-logo" style="width: 100px; height: 48px;">
-									<a href="/map/main">
+									<a href="/">
 										<img alt="shms" width="199" height="30" data-sticky-width="82" data-sticky-height="40" src="${pageContext.request.contextPath}/img/SHMS.png" style="top: 0px; width: 199px; height: 60px;">
 									</a>
 								</div>
@@ -60,6 +52,7 @@
 									<div class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1">
 										<nav class="collapse">
 											<ul class="nav nav-pills" id="mainNav">
+											
 												<li class="dropdown">
 													<a class="dropdown-item dropdown-toggle active current-page-active" href="index.html">
 														모니터링

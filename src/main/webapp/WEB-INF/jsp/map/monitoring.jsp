@@ -2,25 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
-			<h3>실시간 모니터링</h3>
-			<div class="row">
-				<div class="col-lg-9">
-					<div id="map" style="width:800px;height:550px;"></div>
-				</div>
-				<div class="col-lg-3">
-					<div class="tabs tabs-vertical tabs-right tabs-navigation tabs-navigation-simple">
-						<aside class="sidebar mt-2">
-							<h5 class="font-weight-bold">근로자 목록</h5>
-							<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:440px;">
-								<ul class="nav nav-list flex-column">
-									<p id="workerList"></p>
-								</ul>
-							</div>							
-							<button type="button" class="btn btn-primary mb-2" onclick="changeMarker('all')">전체보기 </button>&nbsp;&nbsp;&nbsp;
-							<button type="button" class="btn btn-secondary mb-2" onclick="changeMarker('red')">미착용 보기</button>
-						</aside>
-					</div>
-				</div>
+	<h3>실시간 모니터링</h3>
+	<div class="row">
+		<div class="col-lg-9">
+			<div id="map" style="width:800px;height:550px;"></div>
+		</div>
+		<div class="col-lg-3">
+			<div class="tabs tabs-vertical tabs-right tabs-navigation tabs-navigation-simple">
+				<aside class="sidebar mt-2">
+					<h5 class="font-weight-bold">근로자 목록</h5>
+					<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:440px;">
+						<ul class="nav nav-list flex-column">
+							<p id="workerList"></p>
+						</ul>
+					</div>							
+					<button type="button" class="btn btn-primary mb-2" onclick="changeMarker('all')">전체보기 </button>&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-secondary mb-2" onclick="changeMarker('red')">미착용 보기</button>
+				</aside>
 			</div>
 		</div>
 	</div>
@@ -115,6 +113,7 @@ function reCall() {
 				if (rows.length === 0) {
 					//document.getElementById("workerList").innerHTML = "근무중인 근로자가 없습니다";
 				} else {
+					console.log(rows);
 					// 근로자 목록 부분				
 					var html = "";
 					for (var i = 0; i < rows.length; i++) {
@@ -147,7 +146,6 @@ function reCall() {
 						});
 					}
 									
-					console.log(positions);
 					for (var i = 0; i < rows.length; i++) {
 						if ('y' == rows[i].isWear) {
 							// 마커를 생성합니다
@@ -194,8 +192,9 @@ function reCall() {
 		}
 	};
 	
-	xhr.open("GET", "${pageContext.request.contextPath}" + "/map/monitoring", true);
+	xhr.open("GET", "${pageContext.request.contextPath}" + "/monitoring", true);
 	xhr.send();
 };
 </script>
+
 <%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>

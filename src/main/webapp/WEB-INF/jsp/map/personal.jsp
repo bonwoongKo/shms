@@ -3,43 +3,35 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
-	<div role="main" class="main">
-		<div class="container">
-			<div class="row pb-5">
-				<div class="col">
-				</div>
-			</div>
-			<h3><p id="headLine"></p></h3>
-			<div class="row">
-				<div class="col-lg-9">
-					<div id="map" style="width:800px;height:550px;"></div>
-				</div>
-				<div class="col-lg-3">
-					<div class="tabs tabs-vertical tabs-right tabs-navigation tabs-navigation-simple">
-						<aside class="sidebar mt-2">
-							<h5 class="font-weight-bold">착용 기록</h5>
-							<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:440px;">
-								<ul class="nav nav-list flex-column">
-									<c:forEach items="${rows}" var="row">
-									<c:set var="isWear" value="${row.isWear}" />
-									<c:set var="time" value="${row.time}"/>
-										<li class="nav-item">
-											<a class="nav-link" onclick=panTo(${row.code})>${ fn:substring(time,11,20) } 
-												<c:choose>
-													<c:when test="${isWear eq 'y'}">착용</c:when>
-													<c:when test="${isWear eq 'n'}">미착용</c:when>
-													<c:otherwise></c:otherwise>
-												</c:choose>
-											</a>
-										</li>
-									</c:forEach>
-								</ul>
-							</div>
-							<button type="button" class="btn btn-primary mb-2" onclick="changeMarker('all')">전체보기 </button>&nbsp;&nbsp;&nbsp;
-							<button type="button" class="btn btn-secondary mb-2" onclick="changeMarker('red')">미착용 보기</button>
-						</aside>
+	<h3><p id="headLine"></p></h3>
+	<div class="row">
+		<div class="col-lg-9">
+			<div id="map" style="width:800px;height:550px;"></div>
+		</div>
+		<div class="col-lg-3">
+			<div class="tabs tabs-vertical tabs-right tabs-navigation tabs-navigation-simple">
+				<aside class="sidebar mt-2">
+					<h5 class="font-weight-bold">착용 기록</h5>
+					<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:440px;">
+						<ul class="nav nav-list flex-column">
+							<c:forEach items="${rows}" var="row">
+							<c:set var="isWear" value="${row.isWear}" />
+							<c:set var="time" value="${row.time}"/>
+								<li class="nav-item">
+									<a class="nav-link" onclick=panTo(${row.code})>${ fn:substring(time,11,20) } 
+										<c:choose>
+											<c:when test="${isWear eq 'y'}"><p>착용</p></c:when>
+											<c:when test="${isWear eq 'n'}">미착용</c:when>
+											<c:otherwise></c:otherwise>
+										</c:choose>
+									</a>
+								</li>
+							</c:forEach>
+						</ul>
 					</div>
-				</div>
+					<button type="button" class="btn btn-primary mb-2" onclick="changeMarker('all')">전체보기 </button>&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-secondary mb-2" onclick="changeMarker('red')">미착용 보기</button>
+				</aside>
 			</div>
 		</div>
 	</div>
@@ -49,7 +41,7 @@
 	document.getElementById("headLine").innerHTML = date2 + "  ${rows[0].worker.name}님의 " + "착용기록입니다.";
 	
 </script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98bbfb9a1199725564f1e511f426dd6d"></script> 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=84df5ba3fe6d380ae81cc0059ae8ae59"></script> 
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
