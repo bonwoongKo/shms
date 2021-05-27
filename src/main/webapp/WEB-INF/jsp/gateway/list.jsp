@@ -28,7 +28,7 @@
 									<fmt:formatDate pattern="yyyy년 MM월 dd일" value="${registDate}"/>
 								</td>
 								<td>
-									<input type="submit" class="btn btn-secondary mb-2" value="삭제" /> <br>
+									<input type="submit" class="btn btn-secondary mb-2" value="삭제" />
 								</td>
 							</form>
 						</tr>

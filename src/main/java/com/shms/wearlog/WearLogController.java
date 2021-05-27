@@ -1,12 +1,14 @@
 package com.shms.wearlog;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/wearlog")
@@ -30,8 +32,10 @@ public class WearLogController {
 		return mav;
 	}
 	
-	@GetMapping("/search/{name}/{time}")
-	public String searchWearLog(@ModelAttribute WearLog wearLog, Errors errors) {
-		return null;
+	@GetMapping("/search/{name}")
+	public String searchWearLog(@PathVariable  String name) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		return mapper.writeValueAsString(wearLogServiceImpl.searchWearLog(name));
 	}
 }
