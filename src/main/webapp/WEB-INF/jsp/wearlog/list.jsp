@@ -2,7 +2,7 @@
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
 		
-		<div class="float-left col-lg-4">
+		<div class="float-left col-lg-4" style="padding-left: 0px;">
 			<input id="name" type="text" name="name" placeholder="검색할 이름을 입력해주세요." class="form-control" onkeyup="enterkey();" />
 		</div>
 		<div class="float-left">
