@@ -12,21 +12,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shms.wearlog.WearLog;
 
 @RestController
+@RequestMapping("/map")
 public class MapController {
 	@Autowired
 	private MapServiceImpl mapService;
 	
-	@GetMapping("/") //http://localhost:8080  aws = http://15.164.67.165/
+	@GetMapping //http://localhost:8080  aws = http://15.164.67.165/
 	public ModelAndView Monitoring() {
 		ModelAndView mav = new ModelAndView("/map/monitoring");
-		List<WearLog> rows = null;
-		try {
-			rows = mapService.listWearLog();
-			mav.addObject("rows", rows);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	
+		
 		
 		return mav;
 	}

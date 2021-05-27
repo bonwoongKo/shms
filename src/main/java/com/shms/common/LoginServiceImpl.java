@@ -28,7 +28,7 @@ public class LoginServiceImpl implements LoginService {
 				httpSession.setAttribute("empNumber", manager.getEmpNumber());
 				httpSession.setAttribute("job", manager.getJob());
 				
-				return "/map/main";
+				return "/map";
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -54,7 +54,9 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public void logout(HttpSession httSession) {
-		
+	public void logout(HttpSession httpSession) {
+		if (httpSession != null) {
+			httpSession.invalidate();
+		}
 	}
 }

@@ -192,7 +192,7 @@ function reCall() {
 		}
 	};
 	
-	xhr.open("GET", "${pageContext.request.contextPath}" + "/monitoring", true);
+	xhr.open("GET", "${pageContext.request.contextPath}" + "/map/monitoring", true);
 	xhr.send();
 };
 </script>

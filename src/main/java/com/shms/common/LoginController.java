@@ -27,12 +27,12 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public ModelAndView login(@ModelAttribute Manager manager, HttpSession httpSession) {
+	public ModelAndView login(Manager manager, HttpSession httpSession) {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		System.out.println(manager.getEmpNumber());
 		modelAndView.setView(new RedirectView(loginService.login(manager, httpSession)));
-		
+		System.out.println(httpSession.getAttribute("job"));
 		return modelAndView;
 	}
 	
@@ -54,8 +54,7 @@ public class LoginController {
 			e.printStackTrace();
 			throw new RuntimeException();
 		}
-		
-		System.out.println("test : " + result);
+	
 		return result;
 	}
 }
