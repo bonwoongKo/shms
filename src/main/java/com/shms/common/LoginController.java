@@ -38,7 +38,8 @@ public class LoginController {
 	
 	@GetMapping("/logout")
 	public ModelAndView logout(HttpSession httpSession) {
-		return new ModelAndView(new RedirectView("/login/form"));
+		loginService.logout(httpSession);
+		return new ModelAndView(new RedirectView("/common/login/form"));
 	}
 	
 	@GetMapping("/check/{empNumber}/{password}")

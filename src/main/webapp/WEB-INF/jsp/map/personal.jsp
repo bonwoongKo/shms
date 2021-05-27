@@ -51,7 +51,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-/* 	//현재 접속한 위치로 화면을 이동 해주는 부분, 하지만 GeoLocationg함수 자체 불량으로 다른 위치를 찍는 경우가 잦음(작동은 됨)
+/* //현재 접속한 위치로 화면을 이동 해주는 부분, 하지만 GeoLocationg함수 자체 불량으로 다른 위치를 찍는 경우가 잦음(작동은 됨)
 if (navigator.geolocation) { 
 	
     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -87,22 +87,53 @@ var positions = [
 	</c:forEach> 
 ];
 
-//해당 위치로 지도 부드럽게 이동시키기
+//모든 마커를 가지고 있는 마커 배열
+var markers = [];
+
+//미착용 관련 마커를 가지고 있는 마커 배열
+var redMarkers = [];
+
+//마커의 표시 여부를 관리하기 위한 마커 배열
+var isMarked = [];
+
+var j = 0;
+<c:forEach items="${rows}" var="row">
+	isMarked[j] = 'f';
+
+	j++;
+</c:forEach> 
+
+
+function showMarker(count) {
+	markers[count].setMap(map);
+}
+
+function hideMarker(count) {
+	markers[count].setMap(null);
+}
+
+//해당 위치로 지도 부드럽게 이동시키기 + 마커 키고 끄기
 function panTo(code) {
 	var count2 = 0;
 	<c:forEach items="${rows}" var="row">
-		if (code == ${row.code}) {
-			var latlng = markers[count2].getPosition();
+		if (code == '${row.code}') {
+			var latlng = markers[count2].getPosition(); //마커를 이동하는 부분
 			map.panTo(latlng);
+			if (isMarked[count2] == 'f') { //마커가 활성화 -> 비활성화, 비활성화 -> 활성화
+				showMarker(count2);
+				isMarked[count2] = 't';
+			} else {
+				hideMarker(count2);
+				isMarked[count2] = 'f';
+			}
 		}
+		
 		count2++;
-	</c:forEach> 
+		
+	</c:forEach>
 }
 
-//모든 마커를 가지고 있는 마커 배열
-var markers = [];
-//미착용 관련 마커를 가지고 있는 마커 배열
-var redMarkers = [];
+
 
 var count = 0;
 <c:forEach items="${rows}" var="row">
@@ -176,5 +207,10 @@ var count = 0;
 	count++;
 	
 </c:forEach> 
+
+// 초기 화면에서는 마커가 찍혀있지 않도록 함
+for (var i = 0; i < markers.length; i++) {
+	markers[i].setMap(null);
+}
 
 </script>
