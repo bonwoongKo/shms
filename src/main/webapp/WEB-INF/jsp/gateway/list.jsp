@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
+		<button type="button" class="btn btn-primary mb-2" onclick="location.href='/gateway'">게이트웨이</button>
+		<button type="button" class="btn btn-primary mb-2" onclick="location.href='/hat'">안전모</button>
+		
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>code</th>
+					<th>일련번호</th>
 					<th>등록일</th>
 					<th></th>
 				</tr>
@@ -22,10 +24,11 @@
 									<label>${gateway.code}</label>
 								</td>
 								<td>
-									<label>${gateway.registDate}</label>
+									<fmt:parseDate value="${gateway.registDate}" pattern="yyyy-MM-dd" var="registDate" type="date"/>
+									<fmt:formatDate pattern="yyyy년 MM월 dd일" value="${registDate}"/>
 								</td>
 								<td>
-									<input type="submit" value="삭제" /> <br>
+									<input type="submit" class="btn btn-secondary mb-2" value="삭제" /> <br>
 								</td>
 							</form>
 						</tr>
@@ -34,6 +37,6 @@
 			</tbody>
 		</table>
 		<form action="/gateway/form" method="get">
-			<input type="submit" value="등록" />
+			<input type="submit" class="btn btn-primary mb-2" value="등록" />
 		</form>
 <%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
