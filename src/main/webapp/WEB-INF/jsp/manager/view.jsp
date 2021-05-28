@@ -2,7 +2,7 @@
 
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
-		manager_view
+	<h2 class="font-weight-extra-bold">${manager.name} 정보</h2>
 		<div class="call-to-action with-full-borders mb-5">
 			<label>사원번호</label>
 			<input type="text" value="${manager.empNumber}" class="form-control border-radius-0 h-auto py-2" readonly/>

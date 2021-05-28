@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
-		manager_edit <br>
+		<br>
+		<h2 class="font-weight-extra-bold">안전관리자 정보 수정</h2>
 		<form action="/manager" method="post">
 		<input type="hidden" name="_method" value="put" />
-			<div class="call-to-action with-full-borders mb-5" ">
+			<div class="call-to-action with-full-borders mb-5" style="display:block; overflow:auto; width:100%; height:500px;">
 				<div>
 				<label style="margin-top: 50px">사원번호</label>
 				<input type="text" value="${manager.empNumber}" class="form-control border-radius-0 h-auto py-2" name="empNumber" readonly/>
