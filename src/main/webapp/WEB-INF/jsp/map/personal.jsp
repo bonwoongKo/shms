@@ -170,20 +170,33 @@ var count = 0;
 		}
 	}
 	
+	var isAllSelected = 'f';
+	var isRedSelected = 'f';
 	// 착용 or 미착용 선택에 따라 마커들을 표시해주는 함수
 	function changeMarker(type){
-	    var showAllMarkers = document.getElementById('all');
-	    var redMarkers = document.getElementById('red');
-	    
 	    // 전체보기가 선택되었을 때
 	    if (type === 'all') {
-	        setMarkers(map);
-	        setRedMarkers(map);
-	        
+	    	if (isAllSelected == 'f') {
+	    		setMarkers(map);
+	 	        setRedMarkers(map);
+	 	        isAllSelected = 't';
+	    	} else {
+	    		setMarkers(null);
+	 	        setRedMarkers(null);
+	 	        isAllSelected = 'f';
+	    	}
+	       
 	    // 미착용 보기가 선택되었을 때
-	    } else if (type === 'red') {  	
-	    	setMarkers(null);
-	        setRedMarkers(map);
+	    } else if (type === 'red') {
+	    	if (isRedSelected == 'f') {
+	    		setMarkers(null);
+		        setRedMarkers(map);
+		        isRedSelected = 't';
+	    	} else {
+	    		setMarkers(null);
+		        setRedMarkers(null);
+		        isRedSelected = 'f';
+	    	}
 	    } 
 	} 
 	

@@ -41,7 +41,7 @@
 								<div class="header-row">
 									<div class="header-logo">
 										<a href="${pageContext.request.contextPath}/common/login/form">
-											<img alt="shms" width="199" height="30" data-sticky-width="82" data-sticky-height="40" src="${pageContext.request.contextPath}/img/SHMS.png" style="top: 0px; width: 199px; height: 60px;">
+											<img alt="shms" width="199" height="30" data-sticky-width="82" data-sticky-height="40" src="${pageContext.request.contextPath}/img/login.png" style="top: 0px; width: 199px; height: 60px;">
 										</a>
 									</div>
 								</div>
