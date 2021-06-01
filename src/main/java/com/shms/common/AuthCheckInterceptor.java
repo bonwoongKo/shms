@@ -13,12 +13,11 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession(false);
 		
 		String job = session != null ? session.getAttribute("job") != null ? String.valueOf(session.getAttribute("job")) : "" : "";
-		System.out.println("Session check : " + job);
+		System.out.println("Session check : " + job + "length : " + request.getServletPath().split("/").length);
 		//String job = session.getAttribute("job") != null ? String.valueOf(session.getAttribute("job")) : "";
 		
-		if ("A".equals(job) || "M".equals(job) && request.getServletPath().split("/").length > 1) {
+		if (request.getServletPath().split("/").length > 1 && ("A".equals(job) || "M".equals(job))) {
 			String path = request.getServletPath().split("/")[1];
-			System.out.println("Session check path : " + path);
 			if ("A".equals(job) 
 					&& ("".equals(path))) {
 				response.sendRedirect(request.getContextPath() + "/manager/main");
@@ -51,9 +50,15 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
 			
 			return true;
 		} else {
-			System.out.println("인터 1");
-			response.sendRedirect(request.getContextPath() + "/common/login/form");
-			
+			if ("A".equals(job)) {
+				response.sendRedirect(request.getContextPath() + "/manager/main");
+			}
+			else if ("M".equals(job)) {
+				response.sendRedirect(request.getContextPath() + "/map");
+			}
+			else {
+				response.sendRedirect(request.getContextPath() + "/common/login/form");
+			}	
 			return false;
 		}
 	}
