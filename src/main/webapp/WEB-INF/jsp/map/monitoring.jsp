@@ -5,7 +5,7 @@
 	<h3>실시간 모니터링</h3>
 	<div class="row">
 		<div class="col-lg-9">
-			<div id="map" style="width:800px;height:550px;"></div>
+			<div id="map" style="width:100%;height:80%;"></div>
 		</div>
 		<div class="col-lg-3">
 			<div class="tabs tabs-vertical tabs-right tabs-navigation tabs-navigation-simple">
