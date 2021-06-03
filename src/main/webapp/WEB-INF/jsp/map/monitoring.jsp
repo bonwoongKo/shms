@@ -5,19 +5,36 @@
 	<h3>실시간 모니터링</h3>
 	<div class="row">
 		<div class="col-lg-9">
-			<div id="map" style="width:100%;height:80%;"></div>
+			<div id="map" style="width:100%;height:95%;"></div>
 		</div>
 		<div class="col-lg-3">
 			<div class="tabs tabs-vertical tabs-right tabs-navigation tabs-navigation-simple">
 				<aside class="sidebar mt-2">
-					<h5 class="font-weight-bold">근로자 목록</h5>
-					<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:440px;">
+					<div class="header"><h5 class="font-weight-bold" style="font-size:18px">근로자 목록</h5></div>
+					<div class="content">
+						<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:340px;">
 						<ul class="nav nav-list flex-column">
 							<p id="workerList"></p>
 						</ul>
-					</div>							
-					<button type="button" class="btn btn-primary mb-2" onclick="changeMarker('all')">전체보기 </button>&nbsp;&nbsp;&nbsp;
-					<button type="button" class="btn btn-secondary mb-2" onclick="changeMarker('red')">미착용 보기</button>
+						</div>	
+					</div>
+					<div class="footer">
+						<button type="button" class="btn btn-primary mb-2" onclick="changeMarker('all')">전체보기 </button>&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-secondary mb-2" onclick="changeMarker('red')">미착용 보기</button>
+					</div>
+					<style>
+						.header{
+						    height: 40px;
+						}
+						.content{
+						    max-width: 500px; 
+						    height: 380px;
+						    margin: 0 auto; 
+						}
+						.footer{
+						    height:40px;
+						}
+					</style>
 				</aside>
 			</div>
 		</div>
