@@ -38,7 +38,8 @@
 										<label>${wearLog.worker.name}</label>
 									</td>
 									<td>
-										<label>${wearLog.worker.phoneNumber}</label>
+										<label>${fn:substring(wearLog.worker.phoneNumber,0,3)}-${fn:substring(wearLog.worker.phoneNumber,3,7)}-${fn:substring(wearLog.worker.phoneNumber,7,11)}</label>
+										
 									</td>
 									<td>
 										<fmt:parseDate value="${wearLog.time}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="registDate" type="date"/>
@@ -70,7 +71,7 @@
 					if (xhr.readyState === xhr.DONE) {
 						if (xhr.status === 200 || xhr.status === 201) {	
 							var rows = JSON.parse(xhr.responseText);
-							
+						
 							if (rows.length === 0) {
 								var html =
 									"<table class=\"table table-hover\">";
@@ -124,7 +125,7 @@
 													  + "\'\" align=\"center\" style=\"display:table; width:100%; table-layout:fixed;\">";
 													  
 									html += "	<td>" + rows[i].worker.name + "</td>";
-									html += "	<td>" + rows[i].worker.phoneNumber + "</td>";
+									html += "	<td>" + rows[i].worker.phoneNumber.substring(0,3) + "-" + rows[i].worker.phoneNumber.substring(3,7) + "-" + rows[i].worker.phoneNumber.substring(7,11) + "</td>";
 									html += "	<td>" + rows[i].time.year 
 													  + "-" 
 													  + month 

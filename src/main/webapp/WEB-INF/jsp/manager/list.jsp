@@ -18,7 +18,6 @@
 							<form action="/manager" method="post">
 								<input type="hidden" name="_method" value="delete" />
 								<input type="hidden" name="code" value="${manager.empNumber}" />
-								<input type="hidden" name="isDelete" value="Y" />
 								<td>
 									<label>${manager.empNumber}</label>
 								</td>
@@ -26,7 +25,8 @@
 									<label>${manager.name}</label>
 								</td>
 								<td>
-									<label>${manager.phoneNumber}</label>
+									<label>${fn:substring(manager.phoneNumber,0,3)}-${fn:substring(manager.phoneNumber,3,7)}-${fn:substring(manager.phoneNumber,7,11)}</label>
+									
 								</td>
 								<td>
 									<input type="submit" class="btn btn-secondary mb-2" value="삭제" />

@@ -5,7 +5,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,11 +41,6 @@ public class ManagerController {
 		mav.addObject("managerList", managerServiceImpl.managerList());
 		
 		return mav;
-	}
-	
-	@GetMapping("/search/{name}")
-	public String searchManager(@ModelAttribute Manager manager) {
-		return null;
 	}
 	
 	@GetMapping("/{empNumber}")

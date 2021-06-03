@@ -93,7 +93,7 @@
 		<form action="/common/login" method="POST" onsubmit="return check(this)">
 			<div class="container py-4">
 				<div class="row justify-content-center">
-					<div class="col-md-6 col-lg-5 mb-5 mb-lg-0">
+					<div class="card border-width-3 border-radius-0 mb-4 col-lg-6">
 						<div class="form-row">
 							<div class="form-group col">
 								<h2 class="font-weight-bold text-5 mb-0">Login</h2>

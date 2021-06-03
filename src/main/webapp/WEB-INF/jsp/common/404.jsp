@@ -12,9 +12,18 @@
 								NOT FOUND</span>
 							<p class="text-3 my-4">페이지를 찾을 수 없습니다.</p>
 						</div>
-						<a href="<%= request.getContextPath() %>/map/main"
-							class="btn btn-primary btn-rounded btn-xl font-weight-semibold text-2 px-4 py-3 mt-1 mb-4">
-							<i class="fas fa-angle-left pr-3"></i>메인 페이지로 돌아가기</a>
+						<c:choose>
+							<c:when test="${sessionScope.job eq 'A'}">
+								<a href="${request.getContextPath()}/manager/main" class="btn btn-primary btn-rounded btn-xl font-weight-semibold text-2 px-4 py-3 mt-1 mb-4">
+									<i class="fas fa-angle-left pr-3"></i>메인 페이지로 돌아가기
+								</a>
+							</c:when>
+							<c:when test="${sessionScope.job eq 'M'}">
+								<a href="${request.getContextPath()}/map" class="btn btn-primary btn-rounded btn-xl font-weight-semibold text-2 px-4 py-3 mt-1 mb-4">
+									<i class="fas fa-angle-left pr-3"></i>메인 페이지로 돌아가기
+								</a>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 			</section>

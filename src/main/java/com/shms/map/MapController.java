@@ -26,22 +26,6 @@ public class MapController {
 		return mav;
 	}
 	
-	@GetMapping("/personal") //http://localhost:8080/map/personal
-	public ModelAndView Personal() {
-		ModelAndView mav = new ModelAndView("/map/personal");
-		
-		List<WearLog> rows = null;
-		try {
-			rows = mapService.personalWearLog();
-			mav.addObject("rows", rows);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return mav;
-	}
-	
 	@GetMapping("/monitoring") //http://localhost:8080/map/monitoring
 	public String monitoring() {
 		
@@ -50,7 +34,7 @@ public class MapController {
 		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			rows = mapService.renewalWearLog();
+			rows = mapService.listWearLog();
 			if (rows != null) {
 				result = mapper.writeValueAsString(rows);
 			}
