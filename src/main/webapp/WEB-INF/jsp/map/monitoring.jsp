@@ -106,14 +106,12 @@ setInterval(reCall, 5000);
 function reCall() {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
-		console.log(xhr.readyState);
 		if (xhr.readyState === xhr.DONE) {
 			if (xhr.status === 200 || xhr.status === 201) {
 				var rows = JSON.parse(xhr.responseText);
 				if (rows.length === 0) {
 					//document.getElementById("workerList").innerHTML = "근무중인 근로자가 없습니다";
 				} else {
-					console.log(rows);
 					// 근로자 목록 부분				
 					var html = "";
 					for (var i = 0; i < rows.length; i++) {

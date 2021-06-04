@@ -85,7 +85,7 @@
             , L.HAT_CODE
             , L.GATEWAY_CODE
             , L.EMP_NUMBER
-            , MAX(L.TIME) AS TIME
+            , L.TIME
             , L.IS_WEAR
             , L.LATITUDE
             , L.LONGITUDE
@@ -93,8 +93,11 @@
             , W.PHONE_NUMBER
         FROM WEAR_LOG L JOIN WORKER W
         ON L.EMP_NUMBER = W.EMP_NUMBER
-        WHERE DATE_FORMAT(TIME, '%Y%m%d') = DATE_FORMAT(SYSDATE(), '%Y%m%d')
-        GROUP BY W.NAME;
+        WHERE L.TIME IN (SELECT MAX(L.TIME) AS TIME 
+        				 FROM WEAR_LOG L JOIN WORKER W
+       					 ON L.EMP_NUMBER = W.EMP_NUMBER 
+       					 WHERE DATE_FORMAT(L.TIME, '%Y%m%d') = DATE_FORMAT(SYSDATE(), '%Y%m%d') 
+       					 GROUP BY W.NAME)
     </select>
     
     <select id="viewWearLog" parameterType="com.shms.wearlog.WearLog" resultMap="wearLogResultMap">
