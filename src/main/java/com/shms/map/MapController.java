@@ -17,21 +17,17 @@ public class MapController {
 	@Autowired
 	private MapServiceImpl mapService;
 	
-	@GetMapping //http://localhost:8080  aws = http://15.164.67.165/
+	@GetMapping 
 	public ModelAndView Monitoring() {
 		ModelAndView mav = new ModelAndView("/map/monitoring");
 	
-		
-		
 		return mav;
 	}
 	
-	@GetMapping("/monitoring") //http://localhost:8080/map/monitoring
+	@GetMapping("/monitoring")
 	public String monitoring() {
-		
 		List<WearLog> rows = null;
 		String result = null;
-		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			rows = mapService.listWearLog();

@@ -19,6 +19,7 @@ public class HatController {
 	
 	@GetMapping("/form")
 	public ModelAndView registHatForm() {
+		
 		return new ModelAndView("hat/regist");
 	}
 	

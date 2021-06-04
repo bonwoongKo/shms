@@ -17,11 +17,13 @@ public class HatServiceImpl implements HatService {
 
 	@Override
 	public List<Hat> hatList() throws Exception {
+		
 		return hatMapper.list();
 	}
 
 	@Override
 	public Hat viewHat(Hat hat) throws Exception {
+		
 		return hatMapper.select(hat);
 	}
 

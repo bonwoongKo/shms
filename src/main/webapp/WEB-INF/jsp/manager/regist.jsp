@@ -46,88 +46,88 @@
 		</div>
 	</div>
 </div>
-
 <script>
-function passwordCheck() {
-	var password = document.getElementById('pwd').value;
-	var specialCharacters = ["!", "@", "#", "$", "%", "&"];
-	var isSC = false;
-
-	if (password.length < 6 || password.length > 20) {
-		window.alert('6 ~ 20글자 사이의 비밀번호를 입력하세요.');
-		document.getElementById('pwd').value = '';
-	}
-	for (var i = 0; i < specialCharacters.length; i++) {
-		if (password.indexOf(specialCharacters[i]) != -1) {
-			isSC = true;
-		}
-	}
-	if (false != isSC) {
-		window.alert('특수문자는 불가능합니다.')
-		document.getElementById('password').value = '';
-	}
-	if (document.getElementById('pwd').value != '' && document.getElementById('pwdCheck').value != '') {
-		if (document.getElementById('pwd').value == document.getElementById('pwdCheck').value) {
-			document.getElementById('pwdValid').style.visibility = 'hidden';
-			document.getElementById('submitBtn').disabled = false;
-		}
-		else {
-			document.getElementById('pwdValid').style.visibility = 'visible';
-			document.getElementById('submitBtn').disabled = true;
-			document.getElementById('pwdValid').style.color = 'red';
-		}
-	}
-}
-
-function nameCheck() {
-	var pattern = /^[가-힣]+/;
-	var name = document.getElementById('name').value;
-	
-	if (!pattern.test(name)) {
-		name.value = '';
-		window.alert('유효하지 않은 이름입니다.');
-	}
-	
-	if (name.value == null || name.value == ''){
+	function passwordCheck() {
+		var password = document.getElementById('pwd').value;
+		var specialCharacters = ["!", "@", "#", "$", "%", "&"];
+		var isSC = false;
 		
+		if (password.length < 6 || password.length > 20) {
+			window.alert('6 ~ 20글자 사이의 비밀번호를 입력하세요.');
+			document.getElementById('pwd').value = '';
+		}
+		for (var i = 0; i < specialCharacters.length; i++) {
+			if (password.indexOf(specialCharacters[i]) != -1) {
+				isSC = true;
+			}
+		}
+		if (false != isSC) {
+			window.alert('특수문자는 불가능합니다.')
+			document.getElementById('password').value = '';
+		}
+		if (document.getElementById('pwd').value != '' && document.getElementById('pwdCheck').value != '') {
+			if (document.getElementById('pwd').value == document.getElementById('pwdCheck').value) {
+				document.getElementById('pwdValid').style.visibility = 'hidden';
+				document.getElementById('submitBtn').disabled = false;
+			}
+			else {
+				document.getElementById('pwdValid').style.visibility = 'visible';
+				document.getElementById('submitBtn').disabled = true;
+				document.getElementById('pwdValid').style.color = 'red';
+			}
+		}
 	}
-
-	return true;
-}
-
-var phoneNo = document.getElementById('phoneNumber');
-
-phoneNo.onkeyup = function() {
-  this.value = autoHypen(this.value);  
-}
-
-var autoHypen = function(str) {
-	str = str.replace(/[^0-9]/g, '');
-	var tmp = '';
-	if ( str.length < 4) {
+	
+	function nameCheck() {
+		var pattern = /^[가-힣]+/;
+		var name = document.getElementById('name').value;
+		if (!pattern.test(name)) {
+			name.value = '';
+			window.alert('유효하지 않은 이름입니다.');
+		}
+		if (name.value == null || name.value == ''){
+			
+		}
+	
+		return true;
+	}
+	
+	var phoneNo = document.getElementById('phoneNumber');
+	phoneNo.onkeyup = function() {
+	  this.value = autoHypen(this.value);  
+	}
+	
+	var autoHypen = function(str) {
+		str = str.replace(/[^0-9]/g, '');
+		var tmp = '';
+		if ( str.length < 4) {
+			
+		    return str;
+		} else if (str.length < 7) {
+		    tmp += str.substr(0, 3);
+		    tmp += '-';
+		    tmp += str.substr(3);
+		    
+		    return tmp;
+		} else if (str.length < 11) {
+		    tmp += str.substr(0, 3);
+		    tmp += '-';
+		    tmp += str.substr(3, 3);
+		    tmp += '-';
+		    tmp += str.substr(6);
+		    
+		    return tmp;
+		} else {              
+		    tmp += str.substr(0, 3);
+		    tmp += '-';
+		    tmp += str.substr(3, 4);
+		    tmp += '-';
+		    tmp += str.substr(7);
+		    
+		    return tmp;
+		}
+		
 	    return str;
-	} else if (str.length < 7) {
-	    tmp += str.substr(0, 3);
-	    tmp += '-';
-	    tmp += str.substr(3);
-	    return tmp;
-	} else if (str.length < 11) {
-	    tmp += str.substr(0, 3);
-	    tmp += '-';
-	    tmp += str.substr(3, 3);
-	    tmp += '-';
-	    tmp += str.substr(6);
-	    return tmp;
-	} else {              
-	    tmp += str.substr(0, 3);
-	    tmp += '-';
-	    tmp += str.substr(3, 4);
-	    tmp += '-';
-	    tmp += str.substr(7);
-	    return tmp;
 	}
-    return str;
-}
-
 </script>
 <%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>

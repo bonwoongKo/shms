@@ -23,8 +23,7 @@ public class LoginServiceImpl implements LoginService {
 				httpSession.setAttribute("job", manager.getJob());
 				
 				return "/manager/main";
-			}
-			else if (manager.getJob() == 'M') { // 안전 관리자
+			} else if (manager.getJob() == 'M') { // 안전 관리자
 				httpSession.setAttribute("empNumber", manager.getEmpNumber());
 				httpSession.setAttribute("job", manager.getJob());
 				httpSession.setAttribute("name", manager.getName());
@@ -32,11 +31,10 @@ public class LoginServiceImpl implements LoginService {
 				return "/map";
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		manager.setJob('F');
+		
 		return "/common/login/form";
 	}
 	
@@ -44,10 +42,10 @@ public class LoginServiceImpl implements LoginService {
 	public String loginCheck(Manager manager) {
 		try {
 			if (managerMapper.count(manager) != 0) {
+				
 				return "OK";
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

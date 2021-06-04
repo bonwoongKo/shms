@@ -8,8 +8,7 @@
 					<div class="col-6 text-center" style="width: 1000px;">
 						<div class="http-error-main">
 							<h2 class="mb-0">404!</h2>
-							<span class="text-6 font-weight-bold text-color-dark">PAGE
-								NOT FOUND</span>
+							<span class="text-6 font-weight-bold text-color-dark">PAGE NOT FOUND</span>
 							<p class="text-3 my-4">페이지를 찾을 수 없습니다.</p>
 						</div>
 						<c:choose>

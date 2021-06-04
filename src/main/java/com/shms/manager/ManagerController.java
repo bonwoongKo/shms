@@ -20,11 +20,13 @@ public class ManagerController {
 	
 	@GetMapping("/main")
 	public ModelAndView managerMain() {
+		
 		return new ModelAndView("manager/main");
 	}
 	
 	@GetMapping("/form")
 	public ModelAndView registManagerForm() {
+		
 		return new ModelAndView("manager/regist");
 	}
 	

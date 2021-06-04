@@ -12,26 +12,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 @RequestMapping("/common")
 public class WearInfoController {
-	
 	@Autowired
 	WearInfoServiceImpl wearInfoService;
 	
 	@PostMapping("/receive")
 	public void receiveWearInfo(@RequestBody StringBuilder json, Errors errors) {
 		WearInfo jsonMap = null;
-		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			
 			jsonMap = mapper.readValue(json.toString(), WearInfo.class);
 			
 			new WearInfoValidator().validate(jsonMap, errors);
-			
 			if (errors.hasErrors()) {
 				new Exception();
 			}
-			wearInfoService.receiveWearInfo(jsonMap);
-			
+			wearInfoService.receiveWearInfo(jsonMap);	
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

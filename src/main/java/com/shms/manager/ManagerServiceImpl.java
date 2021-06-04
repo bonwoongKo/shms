@@ -17,11 +17,13 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public List<Manager> managerList() throws Exception {
+		
 		return managerMapper.list();
 	}
 
 	@Override
 	public Manager viewManager(Manager manager) throws Exception {
+		
 		return managerMapper.select(manager);
 	}
 

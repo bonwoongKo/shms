@@ -23,7 +23,7 @@
             </if>
         </where>
     </sql>
-    
+
     <select id="count" parameterType="com.shms.gateway.Gateway" resultType="int">
         SELECT COUNT(*)
         FROM GATEWAY

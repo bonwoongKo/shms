@@ -17,11 +17,13 @@ public class WorkerServiceImpl implements WorkerService {
 
 	@Override
 	public List<Worker> workerList() throws Exception {
+		
 		return workerMapper.list();
 	}
 
 	@Override
 	public Worker viewWorker(Worker worker) throws Exception {
+		
 		return workerMapper.select(worker);
 	}
 

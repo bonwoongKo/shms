@@ -40,16 +40,16 @@
 						</td>
 					</tr>
 				</tbody>
-				</table>
-					<form action="/worker" method="post">
-						<input type="hidden" name="_method" value="delete" />
-						<input type="hidden" name="empNumber" value="${worker.empNumber}"/>
-						<input type="hidden" name="isDelete" value="Y" />
-						<input type="submit" value="삭제" class="btn btn-primary btn-modern float-right" />
-					</form>
-					<div class="col-lg-10">
-						<a href="${request.getContextPath()}/worker/${worker.empNumber}/form"><input type="button" value="수정" class="btn btn-primary btn-modern float-right" /></a>
-					</div>
+			</table>
+			<form action="/worker" method="post">
+				<input type="hidden" name="_method" value="delete" />
+				<input type="hidden" name="empNumber" value="${worker.empNumber}"/>
+				<input type="hidden" name="isDelete" value="Y" />
+				<input type="submit" value="삭제" class="btn btn-primary btn-modern float-right" />
+			</form>
+			<div class="col-lg-10">
+				<a href="${request.getContextPath()}/worker/${worker.empNumber}/form"><input type="button" value="수정" class="btn btn-primary btn-modern float-right" /></a>
+			</div>
 		</div>
 	</div>
 </div>

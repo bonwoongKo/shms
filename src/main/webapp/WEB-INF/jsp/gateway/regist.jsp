@@ -3,9 +3,8 @@
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
 <div class="row justify-content-center">
 	<div class="card border-width-3 border-radius-0 mb-4 col-lg-6">
-	<!--<div class="card border-width-3 border-radius-0 border-color-hover-dark mb-4 col-lg-6">-->
 		<div class="card-body">
-		<h4 class="font-weight-bold text-uppercase text-4 mb-3">게이트웨이 등록</h4>
+			<h4 class="font-weight-bold text-uppercase text-4 mb-3">게이트웨이 등록</h4>
 			<form action="${request.getContextPath()}/gateway" method="post" class="needs-validation" onsubmit="return check(this)" >
 				<div class="form-group row">
 					<label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">일련번호</label>

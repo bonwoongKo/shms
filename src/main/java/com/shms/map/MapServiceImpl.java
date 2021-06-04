@@ -14,7 +14,7 @@ public class MapServiceImpl implements MapService {
 	private WearLogMapper wearLogMapper;
 	
 	@Override
-	public List<WearLog> listWearLog() throws Exception { // 오늘 근무중인 근로자들의 착용 기록 리스트를 반환해야함 (근로자 이름 정렬)
+	public List<WearLog> listWearLog() throws Exception {
 		
 		return wearLogMapper.list();
 	}

@@ -8,28 +8,20 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 public class AuthCheckInterceptor implements HandlerInterceptor {
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession(false);
-		
 		String job = session != null ? session.getAttribute("job") != null ? String.valueOf(session.getAttribute("job")) : "" : "";
-		System.out.println("Session check : " + job + "length : " + request.getServletPath().split("/").length);
-		//String job = session.getAttribute("job") != null ? String.valueOf(session.getAttribute("job")) : "";
 		
 		if (request.getServletPath().split("/").length > 1 && ("A".equals(job) || "M".equals(job))) {
 			String path = request.getServletPath().split("/")[1];
-			if ("A".equals(job) 
-					&& ("".equals(path))) {
+			if ("A".equals(job) && ("".equals(path))) {
 				response.sendRedirect(request.getContextPath() + "/manager/main");
-			}
-			
-			if ("M".equals(job) 
+			} else if ("M".equals(job) 
 					&& ("manager".equals(path) 
 							|| "hat".equals(path) 
 							|| "gateway".equals(path)
 							|| "worker".equals(path))) {
 				// 안전관리자 GET 방식이면서 폼이 포함되지 않는경우 
-				//System.out.println(request.getMethod() + ":" + request.getServletPath().indexOf("form"));
 				if ("manager".equals(path) 
 						&& "GET".equals(request.getMethod()) 
 						&& request.getServletPath().indexOf("form") == -1) {
@@ -52,13 +44,12 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
 		} else {
 			if ("A".equals(job)) {
 				response.sendRedirect(request.getContextPath() + "/manager/main");
-			}
-			else if ("M".equals(job)) {
+			} else if ("M".equals(job)) {
 				response.sendRedirect(request.getContextPath() + "/map");
-			}
-			else {
+			} else {
 				response.sendRedirect(request.getContextPath() + "/common/login/form");
-			}	
+			}
+			
 			return false;
 		}
 	}

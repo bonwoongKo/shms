@@ -20,6 +20,7 @@ public class WorkerController {
 	
 	@GetMapping("/form")
 	public ModelAndView registWorkerForm() {
+		
 		return new ModelAndView("worker/regist");
 	}
 	
@@ -40,6 +41,7 @@ public class WorkerController {
 	
 	@GetMapping("/search/{name}")
 	public String searchWorker(@ModelAttribute Worker worker) {
+		
 		return null;
 	}
 	

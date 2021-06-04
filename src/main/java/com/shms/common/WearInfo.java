@@ -27,8 +27,7 @@ public class WearInfo implements Serializable {
 	
 	public WearInfo() {	}
 
-	public WearInfo(int code, String hatCode, String gatewayCode, String empNumber, LocalDateTime dateTime, char isWear,
-			double latitude, double longitude) {
+	public WearInfo(int code, String hatCode, String gatewayCode, String empNumber, LocalDateTime dateTime, char isWear, double latitude, double longitude) {
 		this.code = code;
 		this.safeHatCode = hatCode;
 		this.gatewayCode = gatewayCode;
@@ -102,5 +101,4 @@ public class WearInfo implements Serializable {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-
 }

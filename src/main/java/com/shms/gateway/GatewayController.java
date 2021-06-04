@@ -19,6 +19,7 @@ public class GatewayController {
 	
 	@GetMapping("/form")
 	public ModelAndView registGatewayForm() {
+		
 		return new ModelAndView("gateway/regist");
 	}
 	

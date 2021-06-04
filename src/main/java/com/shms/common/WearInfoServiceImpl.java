@@ -14,7 +14,6 @@ import com.shms.worker.WorkerMapper;
 
 @Service
 public class WearInfoServiceImpl implements WearInfoService {
-
 	@Autowired
 	WorkerMapper workerMapper;
 	
@@ -27,11 +26,9 @@ public class WearInfoServiceImpl implements WearInfoService {
 	@Autowired
 	WearLogServiceImpl wearLogService;
 	
-	
 	@Override
 	public void receiveWearInfo(WearInfo message) {
 		WearLog wearLog = new WearLog();
-		
 		try {
 			if (validWearInfo(message)) {
 				Worker worker = new Worker();
@@ -49,13 +46,12 @@ public class WearInfoServiceImpl implements WearInfoService {
 				wearLogService.registWearLog(wearLog);
 			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public boolean validWearInfo(WearInfo message) {
-		
 		Worker worker = new Worker();
 		worker.setcardNumber(message.getCardNumber());
 		
@@ -64,26 +60,25 @@ public class WearInfoServiceImpl implements WearInfoService {
 		
 		Gateway gateway = new Gateway();
 		gateway.setCode(message.getGatewayCode());
-		
 		try {
 			if (workerMapper.count(worker) != 1) {
-				System.out.println("worker not 1 : return false");
+				
 				return false;
 			}
 			
 			if (hatMapper.count(hat) != 1) {
-				System.out.println("hat not 1 : return false");
+				
 				return false;
 			}
 			
 			if (gatewayMapper.count(gateway) != 1) {
-				System.out.println("gateway not 1 : return false");
+				
 				return false;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return true;
 	}
-
 }

@@ -17,11 +17,13 @@ public class GatewayServiceImpl implements GatewayService {
 
 	@Override
 	public List<Gateway> gatewayList() throws Exception {
+		
 		return gatewayMapper.list();
 	}
 
 	@Override
 	public Gateway viewGateway(Gateway gateway) throws Exception {
+		
 		return gatewayMapper.select(gateway);
 	}
 

@@ -19,15 +19,12 @@ public class CustomErrorController implements ErrorController {
 		if (status != null) {
 			int statusCode = Integer.valueOf(status.toString());
 			if (statusCode == HttpStatus.NOT_FOUND.value()) {
-				System.out.println("goto 404");
 				mav.setViewName("common/404");
 				return mav;
 			} else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-				System.out.println("goto 500");
 				mav.setViewName("common/500");
 				return mav;
 			} else {
-				System.out.println("goto 404");
 				mav.setViewName("common/404");
 				return mav;
 			}
@@ -38,6 +35,7 @@ public class CustomErrorController implements ErrorController {
 	
 	@Override
 	public String getErrorPath() {
+		
 		return null;
 	}
 	

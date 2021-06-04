@@ -17,16 +17,19 @@ public class WearLogServiceImpl implements WearLogService {
 
 	@Override
 	public List<WearLog> wearLogList() throws Exception {
+		
 		return wearLogMapper.list();
 	}
 
 	@Override
 	public List<WearLog> viewWearLog(WearLog wearLog) throws Exception {
+		
 		return wearLogMapper.viewWearLog(wearLog);
 	}
 	
 	@Override
 	public List<WearLog> searchWearLog(String name) throws Exception {
+		
 		return wearLogMapper.searchWearLog(name);
 	}
 
