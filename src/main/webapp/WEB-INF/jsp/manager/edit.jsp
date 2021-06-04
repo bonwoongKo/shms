@@ -1,6 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
+<div class="row justify-content-center">
+	<div class="card border-width-3 border-radius-0 mb-4 col-lg-6">
+		<div class="card-body">
+		<h4 class="font-weight-bold text-uppercase text-4 mb-3">안전관리자 정보 수정</h4>
+			<form action="/manager" method="post" class="needs-validation" onsubmit="return check(this)" >
+			<input type="hidden" name="_method" value="put" />
+				<div class="form-group row">
+					<label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">사원번호</label>
+					<div class="col-lg-9">
+						<input type="text" name="empNumber" value="${manager.empNumber}" class="form-control" maxlength="10" readonly>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">비밀번호</label>
+					<div class="col-lg-9">
+						<input type="password" name="password" id="pwd" class="form-control" onchange="passwordCheck()" maxlength="20">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">비밀번호 확인</label>
+					<div class="col-lg-9">
+						<input type="password" name="empNumber" id="pwdCheck" class="form-control" onchange="passwordCheck()" maxlength="20">
+						<label id="pwdValid" style="color: red; visibility: hidden;">비밀번호가 일치하지 않습니다.</label>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">이름</label>
+					<div class="col-lg-9">
+						<input type="text" name="name" id="name" value="${manager.name}" class="form-control" onchange="nameCheck()" maxlength="10" required>
+					</div>
+				</div>	
+				<div class="form-group row">
+					<label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">연락처</label>
+					<div class="col-lg-9">
+						<input type="text" name="phoneNumber" id="phoneNumber" value="${manager.phoneNumber}" class="form-control" maxlength="8" required>
+					</div>
+				</div>			
+				<div class="form-group row">
+					<label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">직책</label>
+					<div class="col-lg-9">
+						<input type="text" id="phoneNumber" name="phoneNumber" value="안전관리자" class="form-control" minlength="11" maxlength="11" readonly>
+					</div>
+				</div>	
+				<input type="submit" value="수정" id="submitBtn" disabled="disabled" class="btn btn-primary btn-modern float-right" />
+				<div class="col-lg-10">
+					<a href="${request.getContextPath()}/manager/${sessionScope.empNumber}"><input type="button" value="취소" class="btn btn-primary btn-modern float-right" /></a>
+				</div>
+			</form>
+			<div class="col-lg-9" id="error"></div>
+		</div>
+	</div>
+</div>	
+<!-- 위에껄로 폼 맞추기  -->
 		<br>
 		<h2 class="font-weight-extra-bold">안전관리자 정보 수정</h2>
 		<form action="/manager" method="post">
@@ -12,7 +65,7 @@
 				
 				<div>
 				<label style="margin-top: 50px">비밀번호</label>
-				<input type="password" value="" id="pwd" class="form-control border-radius-0 h-auto py-2" name="password" onchange="passwordCheck()" />
+				<input type="password" value="" id="pwd" class="form-control" name="password" onchange="passwordCheck()" />
 				</div>
 				
 				<div>

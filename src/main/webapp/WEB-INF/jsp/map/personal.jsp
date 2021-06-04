@@ -6,13 +6,14 @@
 	<h3><p id="headLine"></p></h3>
 	<div class="row">
 		<div class="col-lg-9">
-			<div id="map" style="width:800px;height:550px;"></div>
+			<div id="map" style="width:100%;height:95%;"></div>
 		</div>
 		<div class="col-lg-3">
 			<div class="tabs tabs-vertical tabs-right tabs-navigation tabs-navigation-simple">
 				<aside class="sidebar mt-2">
-					<h5 class="font-weight-bold">착용 기록</h5>
-					<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:440px;">
+					<div class="header"><h5 class="font-weight-bold" style="font-size:18px">착용 기록</h5></div>
+					<div class="content">
+						<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:340px;">
 						<ul class="nav nav-list flex-column">
 							<c:forEach items="${rows}" var="row">
 							<c:set var="isWear" value="${row.isWear}" />
@@ -27,10 +28,26 @@
 									</a>
 								</li>
 							</c:forEach>
-						</ul>
+						 </ul>
+						 </div>
 					</div>
-					<button type="button" class="btn btn-primary mb-2" onclick="changeMarker('all')">전체보기 </button>&nbsp;&nbsp;&nbsp;
-					<button type="button" class="btn btn-secondary mb-2" onclick="changeMarker('red')">미착용 보기</button>
+					<div class="footer">
+						<button type="button" class="btn btn-primary mb-2" onclick="changeMarker('all')">전체보기 </button>&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-secondary mb-2" onclick="changeMarker('red')">미착용 보기</button>
+					</div>
+					<style>
+						.header{
+						    height: 40px;
+						}
+						.content{
+						    max-width: 500px; 
+						    height: 380px;
+						    margin: 0 auto; 
+						}
+						.footer{
+						    height:40px;
+						}
+					</style>
 				</aside>
 			</div>
 		</div>
@@ -137,7 +154,7 @@ function panTo(code) {
 
 var count = 0;
 <c:forEach items="${rows}" var="row">
-	if ('y' == '${row.isWear}') {
+	if ('Y' == '${row.isWear}') {
 		// 마커를 생성합니다
 		var marker = new kakao.maps.Marker({
 			map: map, // 마커를 표시할 지도
