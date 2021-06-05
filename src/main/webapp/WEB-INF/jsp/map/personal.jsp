@@ -18,7 +18,8 @@
 							<c:set var="isWear" value="${row.isWear}" />
 							<c:set var="time" value="${row.time}"/>
 							<li class="nav-item">
-								<a class="nav-link" onclick=panTo(${row.code})>${ fn:substring(time,11,20) } 
+								<a class="nav-link" onclick=panTo(${row.code})>
+									${ fn:substring(time,11,13) }시 ${ fn:substring(time,14,16) }분 ${ fn:substring(time,17,20) }초 
 									<c:choose>
 										<c:when test="${isWear eq 'y'}"><p>착용</p></c:when>
 										<c:when test="${isWear eq 'n'}">미착용</c:when>
@@ -53,15 +54,15 @@
 </div>
 <script>
 	var date = "${rows[0].time}";
-	var date2 = date.substring(0, 10);
-	document.getElementById("headLine").innerHTML = date2 + "  ${rows[0].worker.name}님의 " + "착용기록입니다.";
+	var date2 = date.substring(0, 4) + "년 " + date.substring(5, 7) + "월 " + date.substring(8, 10) + "일 ";
+	document.getElementById("headLine").innerHTML = date2 + "  ${rows[0].worker.name}님의 " + "착용 기록입니다.";
 </script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=84df5ba3fe6d380ae81cc0059ae8ae59"></script> 
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(36.798795, 127.074911), // 지도의 중심좌표 선문대 중앙 잔디밭 위도 경도임
-	        level: 5 // 지도의 확대 레벨
+	        level: 2 // 지도의 확대 레벨
 	    };
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	/* 	

@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
 <div style="clear:both">
 	<div style="float:left">
-		<h2 class="font-weight-extra-bold">착용기록</h2>
+		<h2 class="font-weight-extra-bold">착용 기록</h2>
 	</div>
 	<div class="float-right">
 		<input id="search" type="submit" value="검색" class="btn btn-outline btn-primary btn-sm mb-2 form-control" />
