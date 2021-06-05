@@ -93,7 +93,7 @@
 						html += "			<th>착용 여부</th>";
 						html += "		<tr>";
 						html += "	</thead>";
-						html += "	<tbody style=\"display:block; overflow:auto; width:100%; height:500px;\">";
+						html += "	<tbody style=\"display:block; overflow:auto; width:100%; height:400px;\">";
 						for (var i = 0; i < rows.length; i++) {
 							var month = (rows[i].time.monthValue / 10) > 1 ? rows[i].time.monthValue : "0" + rows[i].time.monthValue;
 							var day = (rows[i].time.dayOfMonth / 10) > 1 ? rows[i].time.dayOfMonth : "0" + rows[i].time.dayOfMonth;

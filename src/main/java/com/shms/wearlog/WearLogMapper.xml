@@ -132,7 +132,7 @@
             , W.PHONE_NUMBER
         FROM WEAR_LOG L JOIN WORKER W
         ON L.EMP_NUMBER = W.EMP_NUMBER
-        WHERE W.NAME = #{name}
+        WHERE W.NAME LIKE '%${name}%'
         ORDER BY L.TIME DESC
     </select>
 
