@@ -16,17 +16,13 @@ public class WearInfoController {
 	WearInfoServiceImpl wearInfoService;
 	
 	@PostMapping("/receive")
-	public void receiveWearInfo(@RequestBody StringBuilder json, Errors errors) {
-		WearInfo jsonMap = null;
+	public void receiveWearInfo(@RequestBody WearInfo info, Errors errors) {
 		try {
-			ObjectMapper mapper = new ObjectMapper();
-			jsonMap = mapper.readValue(json.toString(), WearInfo.class);
-			
-			new WearInfoValidator().validate(jsonMap, errors);
 			if (errors.hasErrors()) {
 				new Exception();
 			}
-			wearInfoService.receiveWearInfo(jsonMap);	
+			
+			wearInfoService.receiveWearInfo(info);	
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
