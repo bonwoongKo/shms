@@ -20,7 +20,8 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
 					&& ("manager".equals(path) 
 							|| "hat".equals(path) 
 							|| "gateway".equals(path)
-							|| "worker".equals(path))) {
+							|| "worker".equals(path)
+							|| "wearlog".equals(path))) {
 				// 안전관리자 GET 방식이면서 폼이 포함되지 않는경우 
 				if ("manager".equals(path) 
 						&& "GET".equals(request.getMethod()) 
@@ -47,6 +48,9 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
 			} else if ("M".equals(job)) {
 				response.sendRedirect(request.getContextPath() + "/map");
 			} else {
+				if (request.getServletPath() == "/receive") {
+					return true;
+				}
 				response.sendRedirect(request.getContextPath() + "/common/login/form");
 			}
 			
