@@ -48,9 +48,6 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
 			} else if ("M".equals(job)) {
 				response.sendRedirect(request.getContextPath() + "/map");
 			} else {
-				if (request.getServletPath() == "/receive") {
-					return true;
-				}
 				response.sendRedirect(request.getContextPath() + "/common/login/form");
 			}
 			
