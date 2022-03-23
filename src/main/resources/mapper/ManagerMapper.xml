@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.manager.service.ManagerMapper">
+    <resultMap id="managerResultMap" type="com.shms.manager.service.Manager">
+        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="PASSWORD" property="password" />
+        <result column="NAME" property="name" />
+        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="JOB" property="job" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="empNumber != null and empNumber != ''">
+                AND EMP_NUMBER = #{empNumber}
+            </if>
+            <if test="password != null and password != ''">
+                AND PASSWORD = #{password}
+            </if>
+            <if test="name != null and name != ''">
+                AND NAME = #{name}
+            </if>
+            <if test="phoneNumber != null and phoneNumber != ''">
+                AND PHONE_NUMBER = #{phoneNumber}
+            </if>
+            <if test="job != null and job != ''">
+                AND JOB = #{job}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="count" parameterType="com.shms.manager.service.Manager" resultType="int">
+        SELECT COUNT(*)
+        FROM MANAGER
+        <include refid="whereSql" />
+    </select>
+
+	<select id="list" resultMap="managerResultMap">
+        SELECT
+            EMP_NUMBER
+            , PASSWORD
+            , NAME
+            , PHONE_NUMBER
+            , JOB
+        FROM MANAGER
+    </select>
+
+    <select id="select" parameterType="com.shms.manager.service.Manager" resultMap="managerResultMap">
+        SELECT
+            EMP_NUMBER
+            , PASSWORD
+            , NAME
+            , PHONE_NUMBER
+            , JOB
+        FROM MANAGER
+        <include refid="whereSql" />
+    </select>
+
+    <insert id="insert" parameterType="com.shms.manager.service.Manager">
+        INSERT INTO MANAGER (
+            EMP_NUMBER
+            , PASSWORD
+            , NAME
+            , PHONE_NUMBER
+        ) VALUES (
+            #{empNumber}
+            , #{password}
+            , #{name}
+            , #{phoneNumber}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.manager.service.Manager">
+        UPDATE MANAGER
+        <set>
+            <if test="empNumber != null and empNumber != ''">
+                EMP_NUMBER = #{empNumber},
+            </if>
+            <if test="password != null and password != ''">
+                PASSWORD = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                NAME = #{name},
+            </if>
+            <if test="phoneNumber != null and phoneNumber != ''">
+                PHONE_NUMBER = #{phoneNumber},
+            </if>
+            <if test="job != null and job != ''">
+                JOB = #{job},
+            </if>
+        </set>
+        WHERE EMP_NUMBER = #{empNumber}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.manager.service.Manager">
+        DELETE FROM MANAGER
+        <include refid="whereSql" />
+    </delete>
+</mapper>
