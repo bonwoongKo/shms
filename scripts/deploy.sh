@@ -1,15 +1,15 @@
 #!/bin/bash
 
-REPOSITORY=/home/ec2-user/app/shms_system_distribute
-PROJECT_NAME=system
+REPOSITORY=/home/ec2-user/app/shms
+PROJECT_NAME=shms
 
 echo "> Build 파일 복사"
 
-cp $REPOSITORY/zip/*.war $REPOSITORY/
+cp $REPOSITORY/zip/*.jar $REPOSITORY/
 
 echo "> 현재 구동 중인 애플리케이션 pid 확인"
 
-CURRENT_PID=$(pgrep -fl shms-0.0.1-SNAPSHOT.war | awk '{print $1}')
+CURRENT_PID=$(pgrep -fl shms | grep jar | awk '{print $1}')
 
 echo "현재 구동 중인 애플리케이션 pid: $CURRENT_PID"
 
@@ -23,7 +23,7 @@ fi
 
 echo ">새 애플리케이션 배포"
 
-JAR_NAME=$(ls -tr $REPOSITORY/*.war | tail -n 1)
+JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
 
 echo "> JAR Name: $JAR_NAME"
 
@@ -33,4 +33,4 @@ chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 
-nohup java -jar $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+nohup java -jar \ -Dspring.config.location=classpath:/application.properties \ -Dspring.profiles.active=real \ $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &

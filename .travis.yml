@@ -18,7 +18,7 @@ before_deploy:
   - mkdir -p before-deploy #zip에 포함시킬 파일들을 담을 디렉토리 생성
   - cp scripts/*.sh before-deploy/
   - cp appspec.yml before-deploy/
-  - cp target/*.war before-deploy/
+  - cp target/*.jar before-deploy/
   - cd before-deploy && zip -r before-deploy * #before-deploy로 이동 후 전체 압축
   - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동 후 deploy 데렉토리 생성
   - mv before-deploy/before-deploy.zip deploy/shms.zip # deploy로 zip파일 이동
@@ -28,7 +28,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
 
-    bucket: shms-springboot-build # S3 버킷
+    bucket: shms-spring-build # S3 버킷
     region: ap-northeast-2
     skip_cleanup: true
     acl: private # zip 파일 접근을 private으로
@@ -39,12 +39,12 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY # Travis repo settins에 설정된 값
     secret_access_key: $AWS_SECRET_KEY #Travis repo settings에 설정된 값
 
-    bucket: shms-springboot-build #S3 버킷
+    bucket: shms-spring-build #S3 버킷
     key: shms.zip #빌드 파일로 압축해서 전달
 
     bundle_type: zip # 압축 확장자
-    application: shms-springboot-webservice #웹 콘솔에서 등록한 CodeDeploy 애플리케이션
-    deployment_group: shms-springboot-webservice-group #웹 콘솔에서 등록한 CodeDeploy 배포 그룹
+    application: shms-spring-webservice #웹 콘솔에서 등록한 CodeDeploy 애플리케이션
+    deployment_group: shms-spring-webservice-group #웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
     wait-until-deployed: true
 
@@ -53,4 +53,4 @@ notifications:
   email:
     recipients:
       - coppermin.kim@gmail.com
-      - jgbu97@gmail.com
+      - bonjourkbw@gmail.com
