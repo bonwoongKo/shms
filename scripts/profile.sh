@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# 쉬고 있는profile 찾기 : read1이 사용 중이면 real2가 쉬고 있고, 반대면 read1이 쉬고 있음
+# 쉬고 있는 profile 찾기 : read1이 사용 중이면 real2가 쉬고 있고, 반대면 read1이 쉬고 있음
 
 function find_idle_profile()
 {
