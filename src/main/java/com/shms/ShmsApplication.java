@@ -8,6 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages = {"com.shms"})
 public class ShmsApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ShmsApplication.class, args);
+		SpringApplication.run(ShmsApplication.class, args); 
 	}
 }
