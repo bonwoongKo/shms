@@ -3,11 +3,14 @@ package com.shms.equipment.service;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
+@SuppressWarnings("serial")
 public class Equipment {
 	private String code;
 	private String empNum;
 	private char sort;
-	private LocalDateTime registDate;
 	private char isUse;
 	private char isDelete;
 	
@@ -18,12 +21,11 @@ public class Equipment {
 	
 	public Equipment() { }
 	
-	public Equipment(String code, String empNum, char sort, LocalDateTime registDate, char isUse, char isDelete,
-			Date theFstRgstDttm, String theFstRgstUserId, Date fnlChngDttm, String fnlChngUserId) {
+	public Equipment(String code, String empNum, char sort, char isUse, char isDelete, Date theFstRgstDttm,
+			String theFstRgstUserId, Date fnlChngDttm, String fnlChngUserId) {
 		this.code = code;
 		this.empNum = empNum;
 		this.sort = sort;
-		this.registDate = registDate;
 		this.isUse = isUse;
 		this.isDelete = isDelete;
 		this.theFstRgstDttm = theFstRgstDttm;
@@ -31,7 +33,7 @@ public class Equipment {
 		this.fnlChngDttm = fnlChngDttm;
 		this.fnlChngUserId = fnlChngUserId;
 	}
-	
+
 	public String getCode() {
 		return code;
 	}
@@ -49,12 +51,6 @@ public class Equipment {
 	}
 	public void setSort(char sort) {
 		this.sort = sort;
-	}
-	public LocalDateTime getRegistDate() {
-		return registDate;
-	}
-	public void setRegistDate(LocalDateTime registDate) {
-		this.registDate = registDate;
 	}
 	public char getIsUse() {
 		return isUse;
