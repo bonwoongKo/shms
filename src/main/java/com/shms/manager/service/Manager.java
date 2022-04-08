@@ -19,11 +19,10 @@ public class Manager implements Serializable{
 	private Date fnlChngDttm;
 	private String fnlChngUserId;
 	
-	public Manager() {}
+	public Manager() { }
 
 	public Manager(String empNum, String password, String name, String phoneNum, char job, Date theFstRgstDttm,
 			String theFstRgstUserId, Date fnlChngDttm, String fnlChngUserId) {
-		super();
 		this.empNum = empNum;
 		this.password = password;
 		this.name = name;
@@ -34,78 +33,59 @@ public class Manager implements Serializable{
 		this.fnlChngDttm = fnlChngDttm;
 		this.fnlChngUserId = fnlChngUserId;
 	}
-
 
 	public String getEmpNum() {
 		return empNum;
 	}
-
 	public void setEmpNum(String empNum) {
 		this.empNum = empNum;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getPhoneNum() {
 		return phoneNum;
 	}
-
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
-
 	public char getJob() {
 		return job;
 	}
-
 	public void setJob(char job) {
 		this.job = job;
 	}
-
 	public Date getTheFstRgstDttm() {
 		return theFstRgstDttm;
 	}
-
 	public void setTheFstRgstDttm(Date theFstRgstDttm) {
 		this.theFstRgstDttm = theFstRgstDttm;
 	}
-
 	public String getTheFstRgstUserId() {
 		return theFstRgstUserId;
 	}
-
 	public void setTheFstRgstUserId(String theFstRgstUserId) {
 		this.theFstRgstUserId = theFstRgstUserId;
 	}
-
 	public Date getFnlChngDttm() {
 		return fnlChngDttm;
 	}
-
 	public void setFnlChngDttm(Date fnlChngDttm) {
 		this.fnlChngDttm = fnlChngDttm;
 	}
-
 	public String getFnlChngUserId() {
 		return fnlChngUserId;
 	}
-
 	public void setFnlChngUserId(String fnlChngUserId) {
 		this.fnlChngUserId = fnlChngUserId;
 	}
-	
 }
