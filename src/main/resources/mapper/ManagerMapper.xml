@@ -5,17 +5,21 @@
 
 <mapper namespace="com.shms.manager.service.ManagerMapper">
     <resultMap id="managerResultMap" type="com.shms.manager.service.Manager">
-        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="EMP_NUM" property="empNum" />
         <result column="PASSWORD" property="password" />
         <result column="NAME" property="name" />
-        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="PHONE_NUM" property="phoneNum" />
         <result column="JOB" property="job" />
+        <result column="THE_FST_RGST_DTTM" property="theFstRgstDttm" />
+        <result column="THE_FST_RGST_USERID" property="theFstRgstUserId" />
+        <result column="FNL_CHNG_DTTM" property="fnlChngDttm" />
+        <result column="FNL_CHNG_USERID" property="fnlChngUserId" />
     </resultMap>
 
     <sql id="whereSql">
         <where>
-            <if test="empNumber != null and empNumber != ''">
-                AND EMP_NUMBER = #{empNumber}
+            <if test="empNum != null and empNum != ''">
+                AND EMP_NUM = #{empNum}
             </if>
             <if test="password != null and password != ''">
                 AND PASSWORD = #{password}
@@ -23,61 +27,81 @@
             <if test="name != null and name != ''">
                 AND NAME = #{name}
             </if>
-            <if test="phoneNumber != null and phoneNumber != ''">
-                AND PHONE_NUMBER = #{phoneNumber}
+            <if test="phoneNum != null and phoneNum != ''">
+                AND PHONE_NUM = #{phoneNum}
             </if>
             <if test="job != null and job != ''">
                 AND JOB = #{job}
+            </if>
+            <if test="theFstRgstDttm != null and theFstRgstDttm != ''">
+                AND THE_FST_RGST_DTTM = #{theFstRgstDttm}
+            </if>
+            <if test="theFstRgstUserId != null and theFstRgstUserId != ''">
+                AND THE_FST_RGST_USERID = #{theFstRgstUserId}
+            </if>
+            <if test="fnlChngDttm != null and fnlChngDttm != ''">
+                AND FNL_CHNG_DTTM = #{fnlChngDttm}
+            </if>
+            <if test="fnlChngUserId != null and fnlChngUserId != ''">
+                AND FNL_CHNG_USERID = #{fnlChngUserId}
             </if>
         </where>
     </sql>
     
     <select id="count" parameterType="com.shms.manager.service.Manager" resultType="int">
         SELECT COUNT(*)
-        FROM MANAGER
+          FROM MANAGER
         <include refid="whereSql" />
     </select>
 
 	<select id="list" resultMap="managerResultMap">
-        SELECT
-            EMP_NUMBER
-            , PASSWORD
-            , NAME
-            , PHONE_NUMBER
-            , JOB
-        FROM MANAGER
+        SELECT EMP_NUM
+             , PASSWORD
+             , NAME
+             , PHONE_NUM
+             , JOB
+             , THE_FST_RGST_DTTM
+             , THE_FST_RGST_USERID
+             , FNL_CHNG_DTTM
+             , FNL_CHNG_USERID
+          FROM MANAGER
     </select>
 
     <select id="select" parameterType="com.shms.manager.service.Manager" resultMap="managerResultMap">
-        SELECT
-            EMP_NUMBER
-            , PASSWORD
-            , NAME
-            , PHONE_NUMBER
-            , JOB
-        FROM MANAGER
+        SELECT EMP_NUM
+             , PASSWORD
+             , NAME
+             , PHONE_NUM
+             , JOB
+             , THE_FST_RGST_DTTM
+             , THE_FST_RGST_USERID
+             , FNL_CHNG_DTTM
+             , FNL_CHNG_USERID
+          FROM MANAGER
         <include refid="whereSql" />
     </select>
 
     <insert id="insert" parameterType="com.shms.manager.service.Manager">
         INSERT INTO MANAGER (
-            EMP_NUMBER
+              EMP_NUM
             , PASSWORD
             , NAME
-            , PHONE_NUMBER
+            , PHONE_NUM
+            , JOB
         ) VALUES (
-            #{empNumber}
+              #{empNum}
             , #{password}
             , #{name}
-            , #{phoneNumber}
+            , #{phoneNum}
+            , #{job}
         )
     </insert>
 
     <update id="update" parameterType="com.shms.manager.service.Manager">
         UPDATE MANAGER
         <set>
-            <if test="empNumber != null and empNumber != ''">
-                EMP_NUMBER = #{empNumber},
+            <if test="empNum != null and empNum != ''">
+                EMP_NUM = #{empNum},
             </if>
             <if test="password != null and password != ''">
                 PASSWORD = #{password},
@@ -85,18 +109,18 @@
             <if test="name != null and name != ''">
                 NAME = #{name},
             </if>
-            <if test="phoneNumber != null and phoneNumber != ''">
-                PHONE_NUMBER = #{phoneNumber},
+            <if test="phoneNum != null and phoneNum != ''">
+                PHONE_NUM = #{phoneNum},
             </if>
             <if test="job != null and job != ''">
                 JOB = #{job},
             </if>
         </set>
-        WHERE EMP_NUMBER = #{empNumber}
+        WHERE EMP_NUM = #{empNum}
     </update>
     
     <delete id="delete" parameterType="com.shms.manager.service.Manager">
         DELETE FROM MANAGER
-        <include refid="whereSql" />
+         WHERE EMP_NUM = #{empNum} 
     </delete>
 </mapper>
