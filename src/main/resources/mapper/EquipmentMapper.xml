@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shms.equipment.service.EquipmentMapper">
+    <resultMap id="equipmentResultMap" type="com.shms.equipment.service.Equipment">
+        <result column="CODE" property="code" />
+        <result column="EMP_NUM" property="empNum" />
+        <result column="SORT" property="sort" />
+        <result column="IS_USE" property="isUse" />
+        <result column="IS_DELETE" property="isDelete" />
+        <result column="THE_FST_RGST_DTTM" property="theFstRgstDttm" />
+        <result column="THE_FST_RGST_USERID" property="theFstRgstUserId" />
+        <result column="FNL_CHNG_DTTM" property="fnlChngDttm" />
+        <result column="FNL_CHNG_USERID" property="fnlChngUserId" />
+    </resultMap>
+
+    <sql id="whereSql">
+        <where>
+            <if test="code != null and code != ''">
+                AND CODE = #{code}
+            </if>
+            <if test="empNum != null and empNum != ''">
+                AND EMP_NUM = #{empNum}
+            </if>
+            <if test="sort != null and sort != ''">
+                AND SORT = #{sort}
+            </if>
+            <if test="isUse != null and isUse != ''">
+                AND IS_USE = #{isUse}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                AND IS_DELETE = #{isDelete}
+            </if>
+            <if test="theFstRgstDttm != null and theFstRgstDttm != ''">
+                AND THE_FST_RGST_DTTM = #{theFstRgstDttm}
+            </if>
+        </where>
+    </sql>
+
+    <select id="count" parameterType="com.shms.equipment.service.Equipment" resultType="int">
+        SELECT COUNT(*)
+          FROM EQUIPMENT
+        <include refid="whereSql" />
+    </select>
+
+	<!-- list 쿼리 검색 조건 포함하여 수정 요망 -->
+	<select id="list" resultMap="equipmentResultMap">
+        SELECT CODE
+             , EMP_NUM
+             , SORT
+             , IS_USE
+             , IS_DELETE
+             , THE_FST_RGST_DTTM
+             , THE_FST_RGST_USERID
+             , FNL_CHNG_DTTM
+             , FNL_CHNG_USERID
+          FROM EQUIPMENT
+    </select>
+
+    <select id="select" parameterType="com.shms.equipment.service.Equipment" resultMap="equipmentResultMap">
+        SELECT CODE
+             , EMP_NUM
+             , SORT
+             , IS_USE
+             , IS_DELETE
+             , THE_FST_RGST_DTTM
+             , THE_FST_RGST_USERID
+             , FNL_CHNG_DTTM
+             , FNL_CHNG_USERID
+          FROM EQUIPMENT
+        <include refid="whereSql" />
+    </select>
+	
+	<!-- theFstRgstDttm sysdate로 변경 테스트 요망 -->
+    <insert id="insert" parameterType="com.shms.equipment.service.Equipment">
+        INSERT INTO (
+        	CODE
+          , EMP_NUM
+          , SORT
+          , IS_USE
+          , IS_DELETE
+          , THE_FST_RGST_DTTM
+          , THE_FST_RGST_USERID
+        ) VALUES (
+            #{code}
+          , #{empNum}
+          , #{sort}
+          , #{isUse}
+          , #{isDelete}
+          , #{theFstRgstDttm}
+          , #{theFstRgstUserId}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.shms.equipment.service.Equipment">
+        UPDATE EQUIPMENT
+        <set>
+            <if test="empNum != null and empNum != ''">
+                AND EMP_NUM = #{empNum}
+            </if>
+            <if test="sort != null and sort != ''">
+                AND SORT = #{sort}
+            </if>
+            <if test="isUse != null and isUse != ''">
+                AND IS_USE = #{isUse}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                AND IS_DELETE = #{isDelete}
+            </if>
+            <if test="theFstRgstDttm != null and theFstRgstDttm != ''">
+                AND THE_FST_RGST_DTTM = #{theFstRgstDttm}
+            </if>
+            <if test="theFstRgstUserId != null and theFstRgstUserId != ''">
+                AND THE_FST_RGST_USERID = #{theFstRgstUserId}
+            </if>
+            <if test="fnlChngDttm != null and fnlChngDttm != ''">
+                AND FNL_CHNG_DTTM = #{fnlChngDttm}
+            </if>
+            <if test="fnlChngUserId != null and fnlChngUserId != ''">
+                AND FNL_CHNG_USERID = #{fnlChngUserId}
+            </if>
+        </set>
+        WHERE CODE = #{code}
+    </update>
+    
+    <delete id="delete" parameterType="com.shms.equipment.service.Equipment">
+        DELETE FROM EQUIPMENT
+         WHERE CODE = #{code}
+    </delete>
+</mapper>

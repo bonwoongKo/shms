@@ -47,7 +47,7 @@
 		<br>
 		<br>
 		<br>
-		<form action="/common/login" method="POST" onsubmit="return check(this)">
+		<form action="/shms/common/login" method="POST" onsubmit="return check(this)">
 			<div class="container py-4">
 				<div class="row justify-content-center">
 					<div class="card border-width-3 border-radius-0 mb-4 col-lg-6">

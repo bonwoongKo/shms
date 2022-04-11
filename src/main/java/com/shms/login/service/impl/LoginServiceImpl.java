@@ -21,16 +21,16 @@ public class LoginServiceImpl implements LoginService {
 			manager = managerMapper.select(manager);
 			
 			if (manager.getJob() == 'A') { // 시스템 관리자
-				httpSession.setAttribute("empNumber", manager.getEmpNumber());
+				httpSession.setAttribute("empNum", manager.getEmpNum());
 				httpSession.setAttribute("job", manager.getJob());
-				
-				return "/manager/main";
+				System.out.println("aaaa");
+				return "/shms/manager/main";
 			} else if (manager.getJob() == 'M') { // 안전 관리자
-				httpSession.setAttribute("empNumber", manager.getEmpNumber());
+				httpSession.setAttribute("empNum", manager.getEmpNum());
 				httpSession.setAttribute("job", manager.getJob());
 				httpSession.setAttribute("name", manager.getName());
-				
-				return "/map";
+				System.out.println("bbbb");
+				return "/shms/map";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
