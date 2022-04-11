@@ -34,16 +34,16 @@ public class WearInfoServiceImpl implements WearInfoService {
 		try {
 			if (validWearInfo(message)) {
 				Worker worker = new Worker();
-				worker.setcardNumber(message.getCardNumber());
+				//worker.setCardNumber(message.getCardNumber());
 				worker = workerMapper.select(worker);
 				
-				wearLog.setEmpNumber(worker.getEmpNumber());
-				wearLog.setGatewayCode(message.getGatewayCode());
-				wearLog.setHatCode(message.getSafeHatCode());
+				//wearLog.setEmpNumber(worker.getEmpNum());
+				//wearLog.setGatewayCode(message.getGatewayCode());
+				//wearLog.setHatCode(message.getSafeHatCode());
 				wearLog.setIsWear(message.getIsWear());
 				wearLog.setLatitude(message.getLatitude());
 				wearLog.setLongitude(message.getLongitude());
-				wearLog.setTime(message.getTime());
+				//wearLog.setTime(message.getTime());
 				
 				wearLogService.registWearLog(wearLog);
 			}
@@ -55,7 +55,7 @@ public class WearInfoServiceImpl implements WearInfoService {
 	@Override
 	public boolean validWearInfo(WearInfo message) {
 		Worker worker = new Worker();
-		worker.setcardNumber(message.getCardNumber());
+		worker.setCardNum(message.getCardNumber());
 		
 		Hat hat = new Hat();
 		hat.setCode(message.getSafeHatCode());
