@@ -61,14 +61,14 @@
 												<li><a href="${request.getContextPath()}/manager" class="nav-link" style="font-size:16px" style="font-size:18px">안전관리자 관리</a></li>
 												<li><a href="${request.getContextPath()}/wearlog" class="nav-link" style="font-size:16px" style="font-size:18px">착용 기록</a></li>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<li><a href="${request.getContextPath()}/common/logout" class="nav-link" style="font-size:16px" style="font-size:18px">로그아웃</a></li>
+												<li><a href="${request.getContextPath()}/shms/portal/logout" class="nav-link" style="font-size:16px" style="font-size:18px">로그아웃</a></li>
 											</c:when>
 											<c:when test="${sessionScope.job eq 'M'}">
 												<li><a href="${request.getContextPath()}/map" class="nav-link" style="font-size:18px">모니터링</a></li>
 												<li><a href="${request.getContextPath()}/wearlog" class="nav-link" style="font-size:18px">착용 기록</a></li>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 												<li><a href="${request.getContextPath()}/manager/${sessionScope.empNumber}" class="nav-link" style="font-size:18px">${sessionScope.name}님</a></li>
-												<li><a href="${request.getContextPath()}/common/logout" class="nav-link" style="font-size:18px">로그아웃</a></li>
+												<li><a href="${request.getContextPath()}/shms/portal/logout" class="nav-link" style="font-size:18px">로그아웃</a></li>
 											</c:when>  
 										</c:choose>
 									</ul>

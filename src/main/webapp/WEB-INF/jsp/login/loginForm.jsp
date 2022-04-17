@@ -32,7 +32,7 @@
 							<div class="header-column">
 								<div class="header-row">
 									<div class="header-logo">
-										<a href="${pageContext.request.contextPath}/common/login/form">
+										<a href="${pageContext.request.contextPath}/portal/login/form">
 											<img alt="shms" width="199" height="30" data-sticky-width="82" data-sticky-height="40" src="${pageContext.request.contextPath}/img/login.png" style="top: 0px; width: 199px; height: 60px;">
 										</a>
 									</div>
@@ -47,7 +47,7 @@
 		<br>
 		<br>
 		<br>
-		<form action="/shms/common/login" method="POST" onsubmit="return check(this)">
+		<form action="/shms/portal/login" method="POST" onsubmit="return check(this)">
 			<div class="container py-4">
 				<div class="row justify-content-center">
 					<div class="card border-width-3 border-radius-0 mb-4 col-lg-6">
@@ -57,7 +57,7 @@
 									<div class="form-row">
 										<div class="form-group col">
 											<label class="text-color-dark text-3">ID <span class="text-color-danger">*</span></label>
-											<input id="empNumber" type="text" name="empNumber" value="${manager.empNumber}" class="form-control form-control-lg text-4" required>
+											<input id="empNum" type="text" name="empNum" class="form-control form-control-lg text-4" required>
 										</div>
 									</div>
 									<div class="form-row">
@@ -95,15 +95,15 @@
 						}
 					}
 				};
-				var empNumber = document.getElementById("empNumber").value;
+				var empNum = document.getElementById("empNum").value;
 				var password = document.getElementById("password").value;
-				if (!empNumber) {
-					empNumber = "1";
+				if (!empNum) {
+					empNum = "1";
 				}
 				if (!password) {
 					password = "!";
 				}
-				xhr.open("GET", "${pageContext.request.contextPath}" + "/common/check/" + empNumber + "/" + password, true);
+				xhr.open("GET", "${pageContext.request.contextPath}" + "/portal/check/" + empNum + "/" + password, true);
 				xhr.send();
 				
 				return false;
