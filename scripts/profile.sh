@@ -4,13 +4,13 @@
 
 function find_idle_profile()
 {
-	RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/portal/profile)
+	RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/shms/profile)
 	
 	if [ ${RESPONSE_CODE} -ge 400 ] # 400보다 크면 (즉, 40X / 50X 에로 모두 포함)
 	then
 		CURRENT_PROFILE=real2
 	else
-        CURRENT_PROFILE=$(curl -s http://localhost/portal/profile)
+        CURRENT_PROFILE=$(curl -s http://localhost/shms/profile)
     fi
 	
 	if [ ${CURRENT_PROFILE} == real1 ]

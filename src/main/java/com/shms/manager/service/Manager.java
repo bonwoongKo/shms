@@ -88,8 +88,4 @@ public class Manager implements Serializable{
 	public void setFnlChngUserId(String fnlChngUserId) {
 		this.fnlChngUserId = fnlChngUserId;
 	}
-	
-	public boolean matchPassword(String password) {
-		return this.password.equals(password);
-	}
 }

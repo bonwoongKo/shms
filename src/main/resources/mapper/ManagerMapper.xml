@@ -15,11 +15,6 @@
         <result column="FNL_CHNG_DTTM" property="fnlChngDttm" />
         <result column="FNL_CHNG_USERID" property="fnlChngUserId" />
     </resultMap>
-    
-    <resultMap id="loginCommandResultMap" type="com.shms.login.service.LoginCommand">
-        <result column="EMP_NUM" property="empNum" />
-        <result column="PASSWORD" property="password" />
-    </resultMap>
 
     <sql id="whereSql">
         <where>
@@ -85,21 +80,6 @@
           FROM MANAGER
         <include refid="whereSql" />
     </select>
-    
-    <select id="selectByEmpNum" parameterType="String" resultMap="managerResultMap">
-        SELECT EMP_NUM
-             , PASSWORD
-             , NAME
-             , PHONE_NUM
-             , JOB
-             , THE_FST_RGST_DTTM
-             , THE_FST_RGST_USERID
-             , FNL_CHNG_DTTM
-             , FNL_CHNG_USERID
-          FROM MANAGER
-          WHERE EMP_NUM = #{empNum}
-    </select>
-    
 
     <insert id="insert" parameterType="com.shms.manager.service.Manager">
         INSERT INTO MANAGER (

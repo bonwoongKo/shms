@@ -47,7 +47,7 @@
 		<br>
 		<br>
 		<br>
-		<form action="/portal/login" method="POST">
+		<form action="/shms/common/login" method="POST" onsubmit="return check(this)">
 			<div class="container py-4">
 				<div class="row justify-content-center">
 					<div class="card border-width-3 border-radius-0 mb-4 col-lg-6">
@@ -57,7 +57,7 @@
 									<div class="form-row">
 										<div class="form-group col">
 											<label class="text-color-dark text-3">ID <span class="text-color-danger">*</span></label>
-											<input id="empNum" type="text" name="empNum" class="form-control form-control-lg text-4" required>
+											<input id="empNumber" type="text" name="empNumber" value="${manager.empNumber}" class="form-control form-control-lg text-4" required>
 										</div>
 									</div>
 									<div class="form-row">
@@ -78,5 +78,35 @@
 					</div>
 				</div>
 		</form>
-		
+		<script>
+			function check(form) {
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {	
+					if (xhr.readyState === xhr.DONE) {
+						if (xhr.status === 200 || xhr.status === 201) {
+							var row = JSON.parse(xhr.responseText);
+							if (JSON.stringify(row) != '{}') {
+								form.submit();
+							} else {
+								document.getElementById("error").innerHTML = "<font size=\"2em\" color=\"red\">잘못된 로그인 정보입니다.</font>";
+							}
+						} else {
+							//console.error(xhr.responseText);
+						}
+					}
+				};
+				var empNumber = document.getElementById("empNumber").value;
+				var password = document.getElementById("password").value;
+				if (!empNumber) {
+					empNumber = "1";
+				}
+				if (!password) {
+					password = "!";
+				}
+				xhr.open("GET", "${pageContext.request.contextPath}" + "/common/check/" + empNumber + "/" + password, true);
+				xhr.send();
+				
+				return false;
+			};
+		</script>
 <%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
