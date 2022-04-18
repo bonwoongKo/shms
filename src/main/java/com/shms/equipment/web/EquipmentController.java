@@ -1,5 +1,7 @@
 package com.shms.equipment.web;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +15,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.shms.equipment.service.Equipment;
 import com.shms.equipment.service.impl.EquipmentServiceImpl;
-import com.shms.gateway.service.Gateway;
 
 @RestController
 @RequestMapping("/equipment")
@@ -31,11 +32,19 @@ public class EquipmentController {
 	 * 장비 등록
 	 */
 	@PostMapping
-	public ModelAndView registEquipment(@ModelAttribute Equipment equipment,
+	public ModelAndView registEquipment(@ModelAttribute @Valid Equipment equipment,
 			Errors errors) throws Exception {
-		//equipmentServiceImpl.registEquipment
+		if (errors.hasErrors()) {
+			return new ModelAndView("equipment/rgist");
+		}
 		
-		return new ModelAndView(new RedirectView("/equipment"));
+		try {
+			equipmentServiceImpl.registEquipment(equipment);
+			
+			return new ModelAndView(new RedirectView("equipment"));
+		} catch (Exception e) {
+			return new ModelAndView("equipment/rgist");
+		}
 	}
 	
 	/**
@@ -45,8 +54,7 @@ public class EquipmentController {
 	public ModelAndView EquipmentList(@ModelAttribute Equipment equipment
 			) throws Exception {
 		ModelAndView mav = new ModelAndView("equipment/list");
-		
-		// mav.addObject(장비 리스트 이름, 장비 리스트);
+		mav.addObject("equipmentList", equipmentServiceImpl.equipmentList());
 		
 		return mav;
 	}
@@ -57,7 +65,7 @@ public class EquipmentController {
 	@DeleteMapping
 	public ModelAndView deleteEquip(@ModelAttribute Equipment equipment, Errors errors
 			) throws Exception {
-		//장비 삭제
+		equipmentServiceImpl.deleteEquipment(equipment);
 		
 		return new ModelAndView(new RedirectView("equipment"));
 	}
