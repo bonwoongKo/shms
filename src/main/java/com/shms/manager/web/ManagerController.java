@@ -1,5 +1,7 @@
 package com.shms.manager.web;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,10 +36,18 @@ public class ManagerController {
 	}
 	
 	@PostMapping
-	public ModelAndView registManager(@ModelAttribute Manager manager, Errors errors) throws Exception {
-		managerServiceImpl.registManager(manager);
+	public ModelAndView registManager(@ModelAttribute @Valid Manager manager, Errors errors) throws Exception {
+		if (errors.hasErrors()) {
+			return new ModelAndView("manager/regits");
+		}
 		
-		return new ModelAndView(new RedirectView("/manager"));
+		try {
+			managerServiceImpl.registManager(manager);
+			
+			return new ModelAndView(new RedirectView("/manager"));
+		} catch (Exception e) {
+			return new ModelAndView("manager/regist");
+		}
 	}
 	
 	@GetMapping

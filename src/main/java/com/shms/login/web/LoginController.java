@@ -27,7 +27,7 @@ public class LoginController {
 	
 	@GetMapping("/login/form")
 	public ModelAndView loginForm() {
-		return new ModelAndView("common/loginForm");
+		return new ModelAndView("login/loginForm");
 	}
 	
 	@PostMapping("/login")
@@ -35,18 +35,18 @@ public class LoginController {
 		new LoginCommandValidator().validate(loginCommand, errors);
 		
 		if (errors.hasErrors()) {
-			return new ModelAndView("common/loginForm");
+			return new ModelAndView("login/loginForm");
 		}
 		
 		try {
 			AuthInfo authInfo = loginService.login(loginCommand);
 			
 			session.setAttribute("authInfo", authInfo);
-			return new ModelAndView(new RedirectView("/shms/map"));
+			return new ModelAndView(new RedirectView("/map"));
 		} catch (WrongIdPasswordException e) {
 			errors.reject("idPasswordNotMatching");
 			
-			return new ModelAndView("common/loginForm");
+			return new ModelAndView("login/loginForm");
 		}
 	}
 	

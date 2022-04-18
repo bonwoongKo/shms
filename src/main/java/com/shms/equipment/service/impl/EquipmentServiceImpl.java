@@ -16,32 +16,27 @@ public class EquipmentServiceImpl implements EquipmentService{
 
 	@Override
 	public void registEquipment(Equipment equipment) throws Exception {
-		// TODO Auto-generated method stub
-		
+		equipmentMapper.insert(equipment);
 	}
 
 	@Override
 	public List<Equipment> equipmentList() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return equipmentMapper.list();
 	}
 
 	@Override
 	public Equipment viewEquipment(Equipment equipment) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return equipmentMapper.select(equipment);
 	}
 
 	@Override
 	public void editEquipment(Equipment equipment) throws Exception {
-		// TODO Auto-generated method stub
-		
+		equipmentMapper.update(equipment);
 	}
 
 	@Override
 	public void deleteEquipment(Equipment equipment) throws Exception {
-		// TODO Auto-generated method stub
-		
+		equipmentMapper.delete(equipment);
 	}
 
 }

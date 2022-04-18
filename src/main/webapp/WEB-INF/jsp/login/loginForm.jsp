@@ -32,7 +32,7 @@
 							<div class="header-column">
 								<div class="header-row">
 									<div class="header-logo">
-										<a href="${pageContext.request.contextPath}/portal/login/form">
+										<a href="${pageContext.request.contextPath}/common/login/form">
 											<img alt="shms" width="199" height="30" data-sticky-width="82" data-sticky-height="40" src="${pageContext.request.contextPath}/img/login.png" style="top: 0px; width: 199px; height: 60px;">
 										</a>
 									</div>
@@ -47,7 +47,7 @@
 		<br>
 		<br>
 		<br>
-		<form action="/shms/portal/login" method="POST" onsubmit="return check(this)">
+		<form action="/portal/login" method="POST">
 			<div class="container py-4">
 				<div class="row justify-content-center">
 					<div class="card border-width-3 border-radius-0 mb-4 col-lg-6">
@@ -78,35 +78,5 @@
 					</div>
 				</div>
 		</form>
-		<script>
-			function check(form) {
-				var xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function() {	
-					if (xhr.readyState === xhr.DONE) {
-						if (xhr.status === 200 || xhr.status === 201) {
-							var row = JSON.parse(xhr.responseText);
-							if (JSON.stringify(row) != '{}') {
-								form.submit();
-							} else {
-								document.getElementById("error").innerHTML = "<font size=\"2em\" color=\"red\">잘못된 로그인 정보입니다.</font>";
-							}
-						} else {
-							//console.error(xhr.responseText);
-						}
-					}
-				};
-				var empNum = document.getElementById("empNum").value;
-				var password = document.getElementById("password").value;
-				if (!empNum) {
-					empNum = "1";
-				}
-				if (!password) {
-					password = "!";
-				}
-				xhr.open("GET", "${pageContext.request.contextPath}" + "/portal/check/" + empNum + "/" + password, true);
-				xhr.send();
-				
-				return false;
-			};
-		</script>
+		
 <%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
