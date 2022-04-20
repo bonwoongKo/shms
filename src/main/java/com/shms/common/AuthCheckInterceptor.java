@@ -14,12 +14,25 @@ public class AuthCheckInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			AuthInfo authInfo = (AuthInfo) session.getAttribute("authInfo");
-			if (authInfo != null) {
+			if (authInfo != null && isCheckURL(request, authInfo)) {
 				return true;
 			}
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/map");
+		response.sendRedirect(request.getContextPath() + "/portal/login/form");
 		return false;
+	}
+	
+	
+	public boolean isCheckURL(HttpServletRequest request, AuthInfo authInfo) {
+		char job = authInfo.getJob();
+		String path = request.getServletPath().split("/")[1];
+		
+		if (job == 'M' && (path.equals("equipment")
+						|| path.equals("worker"))) {
+			return false;
+		}
+		
+		return true;
 	}
 }
