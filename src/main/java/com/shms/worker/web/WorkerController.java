@@ -36,7 +36,7 @@ public class WorkerController {
 	
 	@GetMapping
 	public ModelAndView workerList() throws Exception {
-		ModelAndView mav = new ModelAndView("worker/list");
+		ModelAndView mav = new ModelAndView("worker/workerList");
 		mav.addObject("workerList", workerServiceImpl.workerList());
 		
 		return mav;

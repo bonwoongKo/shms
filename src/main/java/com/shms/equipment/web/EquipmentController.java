@@ -53,7 +53,7 @@ public class EquipmentController {
 	@GetMapping
 	public ModelAndView EquipmentList(@ModelAttribute Equipment equipment
 			) throws Exception {
-		ModelAndView mav = new ModelAndView("equipment/list");
+		ModelAndView mav = new ModelAndView("equipment/equipmentList");
 		mav.addObject("equipmentList", equipmentServiceImpl.equipmentList());
 		
 		return mav;
