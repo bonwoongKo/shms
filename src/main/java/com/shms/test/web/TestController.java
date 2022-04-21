@@ -21,4 +21,18 @@ public class TestController {
 		
 		return mav;
 	}
+	
+	@GetMapping("test3")
+	public ModelAndView showBootstrapPage3() {
+		ModelAndView mav = new ModelAndView("/equipment/equipmentList");
+		
+		return mav;
+	}
+	
+	@GetMapping("test4")
+	public ModelAndView showBootstrapPage4() {
+		ModelAndView mav = new ModelAndView("/manager/managerList");
+		
+		return mav;
+	}
 }
