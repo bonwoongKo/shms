@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/common/popup.jsp" %>				    
 				    </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -22,5 +23,6 @@
         <script src="<%=request.getContextPath()%>/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath()%>/js/datatables-simple-demo.js"></script>
+    	
     </body>
 </html>

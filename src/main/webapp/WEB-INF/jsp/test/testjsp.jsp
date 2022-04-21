@@ -23,8 +23,8 @@
 				<!-- 지도 영역 -->
 			    <div id="map" style="width:100%;height:500px;"></div>
 			</div>
-			<div class="card-footer small text-muted">
-				<ol class="breadcrumb "> 
+			<div class="card-footer small text-muted" >
+				<ol class="breadcrumb" style="float:right;"> 
 				    <li class="breadcrumb-item active">추후 000 분에 조회되었습니다로 하단에 체크</li>
 				</ol> 
 			</div>
@@ -38,8 +38,36 @@
 			</div>
 			<div class="card-body">
 				<!-- 근로자 목록 리스트 -->
+				<ul class="list-group list-group-flush">
+				<div style="overflow-y:auto; overflow-x:hidden; width:100%; height:500px;">
+					 <li class="list-group-item">An item</li>
+				  <li class="list-group-item">A second item</li>
+				  <li class="list-group-item">A third item</li>
+				  <li class="list-group-item">A fourth item</li>
+				  <li class="list-group-item">And a fifth one</li>
+				</div>
+				
+				</ul>
 				<!-- TODO : foreach문 근로자 리스트 뿌리기 -->
 				<ul class="list-group list-group-flush">
+				    <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:500px;">
+				        <li class="list-group-item d-flex justify-content-between align-items-center">
+						    A list item
+						    <span class="badge bg-primary rounded-pill">확인</span>
+						</li>
+						<li class="list-group-item">An item</li>
+						
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+						    A second list item
+						    <span class="badge bg-primary rounded-pill"></span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+						    A third list item
+						    <span class="badge bg-primary rounded-pill">확인</span>
+						</li>
+				    </div>
+				</ul>
+				<!-- <ul class="list-group list-group-flush">
 					<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:500px;">
 						<li class="list-group-item">An item</li>
 					    <li class="list-group-item">A second item</li>
@@ -54,25 +82,8 @@
 					    <li class="list-group-item">An item</li>
 					    <li class="list-group-item">A second item</li>
 					    <li class="list-group-item">A third item</li>
-					    <li class="list-group-item">A fourth item</li>
-					    <li class="list-group-item">And a fifth one</li>
-					    <li class="list-group-item">An item</li>
-					    <li class="list-group-item">A second item</li>
-					    <li class="list-group-item">A third item</li>
-					    <li class="list-group-item">A fourth item</li>
-					    <li class="list-group-item">And a fifth one</li>
-					    <li class="list-group-item">An item</li>
-					    <li class="list-group-item">A second item</li>
-					    <li class="list-group-item">A third item</li>
-					    <li class="list-group-item">A fourth item</li>
-					    <li class="list-group-item">And a fifth one</li>
-					    <li class="list-group-item">An item</li>
-					    <li class="list-group-item">A second item</li>
-					    <li class="list-group-item">A third item</li>
-					    <li class="list-group-item">A fourth item</li>
-					    <li class="list-group-item">And a fifth one</li>
 					</div>	
-				</ul>
+				</ul> -->
 			</div>
 			<div class="card-footer small text-muted">
 				<div class="btn-group" role="group" aria-label="Basic mixed styles example">

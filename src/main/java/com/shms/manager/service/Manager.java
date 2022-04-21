@@ -19,6 +19,9 @@ public class Manager implements Serializable{
 	private Date fnlChngDttm;
 	private String fnlChngUserId;
 	
+	private String searchEmpNum;
+	private String searchName;
+	
 	public Manager() { }
 
 	public Manager(String empNum, String password, String name, String phoneNum, char job, Date theFstRgstDttm,

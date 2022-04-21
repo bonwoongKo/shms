@@ -15,14 +15,16 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		<link href="<%=request.getContextPath()%>/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/sub.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         	<!-- Navbar Brand-->
         	<a class="navbar-brand ps-2" href="${request.getContextPath()}/manager/main">
-				<img src="${pageContext.request.contextPath}/img/mainIcon.png" style="top: 0px; width: 210px; height: 60px;">
+				<img src="${pageContext.request.contextPath}/img/mainIcon.png" style="top: 0px; width: 210px; height: 50px;">
 			</a>
-			
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -65,7 +67,7 @@
                             </a>
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                안전관리자 관리
+                                안전 관리자 관리
                             </a>
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>

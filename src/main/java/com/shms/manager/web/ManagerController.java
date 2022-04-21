@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -57,13 +58,24 @@ public class ManagerController {
 		
 		return mav;
 	}
-	
+	/*
 	@GetMapping("/{empNumber}")
 	public ModelAndView viewManager(@ModelAttribute Manager manager) throws Exception {
 		ModelAndView mav = new ModelAndView("manager/view");
 		mav.addObject("manager", managerServiceImpl.viewManager(manager));
 		
 		return mav;
+	}
+	*/
+	
+	
+	// 수정 중 (test)
+	@GetMapping("/{empNumber}")
+	public Manager viewManager(@ModelAttribute Manager manager) throws Exception {
+		System.out.println("@@@test");
+		System.out.println(manager.getEmpNum());
+		
+		return managerServiceImpl.viewManager(manager);
 	}
 	
 	@GetMapping("/{empNumber}/form")
