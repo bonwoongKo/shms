@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -23,12 +22,6 @@ import com.shms.manager.service.impl.ManagerServiceImpl;
 public class ManagerController {
 	@Autowired
 	private ManagerServiceImpl managerServiceImpl;
-	
-	@GetMapping("/main")
-	public ModelAndView managerMain() {
-		
-		return new ModelAndView("manager/main");
-	}
 	
 	@GetMapping("/form")
 	public ModelAndView registManagerForm() {
@@ -53,7 +46,7 @@ public class ManagerController {
 	
 	@GetMapping
 	public ModelAndView managerList() throws Exception {
-		ModelAndView mav = new ModelAndView("manager/list");
+		ModelAndView mav = new ModelAndView("manager/managerList");
 		mav.addObject("managerList", managerServiceImpl.managerList());
 		
 		return mav;

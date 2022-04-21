@@ -20,7 +20,7 @@ public class MapController {
 	
 	@GetMapping 
 	public ModelAndView Monitoring() {
-		ModelAndView mav = new ModelAndView("/map/monitoring");
+		ModelAndView mav = new ModelAndView("map/monitoring");
 	
 		return mav;
 	}
