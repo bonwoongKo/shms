@@ -79,4 +79,4 @@
 				</div>
 		</form>
 		
-<%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
+<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
