@@ -5,26 +5,34 @@
 
 <mapper namespace="com.shms.worker.service.WorkerMapper">
     <resultMap id="workerResultMap" type="com.shms.worker.service.Worker">
-        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="WORKER_NUM" property="workerNum" />
+        <result column="EMP_NUM" property="empNum" />
         <result column="NAME" property="name" />
-        <result column="CARD_NUMBER" property="cardNumber" />
-        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="CARD_NUM" property="cardNum" />
+        <result column="PHONE_NUM" property="phoneNum" />
         <result column="IS_DELETE" property="isDelete" />
+        <result column="THE_FST_RGST_DTTM" property="theFstRgstDttm" />
+        <result column="THE_FST_RGST_USERID" property="theFstRgstUserId" />
+        <result column="FNL_CHNG_DTTM" property="fnlChngDttm" />
+        <result column="FNL_CHNG_USERID" property="fnlChngUserId" />
     </resultMap>
 
     <sql id="whereSql">
         <where>
-            <if test="empNumber != null and empNumber != ''">
-                AND EMP_NUMBER = #{empNumber}
+            <if test="workerNum != null and workerNum != ''">
+                AND WORKER_NUM = #{workerNum}
+            </if>
+            <if test="empNum != null and empNum != ''">
+                AND EMP_NUM = #{empNum}
             </if>
             <if test="name != null and name != ''">
                 AND NAME = #{name}
             </if>
-            <if test="cardNumber != null and cardNumber != ''">
-                AND CARD_NUMBER = #{cardNumber}
+            <if test="cardNum != null and cardNum != ''">
+                AND CARD_NUM = #{cardNum}
             </if>
-            <if test="phoneNumber != null and phoneNumber != ''">
-                AND PHONE_NUMBER = #{phoneNumber}
+            <if test="phoneNum != null and phoneNum != ''">
+                AND PHONE_NUM = #{phoneNum}
             </if>
             <if test="isDelete != null and isDelete != ''">
                 AND IS_DELETE = #{isDelete}
@@ -40,20 +48,22 @@
 
 	<select id="list" resultMap="workerResultMap">
         SELECT
-            EMP_NUMBER
+            WORKER_NUM
+            , EMP_NUM
             , NAME
-            , CARD_NUMBER
-            , PHONE_NUMBER
+            , CARD_NUM
+            , PHONE_NUM
             , IS_DELETE
         FROM WORKER
     </select>
 
     <select id="select" parameterType="com.shms.worker.service.Worker" resultMap="workerResultMap">
         SELECT
-            EMP_NUMBER
+            WORKER_NUM
+            , EMP_NUM
             , NAME
-            , CARD_NUMBER
-            , PHONE_NUMBER
+            , CARD_NUM
+            , PHONE_NUM
             , IS_DELETE
         FROM WORKER
         <include refid="whereSql" />
@@ -61,32 +71,36 @@
 
     <insert id="insert" parameterType="com.shms.worker.service.Worker">
         INSERT INTO WORKER (
-            EMP_NUMBER
+            WORKER_NUM
+            , EMP_NUM
             , NAME
-            , CARD_NUMBER
-            , PHONE_NUMBER
+            , CARD_NUM
+            , PHONE_NUM
         ) VALUES (
-            #{empNumber}
+            #{workerNum}
             , #{name}
-            , #{cardNumber}
-            , #{phoneNumber}
+            , #{cardNum}
+            , #{phoneNum}
         )
     </insert>
 
     <update id="update" parameterType="com.shms.worker.service.Worker">
         UPDATE WORKER
         <set>
-            <if test="empNumber != null and empNumber != ''">
-                EMP_NUMBER = #{empNumber},
+            <if test="workerNum != null and workerNum != ''">
+                WORKER_NUM = #{workerNum},
+            </if>
+            <if test="empNum != null and empNum != ''">
+                EMP_NUM = #{empNum},
             </if>
             <if test="name != null and name != ''">
                 NAME = #{name},
             </if>
-            <if test="cardNumber != null and cardNumber != ''">
-                CARD_NUMBER = #{cardNumber},
+            <if test="cardNum != null and cardNum != ''">
+                CARD_NUM = #{cardNum},
             </if>
-            <if test="phoneNumber != null and phoneNumber != ''">
-                PHONE_NUMBER = #{phoneNumber},
+            <if test="phoneNum != null and phoneNum != ''">
+                PHONE_NUM = #{phoneNum},
             </if>
             <if test="isDelete != null and isDelete != ''">
                 IS_DELETE = #{isDelete},

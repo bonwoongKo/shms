@@ -3,6 +3,8 @@ package com.shms.wearInfo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shms.equipment.service.Equipment;
+import com.shms.equipment.service.EquipmentMapper;
 import com.shms.wearInfo.service.WearInfo;
 import com.shms.wearInfo.service.WearInfoService;
 import com.shms.wearlog.service.WearLog;
@@ -16,22 +18,58 @@ public class WearInfoServiceImpl implements WearInfoService {
 	WorkerMapper workerMapper;
 	
 	@Autowired
+	EquipmentMapper equipmentMapper;
+	
+	@Autowired
 	WearLogServiceImpl wearLogService;
 	
 	@Override
 	public void receiveWearInfo(WearInfo message) {
 		WearLog wearLog = new WearLog();
+		
 		try {
-			Worker worker = new Worker();
-			worker = workerMapper.select(worker);
-			
-			wearLog.setIsWear(message.getIsWear());
-			wearLog.setLatitude(message.getLatitude());
-			wearLog.setLongitude(message.getLongitude());
-			
-			wearLogService.registWearLog(wearLog);
+			if (validWearInfo(message.getCardNum(), message.getEquipmentCode())) {
+				Worker worker = new Worker();
+				worker.setCardNum(message.getCardNum());
+				worker = workerMapper.select(worker);
+				
+				wearLog.setWorkerNum(worker.getWorkerNum());
+				wearLog.setEquipmentCode(message.getEquipmentCode());
+				wearLog.setRecodeTime(message.getRecodeTime());
+				wearLog.setIsWear(message.getIsWear());
+				wearLog.setLatitude(message.getLatitude());
+				wearLog.setLongitude(message.getLongitude());
+				
+				wearLogService.registWearLog(wearLog);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public boolean validWearInfo(String cardNum, String equipmentCode) {
+		Worker worker = new Worker();
+		worker.setCardNum(cardNum);
+		
+		Equipment equipment = new Equipment();
+		equipment.setCode(equipmentCode);
+		
+		try {
+			if (workerMapper.count(worker) != 1) {
+				System.out.println("Woorker");
+				return false;
+			}
+			
+			if (equipmentMapper.count(equipment) != 1) {
+				System.out.println("equipment");
+				return false;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 }
