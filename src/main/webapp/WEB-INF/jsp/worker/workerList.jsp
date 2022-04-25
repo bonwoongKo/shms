@@ -5,34 +5,35 @@
 	//페이지 로드 시
 	$(function(){
 		//초기 상세 및 등록 화면을 모두 숨김처리
-		$("#managerView").hide();
-		$("#managerRgst").hide();
+		$("#workerView").hide();
+		$("#workerRgst").hide();
 	});
 	
 	// TODO 페이징 관련
 	
-	//안전 관리자 등록 버튼 클릭 시
-    function showManagerRgstForm() {
-    	$("#managerView").hide();
-    	$("#managerRgst").show();
+	// 근로자 등록 버튼 클릭 시
+    function showWorkerRgstForm() {
+    	$("#workerView").hide();
+    	$("#workerRgst").show();
     }
 	
 	//안전관리자 상세조회
-	function showManagerView(empNum){
-		alert("안전관리자 상세조회");
-		$("#managerRgst").hide();
+	function showWorkerView(workerNum){
+		alert("근로자 상세조회 : " + workerNum);
+		$("#workerRgst").hide();
 		$.ajax({
-      		url			: '/manager/' + empNum + '',
+      		url			: '/worker/' + workerNum + '',
       		method		: 'GET',
       		traditional	: true,
       		data        : {
-      			'empNum'  :  empNum
+      			'workerNum'  :  workerNum
       		},
       		success		: function(Data) {
-     			$("#viewEmpNum").val(Data.empNum);
-      			$("#viewPhoneNum").val(Data.phoneNum);
+     			$("#viewWorkerNum").val(Data.workerNum);
       			$("#viewName").val(Data.name);
-      			$("#viewJob").val(Data.job);
+      			$("#viewPhoneNum").val(Data.phoneNum);
+      			$("#viewCardNum").val(Data.cardNum);
+      			$("#viewEmpNum").val(Data.empNum);
       		},
       		error		: function(jqXHR, textStatus, errorThrown) {
       			/* popup 대체요망 */
@@ -40,10 +41,10 @@
       		}
       	});
 		
-		$("#managerView").show();
+		$("#workerView").show();
 	}
 	
-	// 안전 관리자 등록 검증
+	// 근로자 등록 검증
 	function rgstValidationCheck(){
 		alert("등록 검증");
 		// 비어있는 값 체크
@@ -227,19 +228,19 @@
 </ol> 
 
 <div class="row">
-	<h3 class="fw-bold">안전 관리자 관리</h3>
+	<h3 class="fw-bold">근로자 관리</h3>
 	<div class="col-xl-12 col-md-6 mt-4">
 		<div class="card mb-4">
 			<div class="card-header">
 				<div class="row">
 				    <div class="col-xl-9">
-				        안전 관리자 목록
+				        근로자 목록
 				    </div>
 				</div>
 			</div>
 			<div class="card-body">
 				<div class="col-xl-3" style="float:right;">
-			        <button type="button" onclick="showManagerRgstForm()" style="float:right;" class="btn btn-outline-primary">안전 관리자 등록</button>
+			        <button type="button" onclick="showWorkerRgstForm()" style="float:right;" class="btn btn-outline-primary">근로자 등록</button>
 			    </div>
 			    <!-- 테이블 -->
 				<table class="table table-striped table-hover">
@@ -249,23 +250,18 @@
 				        <th scope="col">사원번호</th>
 				        <th scope="col">성함</th>
 				        <th scope="col">연락처</th>
-				        <th scope="col">직책</th>
+				        <th scope="col">담당 안전관리자 사원번호</th>
 				    </tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${managerList}" var="manager">
+					<c:forEach items="${workerList}" var="worker">
                    		<c:set var="i" value="${i+1}"/>
-                   		<tr id="tr${manager.empNum}" onclick="showManagerView('${manager.empNum}')">
+                   		<tr id="tr${worker.workerNum}" onclick="showWorkerView('${worker.workerNum}')">
                             <th scope="row">${i}</th>
-                            <td>${manager.empNum}</td>
-					        <td>${manager.name}</td>
-					        <td>${manager.phoneNum}</td>
-					        <c:if test="${manager.job eq 'A'}">
-							  <td>관리자</td>
-							</c:if>
-							<c:if test="${manager.job eq 'M'}">
-							  <td>사용자</td>
-							</c:if>
+                            <td>${worker.workerNum}</td>
+					        <td>${worker.name}</td>
+					        <td>${worker.phoneNum}</td>
+					        <td>${worker.empNum}</td>
                         </tr>
 					</c:forEach> 
 				  </tbody>
@@ -294,54 +290,54 @@
 			</div>
 			<div class="card-footer small text-muted">
 				<!-- 상세보기 -->
-				<form id="managerView" class="row g-3 needs-validation" novalidate>
+				<form id="workerView" class="row g-3 needs-validation" novalidate>
 				  <div class="col-md-12">
-				    <p class="fs-6">안전관리자 상세조회</p>
+				    <p class="fs-6">근로자 상세조회</p>
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustom01" class="form-label">사원번호</label>
-				    <input type="text" id="viewEmpNum" readonly class="form-control" value="123123123">
-				    <div class="valid-feedback">
-				      사용할 수 있는 사원번호입니다.
-				    </div>
+				    <input type="text" id="viewWorkerNum" readonly class="form-control" value="123123123">
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustom02" class="form-label">성함</label>
 				    <input type="text" class="form-control" id="viewName" value="123">
 				    <div class="valid-feedback">
-				      Looks good!
 				    </div>
+				    <div class="invalid-feedback">
+			          근로자 성함을 입력하세요.
+			        </div>
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustomUsername" class="form-label">연락처</label>
 				    <div class="input-group has-validation">
 				      <input type="text" class="form-control" id="viewPhoneNum" value="01011111111">
-				      <div class="invalid-feedback">
-				        Please choose a username.
+				      <div class="valid-feedback">
 				      </div>
+				      <div class="invalid-feedback">
+			            근로자 연락처를 입력하세요.
+			          </div>
 				    </div>
 				  </div>
-				  <div class="col-md-5">
-				    <label for="validationCustom03" class="form-label">비밀번호</label>
+				  <div class="col-md-4">
+				    <label for="validationCustom03" class="form-label">카드번호</label>
 				    <div class="input-group mb-3">
-					  <input type="password" class="form-control" id="viewPw" value="**********">
-					  <button class="btn btn-outline-secondary" onclick="resetPw()" type="button" id="button-addon2">비밀번호 초기화</button>
+					  <input type="text" class="form-control" id="viewCardNum" value="01011111111">
 					</div>
 				    <div class="invalid-feedback">
 				      Please provide a valid city.
 				    </div>
 				  </div>
-				  <div class="col-md-3"></div>
 				  <div class="col-md-4">
-				    <label for="validationCustom04" class="form-label">직책</label>
-				    <select class="form-select" id="viewJob" required>
-				      <option value="M">사용자</option>
-				      <option value="A">관리자</option>
-				    </select>
+				    <label for="validationCustom03" class="form-label">담당 안전관리자 사원번호</label>
+				    <div class="input-group mb-3">
+					  <input type="text" class="form-control" id="viewEmpNum" value="01011111111">
+					</div>
 				    <div class="invalid-feedback">
-				      Please select a valid state.
+				      Please provide a valid city.
 				    </div>
 				  </div>
+				  <div class="col-md-4"></div>
+				  
 				  <div class="col-md-3">
 				    <label for="validationCustom01" class="form-label">최초 등록일</label>
 				    <input type="text" readonly class="form-control-plaintext" id="theFstRgstDttm" value="2022-04-20">
@@ -371,13 +367,13 @@
 				</form>
 				
 				<!-- 안전 관리자 등록 폼 -->
-				<form id="managerRgst" name="managerRgst" action="/manager/rgstManager" method="post" class="row g-3 needs-validation" novalidate>
+				<form id="workerRgst" name="workerRgst" action="/worker/rgstWorker" method="post" class="row g-3 needs-validation" novalidate>
 				  <div class="col-md-12">
 				    <p class="fs-6">신규 안전관리자 등록</p>
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustom01" class="form-label">사원번호</label>
-				    <input type="text" class="form-control" id="rgstEmpNum" value="">
+				    <input type="text" class="form-control" id="rgstWorkerNum" value="">
 				    <div class="valid-feedback">
 				      사용할 수 있는 사원번호입니다.
 				    </div>
@@ -406,15 +402,21 @@
 				    </div>
 				  </div>
 				  <div class="col-md-4">
-				    <label for="validationCustom04" class="form-label">직책</label>
-				    <select class="form-select" id="rgstJob" required>
-				      <option value="A">관리자</option>
-				      <option value="M">사용자</option>
-				    </select>
+				    <label for="validationCustom04" class="form-label">카드번호</label>
+				    <input type="text" class="form-control" id="rgstCardNum" value="">
 				    <div class="valid-feedback">
 				    </div>
 				    <div class="invalid-feedback">
-				      직책을 선택하세요.
+				      카드번호를 입력하세요.
+				    </div>
+				  </div>
+				  <div class="col-md-4">
+				    <label for="validationCustom04" class="form-label">담당 안전관리자 사원번호</label>
+				    <input type="text" class="form-control" id="rgstEmpNum" value="">
+				    <div class="valid-feedback">
+				    </div>
+				    <div class="invalid-feedback">
+				      안전관리자 사원번호를 입력하세요.
 				    </div>
 				  </div>
 				  <div class="col-md-12">
