@@ -19,6 +19,7 @@
 
     <sql id="whereSql">
         <where>
+
         	<if test="workerNum != null and workerNum != ''">
                 AND WORKER_NUM = #{workerNum}
             </if>
@@ -79,32 +80,36 @@
 
     <insert id="insert" parameterType="com.shms.worker.service.Worker">
         INSERT INTO WORKER (
-            EMP_NUMBER
+            WORKER_NUM
+            , EMP_NUM
             , NAME
-            , CARD_NUMBER
-            , PHONE_NUMBER
+            , CARD_NUM
+            , PHONE_NUM
         ) VALUES (
-            #{empNumber}
+            #{workerNum}
             , #{name}
-            , #{cardNumber}
-            , #{phoneNumber}
+            , #{cardNum}
+            , #{phoneNum}
         )
     </insert>
 
     <update id="update" parameterType="com.shms.worker.service.Worker">
         UPDATE WORKER
         <set>
-            <if test="empNumber != null and empNumber != ''">
-                EMP_NUMBER = #{empNumber},
+            <if test="workerNum != null and workerNum != ''">
+                WORKER_NUM = #{workerNum},
+            </if>
+            <if test="empNum != null and empNum != ''">
+                EMP_NUM = #{empNum},
             </if>
             <if test="name != null and name != ''">
                 NAME = #{name},
             </if>
-            <if test="cardNumber != null and cardNumber != ''">
-                CARD_NUMBER = #{cardNumber},
+            <if test="cardNum != null and cardNum != ''">
+                CARD_NUM = #{cardNum},
             </if>
-            <if test="phoneNumber != null and phoneNumber != ''">
-                PHONE_NUMBER = #{phoneNumber},
+            <if test="phoneNum != null and phoneNum != ''">
+                PHONE_NUM = #{phoneNum},
             </if>
             <if test="isDelete != null and isDelete != ''">
                 IS_DELETE = #{isDelete},

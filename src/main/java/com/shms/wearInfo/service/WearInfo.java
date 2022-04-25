@@ -5,34 +5,31 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Component
 @SuppressWarnings("serial")
 public class WearInfo implements Serializable {
 	private int code;
-	private String safeHatCode;
-	private String gatewayCode;
-	private String cardNumber;
+	private String equipmentCode;
+	private String cardNum;
 	
-	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	private LocalDateTime time;
+	//@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	//@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
+	private LocalDateTime recodeTime;
 	private char isWear;
 	private double latitude;
 	private double longitude;
 	
 	public WearInfo() {	}
 
-	public WearInfo(int code, String hatCode, String gatewayCode, String empNumber, LocalDateTime dateTime, char isWear, double latitude, double longitude) {
+	public WearInfo(int code, String equipmentCode, String cardNum, LocalDateTime recodeTime, char isWear,
+			double latitude, double longitude) {
 		this.code = code;
-		this.safeHatCode = hatCode;
-		this.gatewayCode = gatewayCode;
-		this.cardNumber = empNumber;
-		this.time = dateTime;
+		this.equipmentCode = equipmentCode;
+		this.cardNum = cardNum;
+		this.recodeTime = recodeTime;
 		this.isWear = isWear;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -46,36 +43,28 @@ public class WearInfo implements Serializable {
 		this.code = code;
 	}
 
-	public String getSafeHatCode() {
-		return safeHatCode;
+	public String getEquipmentCode() {
+		return equipmentCode;
 	}
 
-	public void setSafeHatCode(String safeHatCode) {
-		this.safeHatCode = safeHatCode;
+	public void setEquipmentCode(String equipmentCode) {
+		this.equipmentCode = equipmentCode;
 	}
 
-	public String getGatewayCode() {
-		return gatewayCode;
+	public String getCardNum() {
+		return cardNum;
 	}
 
-	public void setGatewayCode(String gatewayCode) {
-		this.gatewayCode = gatewayCode;
+	public void setCardNum(String cardNum) {
+		this.cardNum = cardNum;
 	}
 
-	public String getCardNumber() {
-		return cardNumber;
+	public LocalDateTime getRecodeTime() {
+		return recodeTime;
 	}
 
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
-	}
-
-	public LocalDateTime getTime() {
-		return time;
-	}
-
-	public void setTime(LocalDateTime time) {
-		this.time = time;
+	public void setRecodeTime(LocalDateTime recodeTime) {
+		this.recodeTime = recodeTime;
 	}
 
 	public char getIsWear() {
@@ -101,4 +90,5 @@ public class WearInfo implements Serializable {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+	
 }

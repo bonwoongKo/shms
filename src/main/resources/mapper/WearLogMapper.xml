@@ -5,19 +5,23 @@
 
 <mapper namespace="com.shms.wearlog.service.WearLogMapper">
 	<resultMap id="workerResultMap" type="com.shms.worker.service.Worker">
+        <result column="WORKER_NUM" property="workerNum" />
         <result column="EMP_NUMBER" property="empNumber" />
         <result column="NAME" property="name" />
-        <result column="CARD_NUMBER" property="cardNumber" />
-        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="CARD_NUM" property="cardNum" />
+        <result column="PHONE_NUM" property="phoneNum" />
         <result column="IS_DELETE" property="isDelete" />
+        <result column="THE_FST_RGST_DTTM" property="theFstRgstDttm" />
+        <result column="THE_FST_RGST_USERID" property="theFstRgstUserId" />
+        <result column="FNL_CHNG_DTTM" property="fnlChngDttm" />
+        <result column="FNL_CHNG_USERID" property="fnlChngUserId" />
     </resultMap>
     
     <resultMap id="wearLogResultMap" type="com.shms.wearlog.service.WearLog">
         <result column="CODE" property="code" />
-        <result column="HAT_CODE" property="hatCode" />
-        <result column="GATEWAY_CODE" property="gatewayCode" />
-        <result column="EMP_NUMBER" property="empNumber" />
-        <result column="TIME" property="time" />
+        <result column="EQUIPMENT_CODE" property="equipmentCode" />
+        <result column="WORKER_NUM" property="workerNum" />
+        <result column="RECODE_TIME" property="recodeTime" />
         <result column="IS_WEAR" property="isWear" />
         <result column="LATITUDE" property="latitude" />
         <result column="LONGITUDE" property="longitude" />
@@ -29,17 +33,14 @@
             <if test="code != null and code != ''">
                 AND CODE = #{code}
             </if>
-            <if test="hatCode != null and hatCode != ''">
-                AND HAT_CODE = #{hatCode}
+            <if test="equipmentCode != null and equipmentCode != ''">
+                AND EQUIPMENT_CODE = #{equipmentCode}
             </if>
-            <if test="gatewayCode != null and gatewayCode != ''">
-                AND GATEWAY_CODE = #{gatewayCode}
+            <if test="workerNum != null and workerNum != ''">
+                AND WORKER_NUM = #{workerNum}
             </if>
-            <if test="empNumber != null and empNumber != ''">
-                AND EMP_NUMBER = #{empNumber}
-            </if>
-            <if test="time != null and time != ''">
-                AND TIME = #{time}
+            <if test="recodeTime != null and recodeTime != ''">
+                AND RECODE_TIME = #{recodeTime}
             </if>
             <if test="isWear != null and isWear != ''">
                 AND IS_WEAR = #{isWear}
@@ -55,6 +56,9 @@
     
     <sql id="whereSqlWorker">
         <where>
+        	<if test="workerNum != null and workerNum != ''">
+                AND WORKER_NUM = #{workerNum}
+            </if>
             <if test="empNumber != null and empNumber != ''">
                 AND EMP_NUMBER = #{empNumber}
             </if>
@@ -82,56 +86,53 @@
 	<select id="list" resultMap="wearLogResultMap">
         SELECT 
         	L.CODE
-            , L.HAT_CODE
-            , L.GATEWAY_CODE
-            , L.EMP_NUMBER
-            , L.TIME
+            , L.EQUIPMENT_CODE
+            , L.WORKER_NUM
+            , L.RECODE_TIME
             , L.IS_WEAR
             , L.LATITUDE
             , L.LONGITUDE
             , W.NAME
             , W.PHONE_NUMBER
         FROM WEAR_LOG L JOIN WORKER W
-        ON L.EMP_NUMBER = W.EMP_NUMBER
-        WHERE L.TIME IN (SELECT MAX(L.TIME) AS TIME 
+        ON L.WORKER_NUM = W.WORKER_NUM
+        WHERE L.RECODE_TIME IN (SELECT MAX(L.RECODE_TIME) AS RECODE_TIME 
         				 FROM WEAR_LOG L JOIN WORKER W
-       					 ON L.EMP_NUMBER = W.EMP_NUMBER 
-       					 WHERE DATE_FORMAT(L.TIME, '%Y%m%d') = DATE_FORMAT(SYSDATE(), '%Y%m%d') 
+       					 ON L.WORKER_NUM = W.WORKER_NUM 
+       					 WHERE DATE_FORMAT(L.RECODE_TIME, '%Y%m%d') = DATE_FORMAT(SYSDATE(), '%Y%m%d') 
        					 GROUP BY W.NAME)
     </select>
     
     <select id="viewWearLog" parameterType="com.shms.wearlog.service.WearLog" resultMap="wearLogResultMap">
         SELECT 
         	L.CODE
-            , L.HAT_CODE
-            , L.GATEWAY_CODE
-            , L.EMP_NUMBER
-            , L.TIME
+            , L.EQUIPMENT_CODE
+            , L.WORKER_NUM
+            , L.RECODE_TIME
             , L.IS_WEAR
             , L.LATITUDE
             , L.LONGITUDE
             , W.NAME
-            , W.PHONE_NUMBER
+            , W.PHONE_NUMB
         FROM WEAR_LOG L JOIN WORKER W
-        ON L.EMP_NUMBER = W.EMP_NUMBER
-        WHERE L.EMP_NUMBER = #{empNumber}
-        AND DATE_FORMAT(L.TIME, '%Y%m%d') = DATE_FORMAT(#{time}, '%Y%m%d')
+        ON L.WORKER_NUM = W.WORKER_NUM
+        WHERE L.WORKER_NUM = #{workerNum}
+        AND DATE_FORMAT(L.RECODE_TIME, '%Y%m%d') = DATE_FORMAT(#{recodeTime}, '%Y%m%d')
     </select>
     
     <select id="searchWearLog" parameterType="String" resultMap="wearLogResultMap">
         SELECT 
         	L.CODE
-            , L.HAT_CODE
-            , L.GATEWAY_CODE
-            , L.EMP_NUMBER
-            , L.TIME
+            , L.EQUIPMENT_CODE
+            , L.WORKER_NUM
+            , L.RECODE_TIME
             , L.IS_WEAR
             , L.LATITUDE
             , L.LONGITUDE
             , W.NAME
-            , W.PHONE_NUMBER
+            , W.PHONE_NUMB
         FROM WEAR_LOG L JOIN WORKER W
-        ON L.EMP_NUMBER = W.EMP_NUMBER
+        ON L.WORKER_NUM = W.WORKER_NUM
         WHERE W.NAME LIKE '%${name}%'
         ORDER BY L.TIME DESC
     </select>
@@ -139,10 +140,9 @@
     <select id="select" parameterType="com.shms.wearlog.service.WearLog" resultMap="wearLogResultMap">
         SELECT
             CODE
-            , HAT_CODE
-            , GATEWAY_CODE
-            , EMP_NUMBER
-            , TIME
+            , EQUIPMENT_CODE
+            , WORKER_NUM
+            , RECODE_TIME
             , IS_WEAR
             , LATITUDE
             , LONGITUDE
@@ -153,19 +153,17 @@
     <insert id="insert" parameterType="com.shms.wearlog.service.WearLog">
         INSERT INTO WEAR_LOG (
             CODE
-            , HAT_CODE
-            , GATEWAY_CODE
-            , EMP_NUMBER
-            , TIME
+            , EQUIPMENT_CODE
+            , WORKER_NUM
+            , RECODE_TIME
             , IS_WEAR
             , LATITUDE
             , LONGITUDE
         ) VALUES (
             #{code}
-            , #{hatCode}
-            , #{gatewayCode}
-            , #{empNumber}
-            , #{time}
+            , #{equipmentCode}
+            , #{workerNum}
+            , #{recodeTime}
             , #{isWear}
             , #{latitude}
             , #{longitude}
@@ -178,17 +176,14 @@
             <if test="code != null and code != ''">
                 CODE = #{code},
             </if>
-            <if test="hatCode != null and hatCode != ''">
-                HAT_CODE = #{hatCode},
+            <if test="equipmentCode != null and equipmentCode != ''">
+                EQUIPMENT_CODE = #{equipmentCode},
             </if>
-            <if test="gatewayCode != null and gatewayCode != ''">
-                GATEWAY_CODE = #{gatewayCode},
+            <if test="workerNum != null and workerNum != ''">
+                WORKER_NUM = #{workerNum},
             </if>
-            <if test="empNumber != null and empNumber != ''">
-                EMP_NUMBER = #{empNumber},
-            </if>
-            <if test="time != null and time != ''">
-                TIME = #{time},
+            <if test="recodeTime != null and recodeTime != ''">
+                RECODE_TIME = #{recodeTime},
             </if>
             <if test="isWear != null and isWear != ''">
                 IS_WEAR = #{isWear},

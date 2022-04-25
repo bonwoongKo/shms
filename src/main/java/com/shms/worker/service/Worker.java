@@ -39,60 +39,77 @@ public class Worker implements Serializable{
 	public String getWorkerNum() {
 		return workerNum;
 	}
+	
 	public void setWorkerNum(String workerNum) {
 		this.workerNum = workerNum;
 	}
+	
 	public String getEmpNum() {
 		return empNum;
 	}
+	
 	public void setEmpNum(String empNum) {
 		this.empNum = empNum;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getCardNum() {
 		return cardNum;
 	}
+	
 	public void setCardNum(String cardNum) {
 		this.cardNum = cardNum;
 	}
+	
 	public String getPhoneNum() {
 		return phoneNum;
 	}
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
+	
 	public char getIsDelete() {
 		return isDelete;
 	}
+	
 	public void setIsDelete(char isDelete) {
 		this.isDelete = isDelete;
 	}
+	
 	public Date getTheFstRgstDttm() {
 		return theFstRgstDttm;
 	}
+	
 	public void setTheFstRgstDttm(Date theFstRgstDttm) {
 		this.theFstRgstDttm = theFstRgstDttm;
 	}
+	
 	public String getTheFstRgstUserId() {
 		return theFstRgstUserId;
 	}
+	
 	public void setTheFstRgstUserId(String theFstRgstUserId) {
 		this.theFstRgstUserId = theFstRgstUserId;
 	}
 	public Date getFnlChngDttm() {
 		return fnlChngDttm;
 	}
+	
 	public void setFnlChngDttm(Date fnlChngDttm) {
 		this.fnlChngDttm = fnlChngDttm;
 	}
+	
 	public String getFnlChngUserId() {
 		return fnlChngUserId;
 	}
+	
 	public void setFnlChngUserId(String fnlChngUserId) {
 		this.fnlChngUserId = fnlChngUserId;
 	}
