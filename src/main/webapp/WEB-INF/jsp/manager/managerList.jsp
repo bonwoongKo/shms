@@ -7,8 +7,9 @@
 		//초기 상세 및 등록 화면을 모두 숨김처리
 		$("#managerView").hide();
 		$("#managerRgst").hide();
-		
 	});
+	
+	// TODO 페이징 관련
 	
 	//안전 관리자 등록 버튼 클릭 시
     function showManagerRgstForm() {
@@ -18,27 +19,203 @@
 	
 	//안전관리자 상세조회
 	function showManagerView(empNum){
+		alert("안전관리자 상세조회");
 		$("#managerRgst").hide();
 		$.ajax({
-      		url			: '/shms/manager/' + empNum + '',
+      		url			: '/manager/' + empNum + '',
       		method		: 'GET',
       		traditional	: true,
-      		data		: {
-      			'empNum' : empNum
+      		data        : {
+      			'empNum'  :  empNum
       		},
       		success		: function(Data) {
-      			$("#managerViewEmpNum").val(Data.empNum);
-      			$("#managerViewPhone").val(Data.phoneNum);
-      			$("#managerViewName").val(Data.name);
-      			$("#managerViewName").val(Data.name);
+     			$("#viewEmpNum").val(Data.empNum);
+      			$("#viewPhoneNum").val(Data.phoneNum);
+      			$("#viewName").val(Data.name);
+      			$("#viewJob").val(Data.job);
       		},
       		error		: function(jqXHR, textStatus, errorThrown) {
       			/* popup 대체요망 */
       			alert("error 발생");
       		}
       	});
-		
 		$("#managerView").show();
+	}
+	
+	// 안전 관리자 등록 검증
+	function rgstValidationCheck(){
+		alert("등록 검증");
+		// 비어있는 값 체크
+		var rgstEmpNum = document.getElementById('rgstEmpNum').value;
+		if (rgstEmpNum == "") {
+			$("#rgstEmpNum").attr('class', 'form-control is-invalid');
+		} else {
+			// 사원번호 중복체크
+			$.ajax({
+	      		url			: '/manager/doubleCheck',
+	      		method		: 'POST',
+	      		traditional	: true,
+	      		data        : {
+	      			'empNum'  :  rgstEmpNum
+	      		},
+	      		success		: function(Data) {
+	      			Data = "N";
+	      			if (Data == "Y") {
+	      				$("#rgstEmpNum").attr('class', 'form-control is-invalid');
+	      			} else {
+	      				$("#rgstEmpNum").attr('class', 'form-control is-valid');
+	      			}
+	      		},
+	      		error		: function(jqXHR, textStatus, errorThrown) {
+	      			/* popup 대체요망 */
+	      			alert("error 발생");
+	      		}
+	      	});
+		}
+		
+		var rgstName = document.getElementById('rgstName').value;
+		if (rgstName == "") {
+			$("#rgstName").attr('class', 'form-control is-invalid');
+		} else {
+			$("#rgstName").attr('class', 'form-control is-valid');
+		}
+		
+		var rgstPhoneNum = document.getElementById('rgstPhoneNum').value;
+		if (rgstPhoneNum == "") {
+			$("#rgstPhoneNum").attr('class', 'form-control is-invalid');
+		} else {
+			$("#rgstPhoneNum").attr('class', 'form-control is-valid');
+		}
+		
+		var rgstJob = document.getElementById('rgstJob').value;
+		if (rgstJob == "") {
+			$("#rgstJob").attr('class', 'form-control is-invalid');
+		} else {
+			$("#rgstJob").attr('class', 'form-control is-valid');
+		}
+		
+		
+		// form-control is-valid
+		// form-control is-invalid
+		// DB 형식 체크
+		rgstManager();
+	}
+	
+	// 안전관리자 사원번호 중복체크
+	function empNumDoubleCheck() {
+		alert("사원번호 중복체크");
+		
+	}
+	
+	// 안전 관리자 등록
+	function rgstManager(){
+		alert("안전관리자 등록");
+		//var ajaxFrm = $('form[name=managerRgst]').serialize();
+		
+		var empNum = document.getElementById('rgstEmpNum').value;
+		var name = document.getElementById('rgstName').value;
+		var phoneNum = document.getElementById('rgstPhoneNum').value;
+		var job = document.getElementById('rgstJob').value;
+		$.ajax({
+       		url			: '/manager/rgstManager',
+       		method		: 'POST',
+       		traditional	: true,
+       		data		: {
+       			'empNum'   : empNum,
+       			'name'     : name,
+       			'phoneNum' : phoneNum,
+       			'job'      : job
+       		},
+       		success		: function(data) {
+       			alert("success");
+       		},
+       		error		: function(jqXHR, textStatus, errorThrown) {
+       			alert("error 발생");
+       		}
+       	});
+	}
+	
+	// 안전 관리자 수정 검증
+	function editValidationCheck(){
+		alert("수정검증");
+		
+		editManager();
+	}
+	
+	// 안전 관리자 수정
+	function editManager(){
+		alert("안전관리자 수정");
+		//var ajaxFrm = $('form[name=managerRgst]').serialize();
+		
+		var empNum = document.getElementById('viewEmpNum').value;
+		var name = document.getElementById('viewName').value;
+		var phoneNum = document.getElementById('viewPhoneNum').value;
+		var job = document.getElementById('viewJob').value;
+		$.ajax({
+       		url			: '/manager/editManager',
+       		method		: 'POST',
+       		traditional	: true,
+       		data		: {
+       			'empNum'   : empNum,
+       			'name'     : name,
+       			'phoneNum' : phoneNum,
+       			'job'      : job
+       		},
+       		success		: function(data) {
+       			alert("success");
+       		},
+       		error		: function(jqXHR, textStatus, errorThrown) {
+       			alert("error 발생");
+       		}
+       	});
+	}
+	
+	// 안전 관리자 삭제
+	function delManager(){
+		alert("안전관리자 삭제");
+		
+		var empNum = document.getElementById("viewEmpNum").value;
+		alert("empNum : " + empNum);
+		$.ajax({
+      		url			: '/manager/deleteManager',
+      		method		: 'POST',
+      		traditional	: true,
+      		data        : {
+      			'empNum'  :  empNum
+      		},
+      		success		: function(Data) {
+      			/* popup 대체요망 */
+     			alert("success");
+      		},
+      		error		: function(jqXHR, textStatus, errorThrown) {
+      			/* popup 대체요망 */
+      			alert("error 발생");
+      		}
+      	});
+	}
+	
+	// 비밀번호 초기화
+	function resetPw(){
+		alert("비밀번호 초기화");
+		
+		var empNum = document.getElementById("viewEmpNum").value;
+		alert("empNum : " + empNum);
+		$.ajax({
+      		url			: '/manager/resetPw',
+      		method		: 'POST',
+      		traditional	: true,
+      		data        : {
+      			'empNum'  :  empNum
+      		},
+      		success		: function(Data) {
+      			/* popup 대체요망 */
+     			alert("success");
+      		},
+      		error		: function(jqXHR, textStatus, errorThrown) {
+      			/* popup 대체요망 */
+      			alert("error 발생");
+      		}
+      	});
 	}
 	
 </script>
@@ -75,27 +252,21 @@
 				    </tr>
 				</thead>
 				<tbody>
-				    <tr id="tr2016244114" onclick="showManagerView('shms000001')">
-				        <th scope="row">1</th>
-				        <td>2016244114</td>
-				        <td>구본웅</td>
-				        <td>01024141414</td>
-				        <td>관리자</td>
-				    </tr>
-				    <tr>
-				        <th scope="row">2</th>
-				        <td>2016244114</td>
-				        <td>구본웅</td>
-				        <td>01024141414</td>
-				        <td>관리자</td>
-				    </tr>
-				    <tr>
-				        <th scope="row">3</th>
-				        <td>2016244114</td>
-				        <td>구본웅</td>
-				        <td>01024141414</td>
-				        <td>관리자</td>
-				    </tr>
+					<c:forEach items="${managerList}" var="manager">
+                   		<c:set var="i" value="${i+1}"/>
+                   		<tr id="tr${manager.empNum}" onclick="showManagerView('${manager.empNum}')">
+                            <th scope="row">${i}</th>
+                            <td>${manager.empNum}</td>
+					        <td>${manager.name}</td>
+					        <td>${manager.phoneNum}</td>
+					        <c:if test="${manager.job eq 'A'}">
+							  <td>관리자</td>
+							</c:if>
+							<c:if test="${manager.job eq 'M'}">
+							  <td>사용자</td>
+							</c:if>
+                        </tr>
+					</c:forEach> 
 				  </tbody>
 				</table>
 				
@@ -128,14 +299,14 @@
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustom01" class="form-label">사원번호</label>
-				    <input type="text" id="managerViewEmpNum" readonly class="form-control" value="2016244114">
+				    <input type="text" id="viewEmpNum" readonly class="form-control" value="123123123">
 				    <div class="valid-feedback">
-				      Looks good!
+				      사용할 수 있는 사원번호입니다.
 				    </div>
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustom02" class="form-label">성함</label>
-				    <input type="text" class="form-control" id="managerViewName" value="구본웅">
+				    <input type="text" class="form-control" id="viewName" value="123">
 				    <div class="valid-feedback">
 				      Looks good!
 				    </div>
@@ -143,7 +314,7 @@
 				  <div class="col-md-4">
 				    <label for="validationCustomUsername" class="form-label">연락처</label>
 				    <div class="input-group has-validation">
-				      <input type="text" class="form-control" id="managerViewPhone" value="01052412414">
+				      <input type="text" class="form-control" id="viewPhoneNum" value="01011111111">
 				      <div class="invalid-feedback">
 				        Please choose a username.
 				      </div>
@@ -152,8 +323,8 @@
 				  <div class="col-md-5">
 				    <label for="validationCustom03" class="form-label">비밀번호</label>
 				    <div class="input-group mb-3">
-					  <input type="password" class="form-control" id="managerViewPw">
-					  <button class="btn btn-outline-secondary" type="button" id="button-addon2">비밀번호 초기화</button>
+					  <input type="password" class="form-control" id="viewPw" value="**********">
+					  <button class="btn btn-outline-secondary" onclick="resetPw()" type="button" id="button-addon2">비밀번호 초기화</button>
 					</div>
 				    <div class="invalid-feedback">
 				      Please provide a valid city.
@@ -162,9 +333,9 @@
 				  <div class="col-md-3"></div>
 				  <div class="col-md-4">
 				    <label for="validationCustom04" class="form-label">직책</label>
-				    <select class="form-select" id="validationCustom04" required>
-				      <option>관리자</option>
-				      <option>사용자</option>
+				    <select class="form-select" id="viewJob" required>
+				      <option value="M">사용자</option>
+				      <option value="A">관리자</option>
 				    </select>
 				    <div class="invalid-feedback">
 				      Please select a valid state.
@@ -172,81 +343,85 @@
 				  </div>
 				  <div class="col-md-3">
 				    <label for="validationCustom01" class="form-label">최초 등록일</label>
-				    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="2022-04-20">
+				    <input type="text" readonly class="form-control-plaintext" id="theFstRgstDttm" value="2022-04-20">
 				  </div>
 				  <div class="col-md-3">
 				    <label for="validationCustom02" class="form-label">최초 등록 사용자</label>
-				    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="구본웅">
+				    <input type="text" readonly class="form-control-plaintext" id="theFstRgstUserId" value="구본웅">
 				  </div>
 				  <div class="col-md-3">
 				    <label for="validationCustomUsername" class="form-label">최종 수정일</label>
 				    <div class="input-group has-validation">
-				        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="2022-04-20">
+				        <input type="text" readonly class="form-control-plaintext" id="fnlChngDttm" value="2022-04-20">
 				    </div>
 				  </div>
 				  <div class="col-md-3">
 				    <label for="validationCustomUsername" class="form-label">최종 수정 사용자</label>
 				    <div class="input-group has-validation">
-				      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="구본웅">
+				      <input type="text" readonly class="form-control-plaintext" id="fnlChngUserId" value="구본웅">
 				    </div>
+				  </div>
+				  <div class="col-md-12">
+				    <div class="d-grid gap-2 d-md-block" style="float:right;"> 
+				      <button type="button" onclick="editValidationCheck()" class="btn btn-primary">저장</button>
+				      <button type="button" onclick="delManager()" class="btn btn-outline-danger">삭제</button>
+			    	</div>
 				  </div>
 				</form>
 				
 				<!-- 안전 관리자 등록 폼 -->
-				<form id="managerRgst" class="row g-3 needs-validation" novalidate>
+				<form id="managerRgst" name="managerRgst" action="/manager/rgstManager" method="post" class="row g-3 needs-validation" novalidate>
 				  <div class="col-md-12">
 				    <p class="fs-6">신규 안전관리자 등록</p>
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustom01" class="form-label">사원번호</label>
-				    <input type="text" class="form-control" id="staticEmail" value="">
+				    <input type="text" class="form-control" id="rgstEmpNum" value="">
 				    <div class="valid-feedback">
-				      Looks good!
+				      사용할 수 있는 사원번호입니다.
 				    </div>
+				    <div class="invalid-feedback">
+			          중복되지 않는 사원번호를 입력하세요.
+			        </div>
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustom02" class="form-label">성함</label>
-				    <input type="text" class="form-control" id="staticEmail" value="">
+				    <input type="text" class="form-control" id="rgstName" value="">
 				    <div class="valid-feedback">
-				      Looks good!
 				    </div>
+				    <div class="invalid-feedback">
+			          성함을 입력하세요.
+			        </div>
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustomUsername" class="form-label">연락처</label>
 				    <div class="input-group has-validation">
-				      <input type="text" class="form-control" id="staticEmail" value="">
+				      <input type="text" class="form-control" id="rgstPhoneNum" value="">
+				      <div class="valid-feedback">
+				      </div>
 				      <div class="invalid-feedback">
-				        Please choose a username.
+				        연락처를 입력하세요.
 				      </div>
 				    </div>
 				  </div>
 				  <div class="col-md-4">
-				    <label for="validationCustom03" class="form-label">비밀번호</label>
-				    <div class="input-group mb-3">
-				      <!-- 의미없는 값임 서비스에서 고정으로 지정할 것 -->
-					  <input type="password" readonly class="form-control" id="inputPassword" value="shms@123">
-					</div>
+				    <label for="validationCustom04" class="form-label">직책</label>
+				    <select class="form-select" id="rgstJob" required>
+				      <option value="A">관리자</option>
+				      <option value="M">사용자</option>
+				    </select>
+				    <div class="valid-feedback">
+				    </div>
 				    <div class="invalid-feedback">
-				      Please provide a valid city.
+				      직책을 선택하세요.
 				    </div>
 				  </div>
-				  <div class="col-md-3"></div>
-				  <div class="col-md-4">
-				    <label for="validationCustom04" class="form-label">직책</label>
-				    <select class="form-select" id="validationCustom04" required>
-				      <option>관리자</option>
-				      <option>사용자</option>
-				    </select>
-				    <div class="invalid-feedback">
-				      Please select a valid state.
-				    </div>
+				  <div class="col-md-12">
+				    <div class="d-grid gap-2 d-md-block" style="float:right;"> 
+				      <button type="button" onclick="rgstValidationCheck()" class="btn btn-primary">저장</button>
+			    	</div>
 				  </div>
 				</form>
-				
-				<div class="d-grid gap-2 d-md-block" style="float:right;"> 
-				    <button type="button" class="btn btn-outline-success">저장</button>
-				    <button type="button" class="btn btn-outline-danger">삭제</button>
-			    </div>
 			</div>
 		</div>
 	</div>
