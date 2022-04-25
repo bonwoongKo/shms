@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.shms.manager.service.Manager;
 import com.shms.worker.service.Worker;
 import com.shms.worker.service.impl.WorkerServiceImpl;
 
@@ -48,12 +49,20 @@ public class WorkerController {
 		return null;
 	}
 	
+	/*
 	@GetMapping("/{empNumber}")
 	public ModelAndView viewWorker(@ModelAttribute Worker worker) throws Exception {
 		ModelAndView mav = new ModelAndView("worker/view");
 		mav.addObject("worker", workerServiceImpl.viewWorker(worker));
 		
 		return mav;
+	}
+	*/
+	// 안전관리자 상세조회
+	@GetMapping("/{empNumber}")
+	public Worker viewManager(@ModelAttribute Worker worker) throws Exception {
+		System.out.println("worker : " + worker.getWorkerNum());
+		return workerServiceImpl.viewWorker(worker);
 	}
 	
 	@GetMapping("/{empNumber}/form")

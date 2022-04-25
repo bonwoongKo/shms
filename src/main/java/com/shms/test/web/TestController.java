@@ -35,4 +35,11 @@ public class TestController {
 		
 		return mav;
 	}
+	
+	@GetMapping("test5")
+	public ModelAndView showBootstrapPage5() {
+		ModelAndView mav = new ModelAndView("/wearlog/wearlogList");
+		
+		return mav;
+	}
 }
