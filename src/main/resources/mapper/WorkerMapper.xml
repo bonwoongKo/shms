@@ -19,7 +19,8 @@
 
     <sql id="whereSql">
         <where>
-            <if test="workerNum != null and workerNum != ''">
+
+        	<if test="workerNum != null and workerNum != ''">
                 AND WORKER_NUM = #{workerNum}
             </if>
             <if test="empNum != null and empNum != ''">
@@ -48,24 +49,32 @@
 
 	<select id="list" resultMap="workerResultMap">
         SELECT
-            WORKER_NUM
-            , EMP_NUM
-            , NAME
-            , CARD_NUM
-            , PHONE_NUM
-            , IS_DELETE
-        FROM WORKER
+        	WORKER_NUM
+          , EMP_NUM
+          , NAME
+          , CARD_NUM
+          , PHONE_NUM
+          , IS_DELETE
+          , THE_FST_RGST_DTTM
+          , THE_FST_RGST_USERID
+          , FNL_CHNG_DTTM
+          , FNL_CHNG_USERID
+          FROM WORKER
     </select>
 
     <select id="select" parameterType="com.shms.worker.service.Worker" resultMap="workerResultMap">
         SELECT
             WORKER_NUM
-            , EMP_NUM
-            , NAME
-            , CARD_NUM
-            , PHONE_NUM
-            , IS_DELETE
-        FROM WORKER
+          , EMP_NUM
+          , NAME
+          , CARD_NUM
+          , PHONE_NUM
+          , IS_DELETE
+          , THE_FST_RGST_DTTM
+          , THE_FST_RGST_USERID
+          , FNL_CHNG_DTTM
+          , FNL_CHNG_USERID
+          FROM WORKER
         <include refid="whereSql" />
     </select>
 
