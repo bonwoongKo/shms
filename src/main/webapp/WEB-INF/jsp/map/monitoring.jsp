@@ -13,15 +13,25 @@
 		    <li class="breadcrumb-item active">추후 000 분에 조회되었습니다로 하단에 체크</li>
 		</ol> 	
 	</div> -->
-	<h1>실시간 모니터링</h1>
+	<h2 class="fw-bold">실시간 모니터링</h2>
 	<div class="col-xl-9 col-md-6 mt-4">
 		<div class="card mb-4">
 			<div class="card-header">
-				근로자 위치
+				<div class="row">
+					<div class="col-xl-8">
+						<h5 class="fw-bold">최근 근로자 위치</h5>
+					</div>
+					<div class="col-xl-4">
+						<div class="btn-group" role="group" aria-label="Basic mixed styles example" style="float:right;">
+						    <button type="button" class="btn btn-danger" onclick="changeMarker('red')">미착용 보기</button>
+						    <button type="button" class="btn btn-success" onclick="changeMarker('all')">전체보기</button>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="card-body">
 				<!-- 지도 영역 -->
-			    <div id="map" style="width:100%;height:500px;"></div>
+			    <div id="map" style="width:100%; height:500px;"></div>
 			</div>
 			<div class="card-footer small text-muted" >
 				<ol class="breadcrumb" style="float:right;"> 
@@ -39,51 +49,18 @@
 			<div class="card-body">
 				<!-- 근로자 목록 리스트 -->
 				<ul class="list-group list-group-flush">
-				<div style="overflow-y:auto; overflow-x:hidden; width:100%; height:500px;">
-					<!-- TODO : foreach문 근로자 리스트 뿌리기 -->
-					<li class="list-group-item">An item</li>
-					<li class="list-group-item">A second item</li>
-					<li class="list-group-item">A third item</li>
-					<li class="list-group-item">A fourth item</li>
-					<li class="list-group-item">And a fifth one</li>
-				</div>
-				
-				</ul>
-				
-				<!-- <ul class="list-group list-group-flush">
-					<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:500px;">
-						<li class="list-group-item">An item</li>
-					    <li class="list-group-item">A second item</li>
-					    <li class="list-group-item">A third item</li>
-					    <li class="list-group-item">A fourth item</li>
-					    <li class="list-group-item">And a fifth one</li>
-					    <li class="list-group-item">An item</li>
-					    <li class="list-group-item">A second item</li>
-					    <li class="list-group-item">A third item</li>
-					    <li class="list-group-item">A fourth item</li>
-					    <li class="list-group-item">And a fifth one</li>
-					    <li class="list-group-item">An item</li>
-					    <li class="list-group-item">A second item</li>
-					    <li class="list-group-item">A third item</li>
+					<div id="workerList" style="overflow-y:auto; overflow-x:hidden; width:100%; height:560px;">
 					</div>	
-				</ul> -->
-			</div>
-			<div class="card-footer small text-muted">
-				<div class="btn-group" role="group" aria-label="Basic mixed styles example">
-				    <button type="button" class="btn btn-danger" onclick="changeMarker('red')">미착용 보기</button>
-				    <button type="button" class="btn btn-success" onclick="changeMarker('all')">전체보기</button>
-				</div>
+				</ul>
 			</div>
 		</div>
 	</div>
 </div>
 
-
 <!-- 지도 불러오기 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=84df5ba3fe6d380ae81cc0059ae8ae59"></script> 
 
 <script>
-	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = { 
 	    center: new kakao.maps.LatLng(37.2637696, 126.943232), // 지도의 중심좌표
@@ -92,8 +69,8 @@
 	
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	
-	var greenImageSrc = 'https://ifh.cc/g/Brxwqh.png' // 초록색  지도마크 주소
-	var redImageSrc = 'https://ifh.cc/g/nM2glj.png' // 빨강색  지도마크 주소
+	var greenImageSrc =	"${pageContext.request.contextPath}/img/greenMaker.png"// 초록색  지도마크 주소
+	var redImageSrc = "${pageContext.request.contextPath}/img/redMaker.png" // 빨강색  지도마크 주소
 	imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
 	imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. size 와 option중 하나만 변경 시 확대 및 축소시 마커좌표 어긋나게 됨
 	var greenMarkerImage = new kakao.maps.MarkerImage(greenImageSrc, imageSize, imageOption) // 마커의 이미지정보를 가지고 있는 초록 지도마커 생성
@@ -145,8 +122,8 @@
 						// 근로자 부분
 						var html = "";
 						for (var i = 0; i < rows.length; i++) {
-							html += "	<li class=nav-item>";
-							html += " 		<a class=nav-link onclick=panToMarker(" + i + ")>";
+							html += "	<li class=list-group-item>";
+							html += " 		<a onclick=panToMarker(" + i + ")>";
 							html += "		" + rows[i].worker.name + " : ";
 							if (rows[i].isWear == 'Y') {
 								html += "착용";
@@ -169,8 +146,8 @@
 						for (var i = 0; i < rows.length; i++) {
 							positions.push({
 								content: iwContent + rows[i].worker.name + '</div>' 
-								+ iwContent + rows[i].worker.phoneNumber.substring(0,3) + "-" 
-								+ rows[i].worker.phoneNumber.substring(3,7) + "-" + rows[i].worker.phoneNumber.substring(7,11) + '</div>', 
+								+ iwContent + rows[i].worker.phoneNum.substring(0,3) + "-" 
+								+ rows[i].worker.phoneNum.substring(3,7) + "-" + rows[i].worker.phoneNum.substring(7,11) + '</div>', 
 							    latlng: new kakao.maps.LatLng(rows[i].latitude, rows[i].longitude)
 							});
 						}
@@ -218,8 +195,6 @@
 		xhr.open("GET", "${pageContext.request.contextPath}" + "/map/monitoring", true);
 		xhr.send();
 	};
-
-	
 </script>
 
 <%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>

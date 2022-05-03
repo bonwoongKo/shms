@@ -9,4 +9,5 @@ import com.shms.wearlog.service.WearLog;
 @Service
 public interface MapService {
 	public List<WearLog> listWearLog() throws Exception;
+	public List<WearLog> monitoring() throws Exception;
 }

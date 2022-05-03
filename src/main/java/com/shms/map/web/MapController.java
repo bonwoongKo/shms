@@ -31,7 +31,7 @@ public class MapController {
 		String result = null;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			rows = mapService.listWearLog();
+			rows = mapService.monitoring();
 			if (rows != null) {
 				result = mapper.writeValueAsString(rows);
 			}

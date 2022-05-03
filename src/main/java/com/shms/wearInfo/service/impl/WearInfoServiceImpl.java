@@ -28,14 +28,15 @@ public class WearInfoServiceImpl implements WearInfoService {
 		WearLog wearLog = new WearLog();
 		
 		try {
-			if (validWearInfo(message.getCardNum(), message.getEquipmentCode())) {
+			if (validWearInfo(message.getCardNum(), message.getHatCode())) {
 				Worker worker = new Worker();
 				worker.setCardNum(message.getCardNum());
 				worker = workerMapper.select(worker);
 				
 				wearLog.setWorkerNum(worker.getWorkerNum());
-				wearLog.setEquipmentCode(message.getEquipmentCode());
-				wearLog.setRecodeTime(message.getRecodeTime());
+				wearLog.setHatCode(message.getHatCode());
+				wearLog.setGatewayCode(message.getGatewayCode());
+				wearLog.setRecordTime(message.getRecordTime());
 				wearLog.setIsWear(message.getIsWear());
 				wearLog.setLatitude(message.getLatitude());
 				wearLog.setLongitude(message.getLongitude());
@@ -57,7 +58,7 @@ public class WearInfoServiceImpl implements WearInfoService {
 		
 		try {
 			if (workerMapper.count(worker) != 1) {
-				System.out.println("Woorker");
+				System.out.println("Worker");
 				return false;
 			}
 			

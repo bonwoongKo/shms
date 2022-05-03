@@ -15,8 +15,8 @@ public class WorkerServiceImpl implements WorkerService {
 	private WorkerMapper workerMapper;
 	
 	@Override
-	public void registWorker(Worker worker) throws Exception {
-		workerMapper.insert(worker);
+	public int registWorker(Worker worker) throws Exception {
+		return workerMapper.insert(worker);
 	}
 
 	@Override
@@ -32,13 +32,18 @@ public class WorkerServiceImpl implements WorkerService {
 	}
 
 	@Override
-	public void editWorker(Worker worker) throws Exception {
-		workerMapper.update(worker);
+	public int editWorker(Worker worker) throws Exception {
+		return workerMapper.update(worker);
 	}
 
 	@Override
-	public void deleteWorker(Worker worker) throws Exception {
-		workerMapper.delete(worker);
+	public int deleteWorker(Worker worker) throws Exception {
+		return workerMapper.delete(worker);
+	}
+
+	@Override
+	public int countWorker(Worker worker) throws Exception {
+		return workerMapper.count(worker);
 	}
 
 }
