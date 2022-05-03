@@ -15,8 +15,9 @@ public class ManagerServiceImpl implements ManagerService {
 	private ManagerMapper managerMapper;
 	
 	@Override
-	public void registManager(Manager manager) throws Exception {
-		managerMapper.insert(manager);
+	public int registManager(Manager manager) throws Exception {
+		manager.setPassword("shms@123");
+		return managerMapper.insert(manager);
 	}
 
 	@Override
@@ -32,13 +33,24 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public void editManager(Manager manager) throws Exception {
-		managerMapper.update(manager);
+	public int editManager(Manager manager) throws Exception {
+		return managerMapper.update(manager);
 	}
 
 	@Override
-	public void deleteManager(Manager manager) throws Exception {
-		managerMapper.delete(manager);
+	public int deleteManager(Manager manager) throws Exception {
+		return managerMapper.delete(manager);
+	}
+
+	@Override
+	public int resetPw(Manager manager) throws Exception {
+		manager.setPassword("shms@123");
+		return managerMapper.resetPw(manager);
+	}
+
+	@Override
+	public int countManager(Manager manager) throws Exception {
+		return managerMapper.count(manager);
 	}
 
 }

@@ -21,7 +21,7 @@ public class LoginServiceImpl implements LoginService {
 		
 		if (manager == null) {
 			throw new WrongIdPasswordException();
-		}
+		} 
 		if (!manager.matchPassword(loginCommand.getPassword())) {
 			throw new WrongIdPasswordException();
 		}

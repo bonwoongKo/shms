@@ -15,8 +15,8 @@ public class EquipmentServiceImpl implements EquipmentService{
 	private EquipmentMapper equipmentMapper;
 
 	@Override
-	public void registEquipment(Equipment equipment) throws Exception {
-		equipmentMapper.insert(equipment);
+	public int registEquipment(Equipment equipment) throws Exception {
+		return equipmentMapper.insert(equipment);
 	}
 
 	@Override
@@ -30,13 +30,18 @@ public class EquipmentServiceImpl implements EquipmentService{
 	}
 
 	@Override
-	public void editEquipment(Equipment equipment) throws Exception {
-		equipmentMapper.update(equipment);
+	public int editEquipment(Equipment equipment) throws Exception {
+		return equipmentMapper.update(equipment);
 	}
 
 	@Override
-	public void deleteEquipment(Equipment equipment) throws Exception {
-		equipmentMapper.delete(equipment);
+	public int deleteEquipment(Equipment equipment) throws Exception {
+		return equipmentMapper.delete(equipment);
+	}
+
+	@Override
+	public int countEquipment(Equipment equipment) throws Exception {
+		return equipmentMapper.count(equipment);
 	}
 
 }

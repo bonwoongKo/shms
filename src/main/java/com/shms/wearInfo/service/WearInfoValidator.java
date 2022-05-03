@@ -16,7 +16,7 @@ public class WearInfoValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmpty(errors, "cardNumber", "required");
 		ValidationUtils.rejectIfEmpty(errors, "equipmentCode", "required");
-		ValidationUtils.rejectIfEmpty(errors, "recodeTime", "required");
+		ValidationUtils.rejectIfEmpty(errors, "recordTime", "required");
 		ValidationUtils.rejectIfEmpty(errors, "isWear", "required");
 		ValidationUtils.rejectIfEmpty(errors, "latitude", "required");
 		ValidationUtils.rejectIfEmpty(errors, "longitude", "required");

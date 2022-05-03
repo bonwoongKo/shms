@@ -19,7 +19,6 @@
 
     <sql id="whereSql">
         <where>
-
         	<if test="workerNum != null and workerNum != ''">
                 AND WORKER_NUM = #{workerNum}
             </if>
@@ -48,32 +47,31 @@
     </select>
 
 	<select id="list" resultMap="workerResultMap">
-        SELECT
-        	WORKER_NUM
-          , EMP_NUM
-          , NAME
-          , CARD_NUM
-          , PHONE_NUM
-          , IS_DELETE
-          , THE_FST_RGST_DTTM
-          , THE_FST_RGST_USERID
-          , FNL_CHNG_DTTM
-          , FNL_CHNG_USERID
-          FROM WORKER
+        SELECT WORKER_NUM
+             , EMP_NUM
+             , NAME
+             , CARD_NUM
+             , PHONE_NUM
+             , IS_DELETE
+             , THE_FST_RGST_DTTM
+             , THE_FST_RGST_USERID
+             , FNL_CHNG_DTTM
+             , FNL_CHNG_USERID
+         FROM WORKER
+        WHERE IS_DELETE = 'N'
     </select>
 
     <select id="select" parameterType="com.shms.worker.service.Worker" resultMap="workerResultMap">
-        SELECT
-            WORKER_NUM
-          , EMP_NUM
-          , NAME
-          , CARD_NUM
-          , PHONE_NUM
-          , IS_DELETE
-          , THE_FST_RGST_DTTM
-          , THE_FST_RGST_USERID
-          , FNL_CHNG_DTTM
-          , FNL_CHNG_USERID
+        SELECT WORKER_NUM
+             , EMP_NUM
+             , NAME
+             , CARD_NUM
+             , PHONE_NUM
+             , IS_DELETE
+             , THE_FST_RGST_DTTM
+             , THE_FST_RGST_USERID
+             , FNL_CHNG_DTTM
+             , FNL_CHNG_USERID
           FROM WORKER
         <include refid="whereSql" />
     </select>
@@ -81,15 +79,26 @@
     <insert id="insert" parameterType="com.shms.worker.service.Worker">
         INSERT INTO WORKER (
             WORKER_NUM
-            , EMP_NUM
-            , NAME
-            , CARD_NUM
-            , PHONE_NUM
+          , EMP_NUM
+          , NAME
+          , CARD_NUM
+          , PHONE_NUM
+          , IS_DELETE
+          , THE_FST_RGST_DTTM
+          , THE_FST_RGST_USERID
+          , FNL_CHNG_DTTM
+          , FNL_CHNG_USERID
         ) VALUES (
             #{workerNum}
-            , #{name}
-            , #{cardNum}
-            , #{phoneNum}
+          , #{empNum}
+          , #{name}
+          , #{cardNum}
+          , #{phoneNum}
+          , 'N'
+          , now()
+          , #{theFstRgstUserId}
+          , now()
+          , #{fnlChngUserId}
         )
     </insert>
 
@@ -114,12 +123,17 @@
             <if test="isDelete != null and isDelete != ''">
                 IS_DELETE = #{isDelete},
             </if>
+                FNL_CHNG_DTTM = now()
+              , FNL_CHNG_USERID = #{fnlChngUserId}
         </set>
-        WHERE EMP_NUMBER = #{empNumber}
+        WHERE WORKER_NUM = #{workerNum}
     </update>
     
     <delete id="delete" parameterType="com.shms.worker.service.Worker">
-        DELETE FROM WORKER
-        <include refid="whereSql" />
+        UPDATE WORKER
+           SET IS_DELETE = 'Y'
+             , FNL_CHNG_DTTM = now()
+             , FNL_CHNG_USERID = #{fnlChngUserId}
+         WHERE WORKER_NUM = #{workerNum}
     </delete>
 </mapper>

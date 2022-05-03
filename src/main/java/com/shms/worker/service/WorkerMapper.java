@@ -9,7 +9,7 @@ public interface WorkerMapper {
 	public int count(Worker worker) throws Exception;
 	public List<Worker> list() throws Exception;
 	public Worker select(Worker worker) throws Exception;
-	public void insert(Worker worker) throws Exception;
-	public void update(Worker worker) throws Exception;
-	public void delete(Worker worker) throws Exception;
+	public int insert(Worker worker) throws Exception;
+	public int update(Worker worker) throws Exception;
+	public int delete(Worker worker) throws Exception;
 }

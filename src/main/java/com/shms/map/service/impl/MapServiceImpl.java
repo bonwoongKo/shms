@@ -19,4 +19,11 @@ public class MapServiceImpl implements MapService {
 		
 		return wearLogMapper.list();
 	}
+	
+	@Override
+	public List<WearLog> monitoring() throws Exception {
+		
+		return wearLogMapper.monitoring();
+	}
+
 }

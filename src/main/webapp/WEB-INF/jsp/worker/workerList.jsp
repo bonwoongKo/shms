@@ -2,6 +2,11 @@
 <%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
 
 <script type="text/javascript">
+	//table
+	$(document).ready(function() {
+	    $('#example').DataTable();
+	});
+	
 	//페이지 로드 시
 	$(function(){
 		//초기 상세 및 등록 화면을 모두 숨김처리
@@ -34,6 +39,11 @@
       			$("#viewPhoneNum").val(Data.phoneNum);
       			$("#viewCardNum").val(Data.cardNum);
       			$("#viewEmpNum").val(Data.empNum);
+      			
+      			$("#theFstRgstDttm").val(Data.theFstRgstDttm);
+      			$("#theFstRgstUserId").val(Data.theFstRgstUserId);
+      			$("#fnlChngDttm").val(Data.fnlChngDttm);
+      			$("#fnlChngUserId").val(Data.fnlChngUserId);
       		},
       		error		: function(jqXHR, textStatus, errorThrown) {
       			/* popup 대체요망 */
@@ -47,25 +57,26 @@
 	// 근로자 등록 검증
 	function rgstValidationCheck(){
 		alert("등록 검증");
-		// 비어있는 값 체크
-		var rgstEmpNum = document.getElementById('rgstEmpNum').value;
-		if (rgstEmpNum == "") {
-			$("#rgstEmpNum").attr('class', 'form-control is-invalid');
+		//var rgstEmpNum = document.getElementById('rgstEmpNum').value;
+		var rgstWorkerNum = document.getElementById('rgstWorkerNum').value;
+		if (rgstWorkerNum == "") {
+			$("#rgstWorkerNum").attr('class', 'form-control is-invalid');
+			return;
 		} else {
-			// 사원번호 중복체크
+			// 근로자 중복체크
 			$.ajax({
-	      		url			: '/manager/doubleCheck',
+	      		url			: '/worker/doubleCheck',
 	      		method		: 'POST',
 	      		traditional	: true,
 	      		data        : {
-	      			'empNum'  :  rgstEmpNum
+	      			'workerNum'  :  rgstWorkerNum
 	      		},
 	      		success		: function(Data) {
-	      			Data = "N";
 	      			if (Data == "Y") {
-	      				$("#rgstEmpNum").attr('class', 'form-control is-invalid');
-	      			} else {
-	      				$("#rgstEmpNum").attr('class', 'form-control is-valid');
+	      				$("#rgstWorkerNum").attr('class', 'form-control is-invalid');
+	      				return;
+	      			} else if (Data == "N") {
+	      				$("#rgstWorkerNum").attr('class', 'form-control is-valid');
 	      			}
 	      		},
 	      		error		: function(jqXHR, textStatus, errorThrown) {
@@ -78,6 +89,7 @@
 		var rgstName = document.getElementById('rgstName').value;
 		if (rgstName == "") {
 			$("#rgstName").attr('class', 'form-control is-invalid');
+			return;
 		} else {
 			$("#rgstName").attr('class', 'form-control is-valid');
 		}
@@ -85,51 +97,73 @@
 		var rgstPhoneNum = document.getElementById('rgstPhoneNum').value;
 		if (rgstPhoneNum == "") {
 			$("#rgstPhoneNum").attr('class', 'form-control is-invalid');
+			return;
 		} else {
 			$("#rgstPhoneNum").attr('class', 'form-control is-valid');
 		}
 		
-		var rgstJob = document.getElementById('rgstJob').value;
-		if (rgstJob == "") {
-			$("#rgstJob").attr('class', 'form-control is-invalid');
+		var rgstCardNum = document.getElementById('rgstCardNum').value;
+		if (rgstCardNum == "") {
+			$("#rgstCardNum").attr('class', 'form-control is-invalid');
+			return;
 		} else {
-			$("#rgstJob").attr('class', 'form-control is-valid');
+			$("#rgstCardNum").attr('class', 'form-control is-valid');
 		}
 		
+		var rgstEmpNum = document.getElementById('rgstEmpNum').value;
+		if (rgstEmpNum == "") {
+			$("#rgstEmpNum").attr('class', 'form-control is-invalid');
+			return;
+		} else {
+			// 존재하는 안전관리자 사원번호인지 체크
+			$.ajax({
+	      		url			: '/worker/doubleCheck',
+	      		method		: 'POST',
+	      		traditional	: true,
+	      		data        : {
+	      			'empNum'  :  rgstEmpNum
+	      		},
+	      		success		: function(Data) {
+	      			if (Data == "Y") {
+	      				$("#rgstEmpNum").attr('class', 'form-control is-valid');
+	      			} else if (Data == "N") {
+	      				$("#rgstEmpNum").attr('class', 'form-control is-invalid');
+	      				return;
+	      			}
+	      		},
+	      		error		: function(jqXHR, textStatus, errorThrown) {
+	      			/* popup 대체요망 */
+	      			alert("error 발생");
+	      		}
+	      	});
+		}
 		
-		// form-control is-valid
-		// form-control is-invalid
 		// DB 형식 체크
 		rgstManager();
 	}
 	
-	// 안전관리자 사원번호 중복체크
-	function empNumDoubleCheck() {
-		alert("사원번호 중복체크");
-		
-	}
-	
-	// 안전 관리자 등록
+	// 근로자 등록
 	function rgstManager(){
-		alert("안전관리자 등록");
-		//var ajaxFrm = $('form[name=managerRgst]').serialize();
+		alert("근로자 등록");
 		
+		var workerNum = document.getElementById('rgstWorkerNum').value;
 		var empNum = document.getElementById('rgstEmpNum').value;
 		var name = document.getElementById('rgstName').value;
 		var phoneNum = document.getElementById('rgstPhoneNum').value;
-		var job = document.getElementById('rgstJob').value;
+		var cardNum = document.getElementById('rgstCardNum').value;
 		$.ajax({
-       		url			: '/manager/rgstManager',
+       		url			: '/worker',
        		method		: 'POST',
        		traditional	: true,
        		data		: {
-       			'empNum'   : empNum,
-       			'name'     : name,
-       			'phoneNum' : phoneNum,
-       			'job'      : job
+       			'workerNum'  : workerNum,
+       			'empNum'     : empNum,
+       			'name'       : name,
+       			'phoneNum'   : phoneNum,
+       			'cardNum'    : cardNum
        		},
        		success		: function(data) {
-       			alert("success");
+       			location.reload();
        		},
        		error		: function(jqXHR, textStatus, errorThrown) {
        			alert("error 발생");
@@ -137,34 +171,39 @@
        	});
 	}
 	
-	// 안전 관리자 수정 검증
+	// 근로자 수정 검증
 	function editValidationCheck(){
-		alert("수정검증");
+		alert("근로자 수정 검증");
 		
 		editManager();
 	}
 	
-	// 안전 관리자 수정
+	// 근로자 수정
 	function editManager(){
-		alert("안전관리자 수정");
-		//var ajaxFrm = $('form[name=managerRgst]').serialize();
-		
+		alert("근로자 수정");
+		var workerNum = document.getElementById('viewWorkerNum').value;
 		var empNum = document.getElementById('viewEmpNum').value;
 		var name = document.getElementById('viewName').value;
 		var phoneNum = document.getElementById('viewPhoneNum').value;
-		var job = document.getElementById('viewJob').value;
+		var cardNum = document.getElementById('viewCardNum').value;
 		$.ajax({
-       		url			: '/manager/editManager',
-       		method		: 'POST',
+       		url			: '/worker',
+       		method		: 'PUT',
        		traditional	: true,
        		data		: {
-       			'empNum'   : empNum,
-       			'name'     : name,
-       			'phoneNum' : phoneNum,
-       			'job'      : job
+       			'workerNum' : workerNum,
+       			'empNum'    : empNum,
+       			'name'      : name,
+       			'phoneNum'  : phoneNum,
+       			'cardNum'   : cardNum
        		},
        		success		: function(data) {
-       			alert("success");
+       			if (data == 'Y') {
+       				alert("success");
+           			location.reload();
+       			} else if (data == 'N') {
+       				alert("수정 실패");
+       			}
        		},
        		error		: function(jqXHR, textStatus, errorThrown) {
        			alert("error 발생");
@@ -175,43 +214,20 @@
 	// 안전 관리자 삭제
 	function delManager(){
 		alert("안전관리자 삭제");
-		
-		var empNum = document.getElementById("viewEmpNum").value;
-		alert("empNum : " + empNum);
+		var workerNum = document.getElementById('viewWorkerNum').value;
 		$.ajax({
-      		url			: '/manager/deleteManager',
-      		method		: 'POST',
+      		url			: '/worker',
+      		method		: 'DELETE',
       		traditional	: true,
       		data        : {
-      			'empNum'  :  empNum
+      			'workerNum'  :  workerNum
       		},
       		success		: function(Data) {
-      			/* popup 대체요망 */
-     			alert("success");
-      		},
-      		error		: function(jqXHR, textStatus, errorThrown) {
-      			/* popup 대체요망 */
-      			alert("error 발생");
-      		}
-      	});
-	}
-	
-	// 비밀번호 초기화
-	function resetPw(){
-		alert("비밀번호 초기화");
-		
-		var empNum = document.getElementById("viewEmpNum").value;
-		alert("empNum : " + empNum);
-		$.ajax({
-      		url			: '/manager/resetPw',
-      		method		: 'POST',
-      		traditional	: true,
-      		data        : {
-      			'empNum'  :  empNum
-      		},
-      		success		: function(Data) {
-      			/* popup 대체요망 */
-     			alert("success");
+      			if (Data == 'Y') {
+           			location.reload();
+       			} else if (Data == 'N') {
+       				alert("삭제 실패");
+       			}
       		},
       		error		: function(jqXHR, textStatus, errorThrown) {
       			/* popup 대체요망 */
@@ -221,7 +237,6 @@
 	}
 	
 </script>
-
 
 <ol class="breadcrumb mb-4"> 
     <li class="breadcrumb-item active"></li>
@@ -236,57 +251,36 @@
 				    <div class="col-xl-9">
 				        근로자 목록
 				    </div>
+				    <div class="col-xl-3" style="float:right;">
+				        <button type="button" onclick="showWorkerRgstForm()" style="float:right;" class="btn btn-outline-primary">근로자 등록</button>
+				    </div>
 				</div>
 			</div>
 			<div class="card-body">
-				<div class="col-xl-3" style="float:right;">
-			        <button type="button" onclick="showWorkerRgstForm()" style="float:right;" class="btn btn-outline-primary">근로자 등록</button>
-			    </div>
-			    <!-- 테이블 -->
-				<table class="table table-striped table-hover">
-				    <thead>
-				    <tr>
-				        <th scope="col">#</th>
-				        <th scope="col">사원번호</th>
-				        <th scope="col">성함</th>
-				        <th scope="col">연락처</th>
-				        <th scope="col">담당 안전관리자 사원번호</th>
-				    </tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${workerList}" var="worker">
-                   		<c:set var="i" value="${i+1}"/>
-                   		<tr id="tr${worker.workerNum}" onclick="showWorkerView('${worker.workerNum}')">
-                            <th scope="row">${i}</th>
-                            <td>${worker.workerNum}</td>
-					        <td>${worker.name}</td>
-					        <td>${worker.phoneNum}</td>
-					        <td>${worker.empNum}</td>
-                        </tr>
-					</c:forEach> 
-				  </tbody>
-				</table>
-				
-				<!-- 페이징 -->
-				<nav aria-label="Page navigation example">
-				  <ul class="pagination justify-content-center"">
-				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				        <span class="sr-only">Previous</span>
-				      </a>
-				    </li>
-				    <li class="page-item"><a class="page-link" href="#">1</a></li>
-				    <li class="page-item"><a class="page-link" href="#">2</a></li>
-				    <li class="page-item"><a class="page-link" href="#">3</a></li>
-				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				        <span class="sr-only">Next</span>
-				      </a>
-				    </li>
-				  </ul>
-				</nav>	
+				<!-- 테이블 -->
+				<table id="example" class="table table-striped" style="width:100%">
+			        <thead>
+			            <tr>
+			                <th>순번</th>
+			                <th>사원번호</th>
+			                <th>성함</th>
+			                <th>연락처</th>
+			                <th>담당 안전관리자 사원번호</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	<c:forEach items="${workerList}" var="worker">
+	                   		<c:set var="i" value="${i+1}"/>
+	                   		<tr id="tr${worker.workerNum}" onclick="showWorkerView('${worker.workerNum}')">
+	                            <th scope="row">${i}</th>
+	                            <td>${worker.workerNum}</td>
+						        <td>${worker.name}</td>
+						        <td>${worker.phoneNum}</td>
+						        <td>${worker.empNum}</td>
+	                        </tr>
+						</c:forEach>
+			        </tbody>
+			    </table>
 			</div>
 			<div class="card-footer small text-muted">
 				<!-- 상세보기 -->
@@ -366,10 +360,10 @@
 				  </div>
 				</form>
 				
-				<!-- 안전 관리자 등록 폼 -->
+				<!-- 근로자 등록 폼 -->
 				<form id="workerRgst" name="workerRgst" action="/worker/rgstWorker" method="post" class="row g-3 needs-validation" novalidate>
 				  <div class="col-md-12">
-				    <p class="fs-6">신규 안전관리자 등록</p>
+				    <p class="fs-6">신규 근로자 등록</p>
 				  </div>
 				  <div class="col-md-4">
 				    <label for="validationCustom01" class="form-label">사원번호</label>
@@ -416,7 +410,7 @@
 				    <div class="valid-feedback">
 				    </div>
 				    <div class="invalid-feedback">
-				      안전관리자 사원번호를 입력하세요.
+				      정확한 안전관리자 사원번호를 입력하세요.
 				    </div>
 				  </div>
 				  <div class="col-md-12">

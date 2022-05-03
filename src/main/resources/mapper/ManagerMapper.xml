@@ -70,6 +70,7 @@
              , FNL_CHNG_DTTM
              , FNL_CHNG_USERID
           FROM MANAGER
+         WHERE IS_DELETE = 'N'
     </select>
 
     <select id="select" parameterType="com.shms.manager.service.Manager" resultMap="managerResultMap">
@@ -99,7 +100,6 @@
           FROM MANAGER
           WHERE EMP_NUM = #{empNum}
     </select>
-    
 
     <insert id="insert" parameterType="com.shms.manager.service.Manager">
         INSERT INTO MANAGER (
@@ -108,12 +108,22 @@
             , NAME
             , PHONE_NUM
             , JOB
+            , IS_DELETE
+            , THE_FST_RGST_DTTM
+            , THE_FST_RGST_USERID
+            , FNL_CHNG_DTTM
+            , FNL_CHNG_USERID
         ) VALUES (
               #{empNum}
             , #{password}
             , #{name}
             , #{phoneNum}
             , #{job}
+            , 'N'
+            , now()
+            , #{theFstRgstUserId}
+            , now()
+            , #{fnlChngUserId}
         )
     </insert>
 
@@ -122,9 +132,6 @@
         <set>
             <if test="empNum != null and empNum != ''">
                 EMP_NUM = #{empNum},
-            </if>
-            <if test="password != null and password != ''">
-                PASSWORD = #{password},
             </if>
             <if test="name != null and name != ''">
                 NAME = #{name},
@@ -135,12 +142,25 @@
             <if test="job != null and job != ''">
                 JOB = #{job},
             </if>
+                FNL_CHNG_DTTM = now()
+              , FNL_CHNG_USERID = #{fnlChngUserId}
         </set>
         WHERE EMP_NUM = #{empNum}
     </update>
     
     <delete id="delete" parameterType="com.shms.manager.service.Manager">
-        DELETE FROM MANAGER
-         WHERE EMP_NUM = #{empNum} 
+        UPDATE MANAGER
+           SET IS_DELETE = 'Y'
+         WHERE EMP_NUM = #{empNum}
     </delete>
+    
+    <update id="resetPw" parameterType="com.shms.manager.service.Manager">
+        UPDATE MANAGER
+        <set>
+        	PASSWORD = #{password}
+          , FNL_CHNG_DTTM = now()
+          , FNL_CHNG_USERID = #{fnlChngUserId}
+        </set>
+        WHERE EMP_NUM = #{empNum}
+    </update>
 </mapper>

@@ -5,12 +5,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            <div class="text-muted">Copyright &copy; 2022 SHMS All rights reserved.</div>
                         </div>
                     </div>
                 </footer>
@@ -23,6 +18,8 @@
         <script src="<%=request.getContextPath()%>/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="<%=request.getContextPath()%>/js/datatables-simple-demo.js"></script>
-    	
+    	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    	<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     </body>
 </html>
