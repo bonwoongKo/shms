@@ -5,19 +5,24 @@
 
 <mapper namespace="com.shms.wearlog.service.WearLogMapper">
 	<resultMap id="workerResultMap" type="com.shms.worker.service.Worker">
-        <result column="EMP_NUMBER" property="empNumber" />
+        <result column="WORKER_NUM" property="workerNum" />
+        <result column="EMP_NUM" property="empNum" />
         <result column="NAME" property="name" />
-        <result column="CARD_NUMBER" property="cardNumber" />
-        <result column="PHONE_NUMBER" property="phoneNumber" />
+        <result column="CARD_NUM" property="cardNum" />
+        <result column="PHONE_NUM" property="phoneNum" />
         <result column="IS_DELETE" property="isDelete" />
+        <result column="THE_FST_RGST_DTTM" property="theFstRgstDttm" />
+        <result column="THE_FST_RGST_USERID" property="theFstRgstUserId" />
+        <result column="FNL_CHNG_DTTM" property="fnlChngDttm" />
+        <result column="FNL_CHNG_USERID" property="fnlChngUserId" />
     </resultMap>
     
     <resultMap id="wearLogResultMap" type="com.shms.wearlog.service.WearLog">
         <result column="CODE" property="code" />
         <result column="HAT_CODE" property="hatCode" />
         <result column="GATEWAY_CODE" property="gatewayCode" />
-        <result column="EMP_NUMBER" property="empNumber" />
-        <result column="TIME" property="time" />
+        <result column="WORKER_NUM" property="workerNum" />
+        <result column="RECORD_TIME" property="recordTime" />
         <result column="IS_WEAR" property="isWear" />
         <result column="LATITUDE" property="latitude" />
         <result column="LONGITUDE" property="longitude" />
@@ -35,11 +40,11 @@
             <if test="gatewayCode != null and gatewayCode != ''">
                 AND GATEWAY_CODE = #{gatewayCode}
             </if>
-            <if test="empNumber != null and empNumber != ''">
-                AND EMP_NUMBER = #{empNumber}
+            <if test="workerNum != null and workerNum != ''">
+                AND WORKER_NUM = #{workerNum}
             </if>
-            <if test="time != null and time != ''">
-                AND TIME = #{time}
+            <if test="recordTime != null and recordTime != ''">
+                AND RECORD_TIME = #{recordTime}
             </if>
             <if test="isWear != null and isWear != ''">
                 AND IS_WEAR = #{isWear}
@@ -55,17 +60,20 @@
     
     <sql id="whereSqlWorker">
         <where>
-            <if test="empNumber != null and empNumber != ''">
-                AND EMP_NUMBER = #{empNumber}
+        	<if test="workerNum != null and workerNum != ''">
+                AND WORKER_NUM = #{workerNum}
+            </if>
+            <if test="empNum != null and empNum != ''">
+                AND EMP_NUM = #{empNum}
             </if>
             <if test="name != null and name != ''">
                 AND NAME = #{name}
             </if>
-            <if test="cardNumber != null and cardNumber != ''">
-                AND CARD_NUMBER = #{cardNumber}
+            <if test="cardNum != null and cardNum != ''">
+                AND CARD_NUM = #{cardNum}
             </if>
-            <if test="phoneNumber != null and phoneNumber != ''">
-                AND PHONE_NUMBER = #{phoneNumber}
+            <if test="phoneNum != null and phoneNum != ''">
+                AND PHONE_NUM = #{phoneNum}
             </if>
             <if test="isDelete != null and isDelete != ''">
                 AND IS_DELETE = #{isDelete}
@@ -78,44 +86,62 @@
         FROM WEAR_LOG
         <include refid="whereSql" />
     </select>
-
-	<select id="list" resultMap="wearLogResultMap">
-        SELECT 
-        	L.CODE
+	
+	<!-- 모니터링 시 당일 근로자 최신 기록 -->
+	<select id="monitoring" resultMap="wearLogResultMap">
+       SELECT L.CODE
             , L.HAT_CODE
             , L.GATEWAY_CODE
-            , L.EMP_NUMBER
-            , L.TIME
+            , L.WORKER_NUM
+            , L.RECORD_TIME
             , L.IS_WEAR
             , L.LATITUDE
             , L.LONGITUDE
             , W.NAME
-            , W.PHONE_NUMBER
+            , W.PHONE_NUM
         FROM WEAR_LOG L JOIN WORKER W
-        ON L.EMP_NUMBER = W.EMP_NUMBER
-        WHERE L.TIME IN (SELECT MAX(L.TIME) AS TIME 
-        				 FROM WEAR_LOG L JOIN WORKER W
-       					 ON L.EMP_NUMBER = W.EMP_NUMBER 
-       					 WHERE DATE_FORMAT(L.TIME, '%Y%m%d') = DATE_FORMAT(SYSDATE(), '%Y%m%d') 
-       					 GROUP BY W.NAME)
+        ON L.WORKER_NUM = W.WORKER_NUM
+        WHERE L.RECORD_TIME IN (SELECT MAX(L.RECORD_TIME) AS RECORD_TIME 
+        				          FROM WEAR_LOG L JOIN WORKER W
+       					            ON L.WORKER_NUM = W.WORKER_NUM
+       					         WHERE DATE_FORMAT(L.RECORD_TIME, '%Y%m%d') = DATE_FORMAT(SYSDATE(), '%Y%m%d') 
+       					         GROUP BY W.NAME)
+    </select>
+	
+	<!-- 착용 기록 조회 -->
+	<select id="list" resultMap="wearLogResultMap">
+        SELECT L.CODE
+			 , L.HAT_CODE
+			 , L.GATEWAY_CODE
+			 , L.WORKER_NUM
+			 , L.RECORD_TIME
+			 , L.IS_WEAR
+			 , L.LATITUDE
+			 , L.LONGITUDE
+			 , W.NAME
+			 , W.PHONE_NUM
+		FROM WEAR_LOG L JOIN WORKER W
+		ON L.WORKER_NUM = W.WORKER_NUM
+		WHERE 1=1
     </select>
     
+    <!-- 착용 기록 상세 조회 -->
     <select id="viewWearLog" parameterType="com.shms.wearlog.service.WearLog" resultMap="wearLogResultMap">
         SELECT 
         	L.CODE
             , L.HAT_CODE
             , L.GATEWAY_CODE
-            , L.EMP_NUMBER
-            , L.TIME
+            , L.WORKER_NUM
+            , L.RECORD_TIME
             , L.IS_WEAR
             , L.LATITUDE
             , L.LONGITUDE
             , W.NAME
-            , W.PHONE_NUMBER
+            , W.PHONE_NUM
         FROM WEAR_LOG L JOIN WORKER W
-        ON L.EMP_NUMBER = W.EMP_NUMBER
-        WHERE L.EMP_NUMBER = #{empNumber}
-        AND DATE_FORMAT(L.TIME, '%Y%m%d') = DATE_FORMAT(#{time}, '%Y%m%d')
+        ON L.WORKER_NUM = W.WORKER_NUM
+        WHERE L.WORKER_NUM = #{workerNum}
+        AND DATE_FORMAT(L.RECORD_TIME, '%Y%m%d') = DATE_FORMAT(#{recordTime}, '%Y%m%d')
     </select>
     
     <select id="searchWearLog" parameterType="String" resultMap="wearLogResultMap">
@@ -123,15 +149,15 @@
         	L.CODE
             , L.HAT_CODE
             , L.GATEWAY_CODE
-            , L.EMP_NUMBER
-            , L.TIME
+            , L.WORKER_NUM
+            , L.RECORD_TIME
             , L.IS_WEAR
             , L.LATITUDE
             , L.LONGITUDE
             , W.NAME
-            , W.PHONE_NUMBER
+            , W.PHONE_NUM
         FROM WEAR_LOG L JOIN WORKER W
-        ON L.EMP_NUMBER = W.EMP_NUMBER
+        ON L.WORKER_NUM = W.WORKER_NUM
         WHERE W.NAME LIKE '%${name}%'
         ORDER BY L.TIME DESC
     </select>
@@ -141,8 +167,8 @@
             CODE
             , HAT_CODE
             , GATEWAY_CODE
-            , EMP_NUMBER
-            , TIME
+            , WORKER_NUM
+            , RECORD_TIME
             , IS_WEAR
             , LATITUDE
             , LONGITUDE
@@ -155,17 +181,16 @@
             CODE
             , HAT_CODE
             , GATEWAY_CODE
-            , EMP_NUMBER
-            , TIME
+            , WORKER_NUM
+            , RECORD_TIME
             , IS_WEAR
             , LATITUDE
             , LONGITUDE
         ) VALUES (
             #{code}
-            , #{hatCode}
-            , #{gatewayCode}
-            , #{empNumber}
-            , #{time}
+            , #{equipmentCode}
+            , #{workerNum}
+            , #{recordTime}
             , #{isWear}
             , #{latitude}
             , #{longitude}
@@ -184,11 +209,11 @@
             <if test="gatewayCode != null and gatewayCode != ''">
                 GATEWAY_CODE = #{gatewayCode},
             </if>
-            <if test="empNumber != null and empNumber != ''">
-                EMP_NUMBER = #{empNumber},
+            <if test="workerNum != null and workerNum != ''">
+                WORKER_NUM = #{workerNum},
             </if>
-            <if test="time != null and time != ''">
-                TIME = #{time},
+            <if test="recordTime != null and recordTime != ''">
+                RECORD_TIME = #{recordTime},
             </if>
             <if test="isWear != null and isWear != ''">
                 IS_WEAR = #{isWear},

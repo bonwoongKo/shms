@@ -1,6 +1,7 @@
 package com.shms.wearInfo.service;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 public class WearInfoValidator implements Validator {
@@ -11,18 +12,16 @@ public class WearInfoValidator implements Validator {
 	
 	@Override
 	public void validate(Object target, Errors errors) {
-		WearInfo WearInfo = (WearInfo) target;
+		WearInfo wearInfo = (WearInfo) target;
 		
-		if (WearInfo.getCardNumber().length() != 8 || WearInfo.getCardNumber() == null || WearInfo.getCardNumber().isEmpty()) {
-			errors.rejectValue("cardNumber", "broken");
-		}
-		if (WearInfo.getSafeHatCode().length() != 5 || WearInfo.getSafeHatCode() == null || WearInfo.getSafeHatCode().isEmpty()) {
-			errors.rejectValue("safeHatCode", "broken");
-		}
-		if (WearInfo.getGatewayCode().length() != 5 || WearInfo.getSafeHatCode() == null || WearInfo.getSafeHatCode().isEmpty()) {
-			errors.rejectValue("gatewayCode", "broken");
-		}
-		if (WearInfo.getIsWear() != 'Y' && WearInfo.getIsWear() != 'N') {
+		ValidationUtils.rejectIfEmpty(errors, "cardNumber", "required");
+		ValidationUtils.rejectIfEmpty(errors, "equipmentCode", "required");
+		ValidationUtils.rejectIfEmpty(errors, "recordTime", "required");
+		ValidationUtils.rejectIfEmpty(errors, "isWear", "required");
+		ValidationUtils.rejectIfEmpty(errors, "latitude", "required");
+		ValidationUtils.rejectIfEmpty(errors, "longitude", "required");
+		
+		if (wearInfo.getIsWear() != 'Y' && wearInfo.getIsWear() != 'N') {
 			errors.rejectValue("isWear", "broken");
 		}
 	}

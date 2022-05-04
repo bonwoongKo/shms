@@ -1,10 +1,11 @@
 package com.shms.login.service.impl;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shms.login.WrongIdPasswordException;
+import com.shms.login.service.AuthInfo;
+import com.shms.login.service.LoginCommand;
 import com.shms.login.service.LoginService;
 import com.shms.manager.service.Manager;
 import com.shms.manager.service.ManagerMapper;
@@ -15,49 +16,16 @@ public class LoginServiceImpl implements LoginService {
 	ManagerMapper managerMapper;
 
 	@Override
-	public String login(Manager manager, HttpSession httpSession) {
-		try {
-			System.out.println("test1");
-			manager = managerMapper.select(manager);
-			
-			if (manager.getJob() == 'A') { // 시스템 관리자
-				httpSession.setAttribute("empNum", manager.getEmpNum());
-				httpSession.setAttribute("job", manager.getJob());
-				System.out.println("aaaa");
-				return "/shms/manager/main";
-			} else if (manager.getJob() == 'M') { // 안전 관리자
-				httpSession.setAttribute("empNum", manager.getEmpNum());
-				httpSession.setAttribute("job", manager.getJob());
-				httpSession.setAttribute("name", manager.getName());
-				System.out.println("bbbb");
-				return "/shms/map";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		manager.setJob('F');
+	public AuthInfo login(LoginCommand loginCommand) throws WrongIdPasswordException {
+		Manager manager = managerMapper.selectByEmpNum(loginCommand.getEmpNum());
 		
-		return "/common/login/form";
-	}
-	
-	@Override
-	public String loginCheck(Manager manager) {
-		try {
-			if (managerMapper.count(manager) != 0) {
-				
-				return "OK";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (manager == null) {
+			throw new WrongIdPasswordException();
+		} 
+		if (!manager.matchPassword(loginCommand.getPassword())) {
+			throw new WrongIdPasswordException();
 		}
 		
-		return null;
-	}
-
-	@Override
-	public void logout(HttpSession httpSession) {
-		if (httpSession != null) {
-			httpSession.invalidate();
-		}
+		return new AuthInfo(manager.getEmpNum(), manager.getName(), manager.getJob());
 	}
 }

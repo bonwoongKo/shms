@@ -1,112 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
 <html>
-	<head>
-		<!-- Basic -->
-		<meta charset="UTF-8">
-		<title>SHMS</title>	
-		<meta name="keywords" content="HTML5 Template" />
-		<meta name="description" content="Porto - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="${pageContext.request.contextPath}/img/icons/icons8-umbrella-100.png" type="image/x-icon" />
-		<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/img/apple-touch-icon.png">
-		<!-- Web Fonts  -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light&display=swap" rel="stylesheet" type="text/css">
-		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css">
-		<!-- Theme CSS -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme-elements.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme-blog.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme-shop.css">
-	</head>
-	<body>
-		<div class="body">
-			<header id="header" class="header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyChangeLogo': true, 'stickyStartAt': 30, 'stickyHeaderContainerHeight': 70}">
-				<div class="header-body">
-					<div class="header-container container">
-						<div class="header-row">
-							<div class="header-column">
-								<div class="header-row">
-									<div class="header-logo">
-										<a href="${pageContext.request.contextPath}/common/login/form">
-											<img alt="shms" width="199" height="30" data-sticky-width="82" data-sticky-height="40" src="${pageContext.request.contextPath}/img/login.png" style="top: 0px; width: 199px; height: 60px;">
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header>
-		</div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<form action="/shms/common/login" method="POST" onsubmit="return check(this)">
-			<div class="container py-4">
-				<div class="row justify-content-center">
-					<div class="card border-width-3 border-radius-0 mb-4 col-lg-6">
-						<div class="form-row">
-							<div class="form-group col">
-								<h2 class="font-weight-bold text-5 mb-0">Login</h2>
-									<div class="form-row">
-										<div class="form-group col">
-											<label class="text-color-dark text-3">ID <span class="text-color-danger">*</span></label>
-											<input id="empNumber" type="text" name="empNumber" value="${manager.empNumber}" class="form-control form-control-lg text-4" required>
-										</div>
-									</div>
-									<div class="form-row">
-										<div class="form-group col">
-											<label class="text-color-dark text-3">Password <span class="text-color-danger">*</span></label>
-											<input id="password" type="password" name="password" class="form-control form-control-lg text-4" required>
-										</div>
-									</div>
-									<div id="error"></div>
-									<div class="form-row">
-										<div class="form-group col">
-											<button type="submit" class="btn btn-dark btn-modern btn-block text-uppercase rounded-0 font-weight-bold text-3 py-3" data-loading-text="Loading...">Login</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-		</form>
-		<script>
-			function check(form) {
-				var xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function() {	
-					if (xhr.readyState === xhr.DONE) {
-						if (xhr.status === 200 || xhr.status === 201) {
-							var row = JSON.parse(xhr.responseText);
-							if (JSON.stringify(row) != '{}') {
-								form.submit();
-							} else {
-								document.getElementById("error").innerHTML = "<font size=\"2em\" color=\"red\">잘못된 로그인 정보입니다.</font>";
-							}
-						} else {
-							//console.error(xhr.responseText);
-						}
-					}
-				};
-				var empNumber = document.getElementById("empNumber").value;
-				var password = document.getElementById("password").value;
-				if (!empNumber) {
-					empNumber = "1";
-				}
-				if (!password) {
-					password = "!";
-				}
-				xhr.open("GET", "${pageContext.request.contextPath}" + "/common/check/" + empNumber + "/" + password, true);
-				xhr.send();
-				
-				return false;
-			};
-		</script>
-<%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
+<head>
+	<meta charset="UTF-8">
+	<title>SHMS LOGIN PAGE</title>
+	<link href="<%=request.getContextPath()%>/css/login.css" rel="stylesheet" />
+	<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>SHMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link href="<%=request.getContextPath()%>/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/sub.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+	<section class="vh-100 gradient-custom">
+	  <div class="container py-5 h-100">
+	    <div class="row d-flex justify-content-center align-items-center h-100">
+	      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+	        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+	          <div class="card-body p-5 text-center">
+				<form action="/portal/login" method="POST">
+		            <div class="mb-md-5 mt-md-4 pb-5">
+					  <a class="navbar-brand ps-2" href="${pageContext.request.contextPath}/common/login/form">
+					    <img src="${pageContext.request.contextPath}/img/mainIcon.png" style="top: 0px; width: 300px; height: 70px;">
+				      </a>
+		              <h5 class="fw-bold mb-2 text-uppercase">안전모 착용여부 모니터링 시스템</h5>
+		              <p class="text-white-50 mb-5"></p>
+		
+		              <div class="form-outline form-white mb-4">
+		                <input type="text" id="empNum" name="empNum" class="form-control form-control-lg" />
+		                <label class="form-label" for="typeEmailX">사원번호</label>
+		              </div>
+		
+		              <div class="form-outline form-white mb-4">
+		                <input type="password" id="password" name="password" class="form-control form-control-lg" />
+		                <label class="form-label" for="typePasswordX">비밀번호</label>
+		              </div>
+		
+		              <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+		
+		            </div>
+	            </form>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</section>
+</body>
+</html>
+

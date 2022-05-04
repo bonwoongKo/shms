@@ -18,17 +18,22 @@ public class WearLogController {
 	@Autowired
 	private WearLogServiceImpl wearLogServiceImpl;
 	
+	// 착용 기록 목록
 	@GetMapping
 	public ModelAndView wearLogList() throws Exception {
-		ModelAndView mav = new ModelAndView("wearlog/list");
+		ModelAndView mav = new ModelAndView("wearlog/wearlogList");
 		mav.addObject("rows", wearLogServiceImpl.wearLogList());
 		
 		return mav;
 	}
 	
-	@GetMapping("/{empNumber}/{time}")
+	// 개인 착용 기록 조회
+	@GetMapping("/{workerNum}/{recordTime}")
 	public ModelAndView viewWearLog(@ModelAttribute WearLog wearLog) throws Exception {
 		ModelAndView mav = new ModelAndView("map/personal");
+		System.out.println("wow");
+		System.out.println(wearLog.getWorkerNum());
+		System.out.println(wearLog.getRecordTime());
 		mav.addObject("rows", wearLogServiceImpl.viewWearLog(wearLog));
 		
 		return mav;

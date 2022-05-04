@@ -20,7 +20,7 @@ public class MapController {
 	
 	@GetMapping 
 	public ModelAndView Monitoring() {
-		ModelAndView mav = new ModelAndView("/map/monitoring");
+		ModelAndView mav = new ModelAndView("map/monitoring");
 	
 		return mav;
 	}
@@ -31,7 +31,7 @@ public class MapController {
 		String result = null;
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			rows = mapService.listWearLog();
+			rows = mapService.monitoring();
 			if (rows != null) {
 				result = mapper.writeValueAsString(rows);
 			}

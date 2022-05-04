@@ -3,10 +3,8 @@ package com.shms.wearInfo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shms.gateway.service.Gateway;
-import com.shms.gateway.service.GatewayMapper;
-import com.shms.hat.service.Hat;
-import com.shms.hat.service.HatMapper;
+import com.shms.equipment.service.Equipment;
+import com.shms.equipment.service.EquipmentMapper;
 import com.shms.wearInfo.service.WearInfo;
 import com.shms.wearInfo.service.WearInfoService;
 import com.shms.wearlog.service.WearLog;
@@ -20,10 +18,7 @@ public class WearInfoServiceImpl implements WearInfoService {
 	WorkerMapper workerMapper;
 	
 	@Autowired
-	HatMapper hatMapper;
-	
-	@Autowired
-	GatewayMapper gatewayMapper;
+	EquipmentMapper equipmentMapper;
 	
 	@Autowired
 	WearLogServiceImpl wearLogService;
@@ -31,19 +26,20 @@ public class WearInfoServiceImpl implements WearInfoService {
 	@Override
 	public void receiveWearInfo(WearInfo message) {
 		WearLog wearLog = new WearLog();
+		
 		try {
-			if (validWearInfo(message)) {
+			if (validWearInfo(message.getCardNum(), message.getHatCode())) {
 				Worker worker = new Worker();
-				//worker.setCardNumber(message.getCardNumber());
+				worker.setCardNum(message.getCardNum());
 				worker = workerMapper.select(worker);
 				
-				//wearLog.setEmpNumber(worker.getEmpNum());
-				//wearLog.setGatewayCode(message.getGatewayCode());
-				//wearLog.setHatCode(message.getSafeHatCode());
+				wearLog.setWorkerNum(worker.getWorkerNum());
+				wearLog.setHatCode(message.getHatCode());
+				wearLog.setGatewayCode(message.getGatewayCode());
+				wearLog.setRecordTime(message.getRecordTime());
 				wearLog.setIsWear(message.getIsWear());
 				wearLog.setLatitude(message.getLatitude());
 				wearLog.setLongitude(message.getLongitude());
-				//wearLog.setTime(message.getTime());
 				
 				wearLogService.registWearLog(wearLog);
 			}
@@ -53,30 +49,24 @@ public class WearInfoServiceImpl implements WearInfoService {
 	}
 	
 	@Override
-	public boolean validWearInfo(WearInfo message) {
+	public boolean validWearInfo(String cardNum, String equipmentCode) {
 		Worker worker = new Worker();
-		worker.setCardNum(message.getCardNumber());
+		worker.setCardNum(cardNum);
 		
-		Hat hat = new Hat();
-		hat.setCode(message.getSafeHatCode());
+		Equipment equipment = new Equipment();
+		equipment.setCode(equipmentCode);
 		
-		Gateway gateway = new Gateway();
-		gateway.setCode(message.getGatewayCode());
 		try {
 			if (workerMapper.count(worker) != 1) {
-				
+				System.out.println("Worker");
 				return false;
 			}
 			
-			if (hatMapper.count(hat) != 1) {
-				
+			if (equipmentMapper.count(equipment) != 1) {
+				System.out.println("equipment");
 				return false;
 			}
 			
-			if (gatewayMapper.count(gateway) != 1) {
-				
-				return false;
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

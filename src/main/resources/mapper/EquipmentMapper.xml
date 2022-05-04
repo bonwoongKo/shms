@@ -57,6 +57,7 @@
              , FNL_CHNG_DTTM
              , FNL_CHNG_USERID
           FROM EQUIPMENT
+         WHERE IS_DELETE = 'N'
     </select>
 
     <select id="select" parameterType="com.shms.equipment.service.Equipment" resultMap="equipmentResultMap">
@@ -73,9 +74,8 @@
         <include refid="whereSql" />
     </select>
 	
-	<!-- theFstRgstDttm sysdate로 변경 테스트 요망 -->
     <insert id="insert" parameterType="com.shms.equipment.service.Equipment">
-        INSERT INTO (
+        INSERT INTO EQUIPMENT (
         	CODE
           , EMP_NUM
           , SORT
@@ -83,14 +83,18 @@
           , IS_DELETE
           , THE_FST_RGST_DTTM
           , THE_FST_RGST_USERID
+          , FNL_CHNG_DTTM
+          , FNL_CHNG_USERID
         ) VALUES (
             #{code}
           , #{empNum}
           , #{sort}
           , #{isUse}
-          , #{isDelete}
-          , #{theFstRgstDttm}
+          , 'N'
+          , now()
           , #{theFstRgstUserId}
+          , now()
+          , #{fnlChngUserId}
         )
     </insert>
 
@@ -98,35 +102,26 @@
         UPDATE EQUIPMENT
         <set>
             <if test="empNum != null and empNum != ''">
-                AND EMP_NUM = #{empNum}
+                EMP_NUM = #{empNum},
             </if>
             <if test="sort != null and sort != ''">
-                AND SORT = #{sort}
+                SORT = #{sort},
             </if>
             <if test="isUse != null and isUse != ''">
-                AND IS_USE = #{isUse}
+                IS_USE = #{isUse},
             </if>
             <if test="isDelete != null and isDelete != ''">
-                AND IS_DELETE = #{isDelete}
+                IS_DELETE = #{isDelete},
             </if>
-            <if test="theFstRgstDttm != null and theFstRgstDttm != ''">
-                AND THE_FST_RGST_DTTM = #{theFstRgstDttm}
-            </if>
-            <if test="theFstRgstUserId != null and theFstRgstUserId != ''">
-                AND THE_FST_RGST_USERID = #{theFstRgstUserId}
-            </if>
-            <if test="fnlChngDttm != null and fnlChngDttm != ''">
-                AND FNL_CHNG_DTTM = #{fnlChngDttm}
-            </if>
-            <if test="fnlChngUserId != null and fnlChngUserId != ''">
-                AND FNL_CHNG_USERID = #{fnlChngUserId}
-            </if>
+                FNL_CHNG_DTTM = now()
+              , FNL_CHNG_USERID = #{fnlChngUserId}
         </set>
         WHERE CODE = #{code}
     </update>
     
     <delete id="delete" parameterType="com.shms.equipment.service.Equipment">
-        DELETE FROM EQUIPMENT
+        UPDATE EQUIPMENT
+           SET IS_DELETE = 'Y'
          WHERE CODE = #{code}
     </delete>
 </mapper>

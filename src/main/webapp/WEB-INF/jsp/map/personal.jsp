@@ -1,66 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="/WEB-INF/jsp/layout/top.jsp" %>
-<h2 class="font-weight-extra-bold"><p id="headLine" style="color:black"></h2>
+<%@ include file="/WEB-INF/jsp/layout/header.jsp" %>
+
+<script type="text/javascript">
+	//페이지 로드 시
+	$(function(){
+		var date = "${rows[0].recordTime}";
+		var date2 = date.substring(0, 4) + "년 " + date.substring(5, 7) + "월 " + date.substring(8, 10) + "일 ";
+		document.getElementById("headLine").innerHTML = date2 + "  ${rows[0].worker.name}님의 " + "착용 기록입니다.";
+	});
+</script>
+
+
+<ol class="breadcrumb mb-4"> 
+    <li class="breadcrumb-item active"></li>
+</ol> 
+
 <div class="row">
-	<div class="col-lg-9">
-		<div id="map" style="width:100%;height:95%;"></div>
+	<h2 id="headLine" class="fw-bold">0000년 00월 00일 000님의 착용기록입니다.</h2>
+	<div class="col-xl-9 col-md-6 mt-4">
+		<div class="card mb-4">
+			<div class="card-header">
+				<div class="row">
+					<div class="col-xl-8">
+						<h5 class="fw-bold">근로자 위치</h5>
+					</div>
+					<div class="col-xl-4">
+						<div class="btn-group" role="group" aria-label="Basic mixed styles example" style="float:right;">
+						    <button type="button" class="btn btn-danger" onclick="changeMarker('red')">미착용 보기</button>
+						    <button type="button" class="btn btn-success" onclick="changeMarker('all')">전체보기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<!-- 지도 영역 -->
+			    <div id="map" style="width:100%; height:550px;"></div>
+			</div>
+		</div>
 	</div>
-	<div class="col-lg-3">
-		<div class="tabs tabs-vertical tabs-right tabs-navigation tabs-navigation-simple">
-			<aside class="sidebar mt-2">
-				<div class="header"><h5 class="font-weight-bold" style="font-size:18px">착용 기록</h5></div>
-				<div class="content">
-					<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:340px;">
-					<ul class="nav nav-list flex-column">
-						<c:forEach items="${rows}" var="row">
-							<c:set var="isWear" value="${row.isWear}" />
-							<c:set var="time" value="${row.time}"/>
-							<li class="nav-item">
-								<a class="nav-link" onclick=panTo(${row.code})>
-									${ fn:substring(time,11,13) }시 ${ fn:substring(time,14,16) }분 ${ fn:substring(time,17,20) }초 
+	<div class="col-xl-3 col-md-6 mt-4">
+	    <!-- 근로자 목록 영역 -->
+	    <div class="card mb-4">
+			<div class="card-header">
+				안전모 착용 여부 기록
+			</div>
+			<div class="card-body">
+				<!-- 근로자 목록 리스트 -->
+				<ul class="list-group list-group-flush">
+					<div  style="overflow-y:auto; overflow-x:hidden; width:100%; height:560px;">
+						<c:forEach items="${rows}" var="wearLog">
+							<c:set var="isWear" value="${wearLog.isWear}" />
+							<c:set var="recordTime" value="${wearLog.recordTime}"/>
+							<li class="list-group-item">
+								<a onclick=panTo(${wearLog.code})>
+									${ fn:substring(wearLog.recordTime,11,13) }시 ${ fn:substring(wearLog.recordTime,14,16) }분 ${ fn:substring(wearLog.recordTime,17,20) }초 
 									<c:choose>
-										<c:when test="${isWear eq 'y'}"><p>착용</p></c:when>
-										<c:when test="${isWear eq 'n'}">미착용</c:when>
+										<c:when test="${isWear eq 'Y'}">착용</c:when>
+										<c:when test="${isWear eq 'N'}">미착용</c:when>
 										<c:otherwise></c:otherwise>
 									</c:choose>
 								</a>
 							</li>
 						</c:forEach>
-					 </ul>
-					 </div>
-				</div>
-				<div class="footer">
-					<button type="button" class="btn btn-primary mb-2" onclick="changeMarker('all')">전체보기 </button>&nbsp;&nbsp;&nbsp;
-					<button type="button" class="btn btn-secondary mb-2" onclick="changeMarker('red')">미착용 보기</button>
-				</div>
-				<style>
-					.header{
-					    height: 40px;
-					}
-					.content{
-					    max-width: 500px; 
-					    height: 380px;
-					    margin: 0 auto; 
-					}
-					.footer{
-					    height:40px;
-					}
-				</style>
-			</aside>
+					</div>	
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
-<script>
-	var date = "${rows[0].time}";
-	var date2 = date.substring(0, 4) + "년 " + date.substring(5, 7) + "월 " + date.substring(8, 10) + "일 ";
-	document.getElementById("headLine").innerHTML = date2 + "  ${rows[0].worker.name}님의 " + "착용 기록입니다.";
-</script>
+
+<!-- 지도 불러오기 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=84df5ba3fe6d380ae81cc0059ae8ae59"></script> 
+
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = { 
+	    mapOption = {
 	        center: new kakao.maps.LatLng(36.798795, 127.074911), // 지도의 중심좌표 선문대 중앙 잔디밭 위도 경도임
 	        level: 2 // 지도의 확대 레벨
 	    };
@@ -78,8 +92,8 @@
 	    alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
 	} 
 	*/
-	var greenImageSrc = 'https://ifh.cc/g/Hmeat5.png' // 초록색  지도마크 주소
-	var redImageSrc = 'https://ifh.cc/g/r766V3.png' // 빨강색  지도마크 주소
+	var greenImageSrc =	"${pageContext.request.contextPath}/img/greenMaker.png"// 초록색  지도마크 주소
+	var redImageSrc = "${pageContext.request.contextPath}/img/redMaker.png" // 빨강색  지도마크 주소
 	imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
 	imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. size 와 option중 하나만 변경 시 확대 및 축소시 마커좌표 어긋나게 됨
 	
@@ -91,8 +105,8 @@
 		<c:forEach items="${rows}" var="row">
 		 {
 			 content: iwContent + '${row.worker.name}</div>' 
-			 + iwContent + '${fn:substring(row.worker.phoneNumber,0,3)}-${fn:substring(row.worker.phoneNumber,3,7)}'
-			 			 + '-${fn:substring(row.worker.phoneNumber,7,11)}</div>', 
+			 + iwContent + '${fn:substring(row.worker.phoneNum,0,3)}-${fn:substring(row.worker.phoneNum,3,7)}'
+			 			 + '-${fn:substring(row.worker.phoneNum,7,11)}</div>', 
 		     latlng: new kakao.maps.LatLng("${row.latitude}", "${row.longitude}")
 		 },
 		</c:forEach> 
@@ -119,6 +133,7 @@
 	}
 	
 	function panTo(code) { //해당 위치로 지도 부드럽게 이동시키기 + 마커 키고 끄기
+		alert("b");
 		var count2 = 0;
 		<c:forEach items="${rows}" var="row">
 			if (code == '${row.code}') {
@@ -135,6 +150,7 @@
 			count2++;
 		</c:forEach>
 	}
+	
 	var count = 0;
 	<c:forEach items="${rows}" var="row">
 		if ('Y' == '${row.isWear}') {
@@ -214,4 +230,5 @@
 		markers[i].setMap(null);
 	}
 </script>
-<%@ include file="/WEB-INF/jsp/layout/bottom.jsp" %>
+
+<%@ include file="/WEB-INF/jsp/layout/footer.jsp" %>
