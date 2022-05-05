@@ -100,6 +100,7 @@ public class ManagerController {
 		return authInfo.getEmpNum();
 	}
 	
+	
 	private String resultMsg(int i) {
 		String resultMsg = "";
 		if (i > 0) {
