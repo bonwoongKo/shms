@@ -88,6 +88,7 @@
 		var rgstSort = document.getElementById('rgstSort').value;
 		if (rgstSort == "") {
 			$("#rgstSort").attr('class', 'form-control is-invalid');
+			
 			return;
 		} else {
 			$("#rgstSort").attr('class', 'form-control is-valid');

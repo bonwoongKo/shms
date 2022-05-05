@@ -109,6 +109,7 @@
 	}
 	
 	reCall();
+	setInterval(reCall, 30000);
 	
 	function reCall() {
 		var xhr = new XMLHttpRequest();
